@@ -6,68 +6,221 @@ GITenberg - Making beautiful books in the public domain
 {% endblock title %}
 
 {% block base_body %}
-<!-- <div class="contain-to-grid"> -->
-<!--   <nav class="top-bar" data-topbar role="navigation"> -->
-<!--     <ul class="title-area"> -->
-<!--       <li class="name"> -->
-<!--         <a href="#"> -->
-<!--           <img src="{% static 'Gitenberg_full.png' %}" alt="GITenberg logo"> -->
-<!--         </a> -->
-<!--       </li> -->
-<!--     </ul> -->
-<!--   </nav> -->
-<!-- </div> -->
-<div class='row panel'>
-  <div class='small-6 large-6 columns'>
-    <img src="{% static 'Gitenberg_full.png' %}" alt="GITenberg logo">
-  </div>
-  <div class='small-6 large-4 columns'>
-    Making beautiful books in the public domain
-  </div>
-</div>
 
-<div class='row'>
+        <div class="contain-to-grid">
+        <nav class="top-bar" data-topbar>
+          <ul class="title-area">
 
-  <div class='small-3'>
+            <li class="name">
+              <h1>
+                <a href="#">
+                  GITenberg
+                </a>
+              </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+          </ul>
 
-    <h5>-Free and Open</h5>
+          <section class="top-bar-section">
 
-    <p>
-      Our mission is to curate a free and open library of books. 
-      All books are in the public domain and can be corrected, pulled, and forked for any purpose.
-    </p>
+            <ul class="right">
+              <li class="divider"></li>
+              <li class="has-dropdown">
+                <a href="#">Main Item 1</a>
+                <ul class="dropdown">
+                  <li><label>Section Name</label></li>
+                  <li class="has-dropdown">
+                    <a href="#" class="">Has Dropdown, Level 1</a>
+                    <ul class="dropdown">
+                      <li><a href="#">Dropdown Options</a></li>
+                      <li><a href="#">Dropdown Options</a></li>
+                      <li><a href="#">Level 2</a></li>
+                      <li><a href="#">Subdropdown Option</a></li>
+                      <li><a href="#">Subdropdown Option</a></li>
+                      <li><a href="#">Subdropdown Option</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Dropdown Option</a></li>
+                  <li><a href="#">Dropdown Option</a></li>
+                  <li class="divider"></li>
+                  <li><label>Section Name</label></li>
+                  <li><a href="#">Dropdown Option</a></li>
+                  <li><a href="#">Dropdown Option</a></li>
+                  <li><a href="#">Dropdown Option</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">See all →</a></li>
+                </ul>
+              </li>
+              <li class="divider"></li>
+              <li><a href="#">Main Item 2</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Main Item 3</a></li>
+            </ul>
+          </section>
+        </nav>
+        </div>
 
-    <h5>-Collaborative</h5>
 
-    <p>
-      Programmers already have a tried-and-true way to collaborate on projects,
-      Git. Github allows this collaboration to be open and social,
-      allowing anyone with a username to maintain our
-      large collection of ebooks.
-    </p>
 
-    <h5>-Trackable</h5>
+        <div class="row">
+          <div class="large-12 columns">
 
-    <p>
-      Leveraging the Git version control system, 
-      we can keep track of changes, track open issues with any book, 
-      and track contributions.
-    </p>
 
-    <h5>-Scriptable</h5>
 
-    <p>
-      Serving books the way we serve code has its benefits. 
-      We can use Git and the Github Api, 
-      to do things like automatically generate epub and pdf files 
-      whenever there is a change stored in Git.
-    </p>
-  </div>
-  <div class='small-3'>
-    <img src="">
-  </div>
-  <div class='small-3'>
-  </div>
+            <div class="row panel">
+              <div class="small-12 large-8 columns">
+                <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
+              </div>
+              <div class="small-12 large-4 columns">
+                <h5>Free books built by us!</h5>
+                <p>
+                  Our mission is to curate a free and open library of books.
+                  All books are in the public domain and can be corrected, pulled, and forked for any purpose.
+                </p>
+              </div>
+              <!-- <div class="large-12 hide-for-small"> -->
 
-</div>
+              <!--   <div id="featured" data-orbit> -->
+              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 1" alt="slide image"> -->
+              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 2" alt="slide image"> -->
+              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 3" alt="slide image"> -->
+              <!--     </div> -->
+
+            <!-- </div> -->
+          </div>
+
+
+
+
+
+
+
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row">
+
+                  <div class="large-4 small-6 columns">
+
+                    <h4>Upcoming Shows</h4><hr>
+
+                    <div class="row">
+                      <div class="large-1 column">
+                        <img src="http://placehold.it/50x50&text=[img]">
+                      </div>
+
+                      <div class="large-9 columns">
+                        <h5><a href="#">Venue Name</a></h5>
+                        <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
+                      </div>
+                    </div><hr>
+
+                    <div class="hide-for-small">
+                      <div class="row">
+                        <div class="large-1 column">
+                          <img src="http://placehold.it/50x50&text=[img]">
+                        </div>
+
+                        <div class="large-9 columns">
+                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
+                        </div>
+                      </div><hr>
+
+                      <div class="row">
+                        <div class="large-1 column">
+                          <img src="http://placehold.it/50x50&text=[img]">
+                        </div>
+
+                        <div class="large-9 columns">
+                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
+                        </div>
+                      </div><hr>
+
+                      <div class="row">
+                        <div class="large-1 column">
+                          <img src="http://placehold.it/50x50&text=[img]">
+                        </div>
+
+                        <div class="large-9 columns">
+                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="large-4 small-6 columns">
+                    <img src="http://placehold.it/300x465&text=Image">
+                  </div>
+
+
+
+
+
+
+                  <div class="large-4 small-12 columns">
+
+                    <h4>Blog</h4><hr>
+                    <div class="panel">
+                      <h5><a href="#">Post Title 1</a></h5>
+
+                      <h6 class="subheader">
+                        Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
+                      </h6>
+
+                      <h6><a href="#">Read More »</a></h6>
+                    </div>
+
+                    <div class="panel hide-for-small">
+                      <h5><a href="#">Post Title 2 »</a></h5>
+                    </div>
+
+                    <div class="panel hide-for-small">
+                      <h5><a href="#">Post Title 3 »</a></h5>
+                    </div>
+
+                    <a href="#" class="right">Go To Blog »</a>
+
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <footer class="row">
+              <div class="large-12 columns"><hr>
+                  <div class="row">
+
+                    <div class="large-6 columns">
+                        <p>© Copyright no one at all. Go to town.</p>
+                    </div>
+
+                    <div class="large-6 small-12 columns">
+                        <ul class="inline-list right">
+                          <li><a href="#">Link 1</a></li>
+                          <li><a href="#">Link 2</a></li>
+                          <li><a href="#">Link 3</a></li>
+                          <li><a href="#">Link 4</a></li>
+                        </ul>
+                    </div>
+
+                  </div>
+              </div>
+            </footer>
+
+
+
+          </div>
+        </div>
+
 {% endblock base_body %}
