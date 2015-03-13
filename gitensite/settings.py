@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Django settings for gitensite project.
 
@@ -27,7 +29,7 @@ class Common(Configuration):
     ALLOWED_HOSTS = []
 
     # Application definition
-    INSTALLED_APPS = (
+    COMMON_APPS = [
         'django.contrib.admin',
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -36,7 +38,14 @@ class Common(Configuration):
         'django.contrib.staticfiles',
 
         'django_extensions',
-    )
+        'foundation',
+    ]
+
+    LOCAL_APPS = [
+        'gitensite.apps.content',
+    ]
+
+    INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
 
     MIDDLEWARE_CLASSES = (
         'djangosecure.middleware.SecurityMiddleware',
@@ -75,6 +84,10 @@ class Common(Configuration):
     # https://docs.djangoproject.com/en/1.7/howto/static-files/
     STATIC_URL = '/static/'
 
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    )
+
 
 class Development(Common):
     """
@@ -86,18 +99,18 @@ class Development(Common):
 
     ALLOWED_HOSTS = []
 
-    INSTALLED_APPS = Common.INSTALLED_APPS + (
+    INSTALLED_APPS = Common.INSTALLED_APPS + [
         'debug_toolbar',
-    )
+    ]
 
 
 class Staging(Common):
     """
     The in-staging settings.
     """
-    INSTALLED_APPS = Common.INSTALLED_APPS + (
+    INSTALLED_APPS = Common.INSTALLED_APPS + [
         'djangosecure',
-    )
+    ]
 
     # django-secure
     SESSION_COOKIE_SECURE = values.BooleanValue(True)
