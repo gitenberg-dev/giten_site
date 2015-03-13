@@ -1,0 +1,73 @@
+{% extends 'foundation/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+GITenberg - Making beautiful books in the public domain
+{% endblock title %}
+
+{% block base_body %}
+<!-- <div class="contain-to-grid"> -->
+<!--   <nav class="top-bar" data-topbar role="navigation"> -->
+<!--     <ul class="title-area"> -->
+<!--       <li class="name"> -->
+<!--         <a href="#"> -->
+<!--           <img src="{% static 'Gitenberg_full.png' %}" alt="GITenberg logo"> -->
+<!--         </a> -->
+<!--       </li> -->
+<!--     </ul> -->
+<!--   </nav> -->
+<!-- </div> -->
+<div class='row panel'>
+  <div class='small-6 large-6 columns'>
+    <img src="{% static 'Gitenberg_full.png' %}" alt="GITenberg logo">
+  </div>
+  <div class='small-6 large-4 columns'>
+    Making beautiful books in the public domain
+  </div>
+</div>
+
+<div class='row'>
+
+  <div class='small-3'>
+
+    <h5>-Free and Open</h5>
+
+    <p>
+      Our mission is to curate a free and open library of books. 
+      All books are in the public domain and can be corrected, pulled, and forked for any purpose.
+    </p>
+
+    <h5>-Collaborative</h5>
+
+    <p>
+      Programmers already have a tried-and-true way to collaborate on projects,
+      Git. Github allows this collaboration to be open and social,
+      allowing anyone with a username to maintain our
+      large collection of ebooks.
+    </p>
+
+    <h5>-Trackable</h5>
+
+    <p>
+      Leveraging the Git version control system, 
+      we can keep track of changes, track open issues with any book, 
+      and track contributions.
+    </p>
+
+    <h5>-Scriptable</h5>
+
+    <p>
+      Serving books the way we serve code has its benefits. 
+      We can use Git and the Github Api, 
+      to do things like automatically generate epub and pdf files 
+      whenever there is a change stored in Git.
+    </p>
+  </div>
+  <div class='small-3'>
+    <img src="">
+  </div>
+  <div class='small-3'>
+  </div>
+
+</div>
+{% endblock base_body %}
