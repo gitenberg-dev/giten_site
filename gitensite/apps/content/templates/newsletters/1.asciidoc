@@ -19,7 +19,7 @@ Aside from 45,000+ repos on GitHub (a significant achievement by itself) GITenbe
 
 So I think it's important to make that sketch more explicit.
 
-### Core Vision
+== Core Vision
 
 The core vision is that for any text in Project Gutenberg, anyone will be able to fork a repo, commit a change, and GITenberg machinery triggered by the commit will derive ebook files and metadata products. The commit can be submitted as a pull request, and accepted PRs will get fed back into Project Gutenberg. We hope.
 
