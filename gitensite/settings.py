@@ -39,6 +39,7 @@ class Common(Configuration):
 
         'django_extensions',
         'foundation',
+        'fontawesome',
     ]
 
     LOCAL_APPS = [
