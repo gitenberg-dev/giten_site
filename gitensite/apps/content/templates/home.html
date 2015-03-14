@@ -1,226 +1,181 @@
 {% extends 'foundation/base.html' %}
+{% load fontawesome %}
 {% load staticfiles %}
 
 {% block title %}
 GITenberg - Making beautiful books in the public domain
 {% endblock title %}
 
+{% block css %}
+{% fontawesome_stylesheet %}
+<link href="{% static 'css/site.css' %}" rel="stylesheet">
+{% endblock css %}
+
 {% block base_body %}
 
-        <div class="contain-to-grid">
-        <nav class="top-bar" data-topbar>
-          <ul class="title-area">
+<div class="contain-to-grid">
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
 
-            <li class="name">
-              <h1>
-                <a href="#">
-                  GITenberg
-                </a>
-              </h1>
-            </li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-          </ul>
+    <li class="name">
+      <h1>
+        <a href="#">
+          GITenberg
+        </a>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+  </ul>
 
-          <section class="top-bar-section">
+  <section class="top-bar-section">
 
-            <ul class="right">
-              <li class="divider"></li>
-              <li class="has-dropdown">
-                <a href="#">Main Item 1</a>
-                <ul class="dropdown">
-                  <li><label>Section Name</label></li>
-                  <li class="has-dropdown">
-                    <a href="#" class="">Has Dropdown, Level 1</a>
-                    <ul class="dropdown">
-                      <li><a href="#">Dropdown Options</a></li>
-                      <li><a href="#">Dropdown Options</a></li>
-                      <li><a href="#">Level 2</a></li>
-                      <li><a href="#">Subdropdown Option</a></li>
-                      <li><a href="#">Subdropdown Option</a></li>
-                      <li><a href="#">Subdropdown Option</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Dropdown Option</a></li>
-                  <li><a href="#">Dropdown Option</a></li>
-                  <li class="divider"></li>
-                  <li><label>Section Name</label></li>
-                  <li><a href="#">Dropdown Option</a></li>
-                  <li><a href="#">Dropdown Option</a></li>
-                  <li><a href="#">Dropdown Option</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">See all →</a></li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li><a href="#">Main Item 2</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Main Item 3</a></li>
-            </ul>
-          </section>
-        </nav>
+    <ul class="right">
+      <li class="divider"></li>
+      <li><a href="/get-involved">get involved</a></li>
+      <li class="divider"></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li class="divider"></li>
+      <li><a href="https://github.com/gitenberg-dev/wiki/wiki">Wiki</a></li>
+    </ul>
+  </section>
+</nav>
+</div>
+
+
+
+<!-- top panel -->
+<div class="row">
+  <div class="large-12 columns">
+
+    <div class="row panel">
+      <div class="small-12 large-8 columns">
+        <div class=row>
+          <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
+        </div>
+        <div class=row>
+          <div class="small-4 columns">
+            <!-- <img src="{% static 'Git-logo.svg' %}"> -->
+            <i class="fa fa-5x fa-book"></i> <large>books</large>
+          </div>
+          <div class="small-4 columns">
+            <i class="fa fa-5x fa-plus"></i>
+          </div>
+          <div class="small-4 columns">
+            <i class="fa fa-5x fa-code-fork"></i> <large>Git</large>
+          </div>
+          <!-- <div class="small-3 columns"> -->
+          <!--   <i class="fa fa-5x fa-equals">=</i> -->
+          <!-- </div> -->
+        </div>
+        <!-- <div class=row> -->
+        <!--   <div class="small-4 columns"> -->
+        <!--     <h5>html</h5> -->
+        <!--   </div> -->
+        <!--   <div class="small-4 columns"> -->
+        <!--     <h5>ebooks</h5> -->
+        <!--   </div> -->
+        <!--   <div class="small-4 columns"> -->
+        <!--     <h5>print</h5> -->
+        <!--   </div> -->
+        <!-- </div> -->
+      </div>
+
+      <div class="small-12 large-3 columns">
+        <h5>Free books built by us!</h5>
+        <p>
+          Our mission is to curate a free and open library of books.
+          All books are in the public domain and can be corrected, pulled, and forked for any purpose.
+        </p>
+      </div>
+    </div> <!-- .row .panel -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="row">
+
+      <!-- left column -->
+      <div class="large-3 small-6 columns">
+        <h4 class="centered">Join our mailing list</h4>
+        {% include 'partials/sign-up-announce.htmldjango' %}
+
+        <hr>
+
+        <h4 class="centered">Follow us on twitter</h4>
+        {% include 'partials/follow-us.htmldjango' %}
+        <hr>
+
+      </div>
+
+      <!-- center column -->
+      <div class="large-6 small-6 columns">
+        <h4>Featured Books</h4><hr>
+        {% for book in "01234" %}
+          {% include "partials/featured-books.htmldjango" %}
+        {% endfor %}
+      </div>
+
+
+      <!-- right column -->
+      <div class="large-3 small-12 columns">
+        <h4>Status Reports</h4>
+        <hr>
+        <div class="panel">
+          <h5><a href="">Status Report #1</a></h5>
+
+          <h6 class="subheader">
+            Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
+          </h6>
+
+          <h6><a href="#">Read More »</a></h6>
         </div>
 
-
-
-        <div class="row">
-          <div class="large-12 columns">
-
-
-
-            <div class="row panel">
-              <div class="small-12 large-8 columns">
-                <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
-              </div>
-              <div class="small-12 large-4 columns">
-                <h5>Free books built by us!</h5>
-                <p>
-                  Our mission is to curate a free and open library of books.
-                  All books are in the public domain and can be corrected, pulled, and forked for any purpose.
-                </p>
-              </div>
-              <!-- <div class="large-12 hide-for-small"> -->
-
-              <!--   <div id="featured" data-orbit> -->
-              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 1" alt="slide image"> -->
-              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 2" alt="slide image"> -->
-              <!--       <img src="http://placehold.it/1200x500&text=Slide Image 3" alt="slide image"> -->
-              <!--     </div> -->
-
-            <!-- </div> -->
-          </div>
-
-
-
-
-
-
-
-
-            <div class="row">
-              <div class="large-12 columns">
-                <div class="row">
-
-                  <div class="large-4 small-6 columns">
-
-                    <h4>Upcoming Shows</h4><hr>
-
-                    <div class="row">
-                      <div class="large-1 column">
-                        <img src="http://placehold.it/50x50&text=[img]">
-                      </div>
-
-                      <div class="large-9 columns">
-                        <h5><a href="#">Venue Name</a></h5>
-                        <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
-                      </div>
-                    </div><hr>
-
-                    <div class="hide-for-small">
-                      <div class="row">
-                        <div class="large-1 column">
-                          <img src="http://placehold.it/50x50&text=[img]">
-                        </div>
-
-                        <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
-                        </div>
-                      </div><hr>
-
-                      <div class="row">
-                        <div class="large-1 column">
-                          <img src="http://placehold.it/50x50&text=[img]">
-                        </div>
-
-                        <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
-                        </div>
-                      </div><hr>
-
-                      <div class="row">
-                        <div class="large-1 column">
-                          <img src="http://placehold.it/50x50&text=[img]">
-                        </div>
-
-                        <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Venue Name</a></h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-                  <div class="large-4 small-6 columns">
-                    <img src="http://placehold.it/300x465&text=Image">
-                  </div>
-
-
-
-
-
-
-                  <div class="large-4 small-12 columns">
-
-                    <h4>Blog</h4><hr>
-                    <div class="panel">
-                      <h5><a href="#">Post Title 1</a></h5>
-
-                      <h6 class="subheader">
-                        Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
-                      </h6>
-
-                      <h6><a href="#">Read More »</a></h6>
-                    </div>
-
-                    <div class="panel hide-for-small">
-                      <h5><a href="#">Post Title 2 »</a></h5>
-                    </div>
-
-                    <div class="panel hide-for-small">
-                      <h5><a href="#">Post Title 3 »</a></h5>
-                    </div>
-
-                    <a href="#" class="right">Go To Blog »</a>
-
-                  </div>
-
-
-
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-            <footer class="row">
-              <div class="large-12 columns"><hr>
-                  <div class="row">
-
-                    <div class="large-6 columns">
-                        <p>© Copyright no one at all. Go to town.</p>
-                    </div>
-
-                    <div class="large-6 small-12 columns">
-                        <ul class="inline-list right">
-                          <li><a href="#">Link 1</a></li>
-                          <li><a href="#">Link 2</a></li>
-                          <li><a href="#">Link 3</a></li>
-                          <li><a href="#">Link 4</a></li>
-                        </ul>
-                    </div>
-
-                  </div>
-              </div>
-            </footer>
-
-
-
-          </div>
+        <div class="panel hide-for-small">
+          <h5><a href="#">Post Title 2 »</a></h5>
         </div>
+
+        <div class="panel hide-for-small">
+          <h5><a href="#">Post Title 3 »</a></h5>
+        </div>
+
+        <a href="#" class="right">Go To Blog »</a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<footer class="row">
+  <div class="large-12 columns"><hr>
+    <div class="row">
+
+      <div class="large-6 columns">
+        <p>© Copyright no one at all. Go to town.</p>
+      </div>
+
+      <div class="large-6 small-12 columns">
+        <ul class="inline-list right">
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+
+        </div>
+      </div>
 
 {% endblock base_body %}

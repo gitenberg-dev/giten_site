@@ -1,0 +1,18 @@
+<form action="//github.us10.list-manage.com/subscribe/post?u=46e966504bd829085d3ac3aca&amp;id=c710d81de4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  <div class="row">
+    <div class="small-12 columns">
+      <input type="email" value="" name="EMAIL" id="mce-EMAIL" placeholder="Email address" />
+    </div>
+  </div> <!-- .row -->
+  <div class="row">
+    <div class="small-12 columns">
+      <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+    </div>
+    <div class="small-12 columns">
+      <small>
+        <a href="http://us10.campaign-archive2.com/home/?u=46e966504bd829085d3ac3aca&id=c710d81de4" title="View previous messages">View previous messages.</a>
+      </small>
+    </div>
+  </div> <!-- .row -->
+</form>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>

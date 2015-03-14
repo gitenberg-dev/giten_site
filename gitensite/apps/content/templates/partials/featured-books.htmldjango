@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/the-star-lord.jpg' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="#">The Warded Man</a></h5>
+    <p>by Peter V. Brett</p>
+  </div>
+</div><hr>

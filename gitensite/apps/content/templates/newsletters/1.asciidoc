@@ -1,0 +1,60 @@
+= GITenberg status report.
+Eric Hellman <>
+
+Seth started GITenberg back in September of 2012. It was pretty much a one person effort. Through this mailing list, a few other people started thinking about what it could be. I discovered the project and joined up in March of 2014 when I was exploring similar ideas. The project got some good exposure on Hacker News last August.
+
+
+== Knight Foundation Grant
+When I heard about the Knight News Challenge for Libraries, I suggested to Seth that GITenberg might be a good fit. Together with Raymond Yee, Seth and I put together a proposal. We got help from Jenny Lee, Phoebe Espiritu, and Emily Nimsakont.
+
+https://www.newschallenge.org/challenge/libraries/feedback/gitenberg-modern-maintenance-infrastructure-for-our-literary-heritage
+
+There were 676 entrants in the News Challenge, and believe it or not, GITenberg was one of 22 entries to receive funding. We've been awarded a $35,000 "Prototype Grant", which will allow us to spend some real development time to start turning the idea into something that really works. More to the point, we have a deadline (in late June!) for demonstrating the GITenberg concept.
+
+Now the work begins.
+
+== Next Steps
+
+Aside from 45,000+ repos on GitHub (a significant achievement by itself) GITenberg has so far been more concept than reality. If you tried to adopt a repo and submitted a pull request, you'll surely be aware that the GITenberg of today is more of a sketch than a working system. To make it a working system, we'll have to assemble a lot of cooperating components. Thankfully most of the components we need exist, and people are working on them. This became very clear at the Hack day sponsored by New York Public Library in January.
+
+So I think it's important to make that sketch more explicit.
+
+### Core Vision
+
+The core vision is that for any text in Project Gutenberg, anyone will be able to fork a repo, commit a change, and GITenberg machinery triggered by the commit will derive ebook files and metadata products. The commit can be submitted as a pull request, and accepted PRs will get fed back into Project Gutenberg. We hope.
+
+At this point, I should comment about Project Gutenberg. To fulfill its mission, Project Gutenberg has to be very conservative in its processes and operations. It doesn't have the resources to engage in speculative projects. So while the Project Gutenberg is enabling the experimentation we're doing, (and happy that we're doing it) we expect that GITenberg will need to prove itself before the PG feedback is a real thing.
+
+One thing that Project Gutenberg has been thinking about for years is the source format for its texts. For a good while, that format was 7 bit ascii text files, and there was a lot of resistance to migrating to anything more "modern". Now, the plain text you get from Project Gutenberg is utf-8. Sort of. The html files are maintained separately, and are not uniform; there's a lot of hand-coding. Changing the source format to RST, XML or TEI has been discussed. The PG ebook files (MOBI and EPUB) are built using a script called ebookmaker which digests the html files. The HTML files are thus the "source" files as far as the ebooks are concerned. It should be possible for us to duplicate this workflow in the GITenberg machinery.
+
+On the metadata side the situation is more obscure, and we're still working to understand it. There's a set of RDF files, there are metadata records associated with each ebook folder.
+
+
+== Book Formats
+
+We've surveyed the components now available, and we feel that we can also improve on the existing workflow by migrating away from HTML as a source format. At this point, asciidoc appears to be the best fit for a format that can be a source format for the required product files, while at the same time fitting with the established PG text corpus and the Git-based version control. It looks like the best choice for ebook and web formats is the HTMLBook flavor of HTML5. http://oreillymedia.github.io/HTMLBook/ There’s a converter for asciidoc that makes htmlbook files. https://github.com/oreillymedia/asciidoctor-htmlbook and css themes that support htmlbook. We expect that alternate paths into HTMLBook can be developed (or already exist) for LaTeX and TEI source formats. Pandoc has done quite a lot.
+
+Internet Archive seems like the best destination for GITenberg produced ebook files.
+
+NYPL Labs has done some really nice work on generating covers for PG texts, we expect to integrate that work as well.
+
+On the metadata side, we've started looking at YAML as an appropriate serialization for PG-associated metadata. conversion to MARC and other formats should be straightforward in the backend.
+
+== Issues
+
+Github itself has presented us with a set of challenges to address. The large number of repos in the GITenberg organization breaks some Github tools. For example, GitHub for Mac became unstable for me, and some 3rd party integrations would time out when we tried enabling them. We broke our Github pages. So we need to understand this better; Github support has been very responsive. There's a separate organization "gitenberg-dev" https://github.com/gitenberg-dev that we're using to let us easily work on code untill we fully understand how to work with 50,000 repos; at this point, you probably don’t want to be a member of the Gitenberg organization but you might want to join gitenberg-dev, even if you’re not a developer.
+
+The non-programmer usability of Github is another problem. We're going to set up a "github for poets" sandbox to see if this challenge can be addressed.
+
+Despite the Knight grant, and the efforts of some committed volunteers, this is still a very small effort. GITenberg can't succeed without a lot of help, cooperation, and collaboration. I hope everyone on this list will be help us nurture that success.
+
+Here’s something each of us can do to get the ball rolling: Decide on a Gitenberg repo to contribute to. Star it in Github. Then add it to the list of active repos at https://github.com/gitenberg-dev/wiki/blob/master/activerepos.csv
+(send a PR or create an issue https://github.com/gitenberg-dev/wiki/issues )
+
+If you’re new to Github, instructions are at https://github.com/gitenberg-dev/wiki/blob/add_how_to/how_to.md
+
+There's a huge amount that we don't know,
+and so much prior work we've yet to absorb but we're really encouraged by all the expressions of support we've received.
+Thank you all!
+
+Eric
