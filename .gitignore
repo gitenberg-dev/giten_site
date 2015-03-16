@@ -1,3 +1,8 @@
+# Custom ignores
+venv/*
+*.swp
+.ropeproject/*
+
 # Created by https://www.gitignore.io
 
 ### OSX ###
