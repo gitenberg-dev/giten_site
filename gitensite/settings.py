@@ -44,6 +44,7 @@ class Common(Configuration):
 
     LOCAL_APPS = [
         'gitensite.apps.content',
+        'gitensite.apps.bookrepos',
     ]
 
     INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
