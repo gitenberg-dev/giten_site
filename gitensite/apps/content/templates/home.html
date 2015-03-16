@@ -1,4 +1,4 @@
-{% extends 'foundation/base.html' %}
+{% extends 'frame.html' %}
 {% load fontawesome %}
 {% load staticfiles %}
 
@@ -11,35 +11,7 @@ GITenberg - Making beautiful books in the public domain
 <link href="{% static 'css/site.css' %}" rel="stylesheet">
 {% endblock css %}
 
-{% block base_body %}
-
-<div class="contain-to-grid">
-<nav class="top-bar" data-topbar>
-  <ul class="title-area">
-
-    <li class="name">
-      <h1>
-        <a href="#">
-          GITenberg
-        </a>
-      </h1>
-    </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-  </ul>
-
-  <section class="top-bar-section">
-
-    <ul class="right">
-      <li class="divider"></li>
-      <li><a href="/get-involved">get involved</a></li>
-      <li class="divider"></li>
-      <li><a href="/faq">FAQ</a></li>
-      <li class="divider"></li>
-      <li><a href="https://github.com/gitenberg-dev/wiki/wiki">Wiki</a></li>
-    </ul>
-  </section>
-</nav>
-</div>
+{% block body_content %}
 
 
 
@@ -143,35 +115,4 @@ GITenberg - Making beautiful books in the public domain
   </div>
 </div>
 
-
-
-
-
-
-<footer class="row">
-  <div class="large-12 columns"><hr>
-    <div class="row">
-
-      <div class="large-6 columns">
-        <p>© Copyright no one at all. Go to town.</p>
-      </div>
-
-      <div class="large-6 small-12 columns">
-        <ul class="inline-list right">
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-          <li><a href="#">Link 4</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</footer>
-
-
-
-        </div>
-      </div>
-
-{% endblock base_body %}
+{% endblock body_content %}

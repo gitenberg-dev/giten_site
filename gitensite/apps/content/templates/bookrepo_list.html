@@ -1,0 +1,5 @@
+
+{% for book in object_list %}
+  {{ book.name }} - {{ book.clone_url }} - {{ book.open_issues }}
+  <br>
+{% endfor %}
