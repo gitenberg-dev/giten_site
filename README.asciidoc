@@ -1,0 +1,64 @@
+= A Django website for GITenberg
+
+This is a django project based on the django project template from jpadilla/django-project-template.
+The goal of gitensite is to:
+
++ provide information about the GITenberg project
++ document the major areas of work of GITenberg
++ connect visitor to areas to contribute
++ list information about GITenberg books
++ distribute completed ebooks
+
+== Set up
+This is a django/python project, so you are going to want to use some standard python dev tools.
+
+=== environment
+Copy example.env to .env and store your local db secret and other values there.
+Load that file into your environment with:
+
+    source .env
+
+=== virtualenv
+Virtual environments in python are a way of separating and reproducing the python package requirements.
+
+From the root of the project
+
+    sudo pip install virtualenv
+    virtualenv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
+For every new terminal, or when returning to work on the project, you will need to run
+
+    source venv/bin/activate
+
+=== Database(s)
+We use Postgres in production/staging and sqlite in local development.
+
+To start a local db run:
+
+    ./manage.py syncdb
+
+If you have modified the database, generate new database migrations:
+
+    ./manage.py makemigrations
+
+And run them with:
+
+    ./manage.py migrate
+
+==== Getting db data
+To fill out data in your local db, you can run the provided `pull_repos` management command:
+
+    ./manage.py pull_repos <username>
+
+Where `<username>` is your github account username.
+
+
+== Apps
+
+There are currently two apps in the project: 
+
++ _content_ for containing templates and views for website pages
++ _bookrepo_ for interacting with github and storing info about books
+
