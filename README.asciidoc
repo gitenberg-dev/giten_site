@@ -3,11 +3,11 @@
 This is a django project based on the django project template from jpadilla/django-project-template.
 The goal of gitensite is to:
 
-+ provide information about the GITenberg project
-+ document the major areas of work of GITenberg
-+ connect visitor to areas to contribute
-+ list information about GITenberg books
-+ distribute completed ebooks
+* provide information about the GITenberg project
+* document the major areas of work of GITenberg
+* connect visitor to areas to contribute
+* list information about GITenberg books
+* distribute completed ebooks
 
 == Set up
 This is a django/python project, so you are going to want to use some standard python dev tools.
@@ -59,6 +59,6 @@ Where `<username>` is your github account username.
 
 There are currently two apps in the project: 
 
-+ _content_ for containing templates and views for website pages
-+ _bookrepo_ for interacting with github and storing info about books
+* _content_ for containing templates and views for website pages
+* _bookrepo_ for interacting with github and storing info about books
 
