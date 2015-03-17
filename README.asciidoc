@@ -54,6 +54,8 @@ To fill out data in your local db, you can run the provided `pull_repos` managem
 
 Where `<username>` is your github account username.
 
+NOTE: This can be _any_ github account.  Not only github users who are members of any particular GITenberg organization.
+
 
 == Apps
 
