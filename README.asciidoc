@@ -32,6 +32,16 @@ For every new terminal, or when returning to work on the project, you will need 
 
     source venv/bin/activate
 
+==== OSX issues with bcrypt
+On OSX, apple occasionally moves cffi's location, which bcrypt depends on. This causes pip to fail when installing. Deactive your virtualenv, set a bash variable, and install system-wide.
+
+    $ # Instal homebrew. See http://brew.sh
+    $ # Install cffi. See  https://cffi.readthedocs.org/en/latest/#macos-x
+    # you may need to find and set include_dirs in setup.py
+    $ brew install pkg-config libffi
+    $ pip install bgcrypt
+    $ source venv/bin/activate
+
 === Database(s)
 We use Postgres in production/staging and sqlite in local development.
 
