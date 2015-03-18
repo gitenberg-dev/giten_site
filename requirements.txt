@@ -9,7 +9,7 @@ gunicorn==19.2.1
 #newrelic==2.44.0.36
 psycopg2==2.6
 Werkzeug==0.10.1
-github3.py
+github3.py==1.0.0a1
 
 django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2

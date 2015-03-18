@@ -17,6 +17,9 @@ class BookRepo(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, default=datetime.datetime.utcnow)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Readme(models.Model):
     text = models.TextField()
