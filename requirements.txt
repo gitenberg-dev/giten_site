@@ -1,4 +1,5 @@
 pip==6.0.8
+
 dj-database-url==0.3.0
 Django==1.7.6
 django-configurations==0.8
@@ -11,6 +12,7 @@ gunicorn==19.2.1
 psycopg2==2.6
 Werkzeug==0.10.1
 github3.py==1.0.0a1
+cffi==0.9.2
 
 django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2
