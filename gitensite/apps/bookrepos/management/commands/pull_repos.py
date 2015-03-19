@@ -32,5 +32,7 @@ class Command(BaseCommand):
             exit(1)
 
         gh = login(args[0], password=getpass.getpass())
+        self.stdout.write('Login successful, beginning sync')
+
         org = gh.organization('gitenberg')
         fetch_repos(org)

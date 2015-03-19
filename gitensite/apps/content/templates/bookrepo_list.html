@@ -1,5 +1,27 @@
+{% extends 'frame.html' %}
+{% load staticfiles %}
+
+{% block body_content %}
 
 {% for book in object_list %}
-  {{ book.name }} - {{ book.clone_url }} - {{ book.open_issues }}
-  <br>
+  <div class=row>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-10 columns">
+      <div class=row>
+        <h3>{{ book.name }}</h3>
+      </div>
+      <div class=row>
+        <div class="small-6 columns">
+        </div>
+        <div class="small-6 columns">
+        </div>
+      </div>
+
+      - {{ book.clone_url }} - {{ book.open_issues }}
+    </div>
+  </div>
 {% endfor %}
+
+{% endblock body_content %}

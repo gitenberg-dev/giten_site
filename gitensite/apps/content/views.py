@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
+from gitensite.apps.bookrepos.models import BookRepo
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
@@ -18,3 +20,12 @@ class NewsletterView(TemplateView):
                 issue=str(self.kwargs['issue'])
                 )]
 
+class BookRepoListView(ListView):
+    model = BookRepo
+    template_name = 'bookrepo_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookRepoListView, self).get_context_data(**kwargs)
+        context['test'] = 'asdfasdfasdf'
+
+        return context
