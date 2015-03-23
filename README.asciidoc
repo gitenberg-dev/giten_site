@@ -13,7 +13,7 @@ The goal of gitensite is to:
 This is a django/python project, so you are going to want to use some standard python dev tools.
 
 === environment
-Copy example.env to .env and store your local db secret and other values there.
+Copy `example.env` to `.env` and store your local db secret and other values there.
 Load that file into your environment with:
 
     source .env
