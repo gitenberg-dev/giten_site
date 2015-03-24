@@ -26,6 +26,5 @@ class BookRepoListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BookRepoListView, self).get_context_data(**kwargs)
-        context['test'] = 'asdfasdfasdf'
 
         return context
