@@ -10,7 +10,7 @@
     </div>
     <div class="small-10 columns">
       <div class=row>
-        <h3>{{ book.name }}</h3>
+        <h3><a href="{{ book.html_url }}">{{ book.name }}</a></h3>
 
       </div>
       <div class=row>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="row">
-        <strong>Open Issues:</strong> {{ book.open_issues }}
+        <a href="{{ book.html_url }}/issues">{{ book.open_issues }} Open Issues</a>
       </div>
       <div class="row">
         <strong>Contributors:</strong> {{ book.contributors }}
