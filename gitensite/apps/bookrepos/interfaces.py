@@ -14,9 +14,15 @@ class GithubToBookRepoInterface():
 
     def fulfill(self):
         # properties of the same name repo & BookRepo
-        direct_set = ('clone_url', 'name', 'open_issues')
+        direct_set = ('clone_url', 'name', 'open_issues', 'html_url')
         for key in direct_set:
             setattr(self.book_repo, key, self.repo.__dict__[key])
+
+        # properties derived from methods
+        contrib = [contrib.login for contrib in self.repo.contributors()]
+        contrib = ', '.join(contrib)
+        self.book_repo.contributors = contrib
+
         return self.book_repo
 
     def __str__(self):

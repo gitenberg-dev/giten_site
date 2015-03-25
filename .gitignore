@@ -2,6 +2,7 @@
 venv/*
 *.swp
 .ropeproject/*
+.idea
 
 # Created by https://www.gitignore.io
 

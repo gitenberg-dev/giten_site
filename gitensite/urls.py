@@ -10,7 +10,7 @@ from gitensite.apps.content.views import BookRepoListView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
-    url(r'^books/?$', BookRepoListView.as_view(), name='home'),
+    url(r'^books/?$', BookRepoListView.as_view(), name='books'),
     url(r'^$', HomePageView.as_view(), name='home'),
 ]
 

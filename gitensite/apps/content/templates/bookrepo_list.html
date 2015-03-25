@@ -10,7 +10,8 @@
     </div>
     <div class="small-10 columns">
       <div class=row>
-        <h3>{{ book.name }}</h3>
+        <h3><a href="{{ book.html_url }}">{{ book.name }}</a></h3>
+
       </div>
       <div class=row>
         <div class="small-6 columns">
@@ -19,7 +20,23 @@
         </div>
       </div>
 
-      - {{ book.clone_url }} - {{ book.open_issues }}
+      <div class="row collapse">
+        <div class="small-3 large-2 columns">
+          <span class="prefix">clone url</span>
+        </div>
+        <div class="small-9 large-10 columns">
+          <input type="text" value={{ book.clone_url }} readonly="readonly">
+        </div>
+      </div>
+
+      <div class="row">
+        <a href="{{ book.html_url }}/issues">{{ book.open_issues }} Open Issues</a>
+      </div>
+      <div class="row">
+        <strong>Contributors:</strong> {{ book.contributors }}
+      </div>
+      
+
     </div>
   </div>
 {% endfor %}
