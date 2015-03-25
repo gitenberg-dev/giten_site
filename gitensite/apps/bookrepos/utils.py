@@ -20,9 +20,6 @@ class CommitTree():
         self.tree = tree
         self.dict = self.tree.as_dict()
 
-class GRepo():
-    pass
-
 class BookRepoGenerator():
     """
     """

@@ -13,7 +13,7 @@ class BookRepo(models.Model):
     # add: Contributors (fkey to GithubContributor model)
     clone_url = models.URLField(max_length=255, null=True, blank=True)
     open_issues = models.IntegerField(default=0, null=True, blank=True)
-
+    contributors = models.CharField(max_length=255, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, default=datetime.datetime.utcnow)
 
