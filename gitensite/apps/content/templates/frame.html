@@ -1,4 +1,10 @@
 {% extends 'foundation/base.html' %}
+{% load staticfiles %}
+
+{# Custom CSS #}
+{% block css %}
+<link href="{% static 'css/site.css'%}" rel="stylesheet"/>
+{% endblock css %}
 
 {% block base_body %}
 
