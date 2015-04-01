@@ -18,10 +18,14 @@ class GithubToBookRepoInterface():
         for key in direct_set:
             setattr(self.book_repo, key, self.repo.__dict__[key])
 
+        # import a stock cover for now
+        self.book_repo.cover_url = 'http://placehold.it/140x200'
+
         # properties derived from methods
         contrib = [contrib.login for contrib in self.repo.contributors()]
         contrib = ', '.join(contrib)
         self.book_repo.contributors = contrib
+
 
         return self.book_repo
 

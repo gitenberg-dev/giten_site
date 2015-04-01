@@ -1,12 +1,11 @@
 {% extends 'frame.html' %}
-{% load staticfiles %}
 
 {% block body_content %}
 
 {% for book in object_list %}
-  <div class=row>
+  <div class="row book-row">
     <div class="small-2 columns">
-      <img src="{% static 'covers/the-star-lord.jpg' %}">
+      <img src="{{ book.cover_url }}">
     </div>
     <div class="small-10 columns">
       <div class=row>
