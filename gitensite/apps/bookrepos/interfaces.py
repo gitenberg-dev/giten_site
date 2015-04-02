@@ -12,6 +12,11 @@ class GithubToBookRepoInterface():
         self.repo = repo
         self.book_repo = BookRepo()
 
+    def _get_bookid(self):
+        """ get bookid out of repo.title """
+        name = self.repo.name
+        return name.split('_')[-1]
+
     def fulfill(self):
         # properties of the same name repo & BookRepo
         direct_set = ('clone_url', 'name', 'open_issues', 'html_url')
@@ -26,6 +31,7 @@ class GithubToBookRepoInterface():
         contrib = ', '.join(contrib)
         self.book_repo.contributors = contrib
 
+        self.book_id = self._get_bookid()
 
         return self.book_repo
 
