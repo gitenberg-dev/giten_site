@@ -14,8 +14,12 @@ class GithubToBookRepoInterface():
 
     def _get_bookid(self):
         """ get bookid out of repo.title """
+
         name = self.repo.name
-        return name.split('_')[-1]
+        try:
+            return int(name.split('_')[-1])
+        except ValueError:
+            return
 
     def fulfill(self):
         # properties of the same name repo & BookRepo
