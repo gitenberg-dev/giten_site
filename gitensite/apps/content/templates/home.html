@@ -69,32 +69,8 @@ GITenberg - Making beautiful books in the public domain
     <div class="row">
 
       <!-- left column -->
-      <div class="large-3 small-6 columns">
-
-      
-        <h4 class="centered">Join our mailing list</h4>
-        {% include 'partials/sign-up-announce.htmldjango' %}
-
-        <hr>
-
-        <h4 class="centered">Follow us on twitter</h4>
-        {% include 'partials/follow-us.htmldjango' %}
-        <hr>
-
-      </div>
-
-      <!-- center column -->
-      <div class="large-6 small-6 columns">
-        <h4>Featured Books</h4><hr>
-        {% for book in "01234" %}
-          {% include "partials/featured-books.htmldjango" %}
-        {% endfor %}
-      </div>
-
-
-      <!-- right column -->
       <div class="large-3 small-12 columns">
-        <h4>Updates</h4>
+        <h4 class="centered">Updates</h4>
         <hr>
         <div class="panel">
           <h5><a href="/newsletter/1">Status Report #1</a></h5>
@@ -111,8 +87,33 @@ GITenberg - Making beautiful books in the public domain
 
           <h6><a href="/newsletter/1">Read More »</a></h6>
         </div>
+      </div>
+
+      <!-- center column -->
+      <div class="large-6 small-6 columns">
+        <h4>Featured Books</h4>
+        <hr>
+        {% for book in "01234" %}
+          {% include "partials/featured-books.htmldjango" %}
+        {% endfor %}
+      </div>
+
+
+      <!-- right column -->
+      <div class="large-3 small-6 columns">
+        <h4 class="centered">Join our mailing list</h4>
+        <hr>
+        {% include 'partials/sign-up-announce.htmldjango' %}
+
+        <hr>
+
+        <h4 class="centered">Follow us on twitter</h4>
+        {% include 'partials/follow-us.htmldjango' %}
+        <hr>
 
       </div>
+
+
 
     </div>
   </div>
