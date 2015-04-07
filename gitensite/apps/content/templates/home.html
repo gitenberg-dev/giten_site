@@ -6,14 +6,8 @@
 GITenberg - Making beautiful books in the public domain
 {% endblock title %}
 
-{% block css %}
-{% fontawesome_stylesheet %}
-<link href="{% static 'css/site.css' %}" rel="stylesheet">
-{% endblock css %}
 
 {% block body_content %}
-
-
 
 <!-- top panel -->
 <div class="row">
@@ -21,6 +15,17 @@ GITenberg - Making beautiful books in the public domain
 
     <div class="row panel">
       <div class="small-12 large-8 columns">
+        <h3>Free Books From the Public Domain</h3>
+        <p>
+          Our mission is to curate free and open electronic books, available for download through this site and your public library.
+          
+          All books and their metadata are stored on github and are in the public domain. They can be corrected, pulled, and forked for any purpose.
+          
+
+        </p>
+      </div>
+
+      <div class="small-12 large-3 columns">
         <div class=row>
           <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
         </div>
@@ -52,13 +57,9 @@ GITenberg - Making beautiful books in the public domain
         <!-- </div> -->
       </div>
 
-      <div class="small-12 large-3 columns">
-        <h5>Free books built by us!</h5>
-        <p>
-          Our mission is to curate a free and open library of books.
-          All books are in the public domain and can be corrected, pulled, and forked for any purpose.
-        </p>
-      </div>
+
+
+
     </div> <!-- .row .panel -->
   </div>
 </div>
@@ -69,6 +70,8 @@ GITenberg - Making beautiful books in the public domain
 
       <!-- left column -->
       <div class="large-3 small-6 columns">
+
+      
         <h4 class="centered">Join our mailing list</h4>
         {% include 'partials/sign-up-announce.htmldjango' %}
 
