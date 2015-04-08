@@ -1,17 +1,57 @@
-{% extends 'frame.html' %}
-{% load fontawesome %}
-{% load staticfiles %}
-
-{% block title %}
-GITenberg - Making beautiful books in the public domain
-{% endblock title %}
-
-
-{% block body_content %}
-
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
 <!-- top panel -->
 <div class="row">
-get involved page
+    <div class="large-12 columns">
+        <div class="row">
+
+        <!-- left column -->
+            <div class="large-8 small-12 columns">
+                <h3>Interested in contributing?</h3>
+                <hr>
+                <p>Awesome! For now there are a few things you can do depending on your interest and skill level. Firstly, if you find an error or typo in any of the books, report it in the 'Issues' tab on that repo. If you would like to offer changes: fork, edit and create a Pull Request. If you would like to make suggestions, help in another way, or would like to get more involved, you can join the project mailing list.
+                </p>
+            </div>
+
+        <!-- right column -->
+            <div class="large-4 small-12 columns">
+                <h4 class="centered">Join our mailing list</h4>
+                <hr> {% include 'partials/sign-up-announce.htmldjango' %}
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Classifications & Portals -->
+<div class="row">
+  <div class="large-12 columns">
+    <div class="row">
+
+      <!-- left column -->
+      <div class="large-4 small-6 columns">
+        <h4 class="centered">Developers</h4>
+        <hr>
+
+      </div>
+
+      <!-- center column -->
+      <div class="large-4 small-6 columns">
+        <h4>Editors & Lit People</h4>
+        <hr>
+       
+      </div>
+
+
+      <!-- right column -->
+      <div class="large-4 small-6 columns">
+        <h4 class="centered">Everyone Else</h4>
+        <hr>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
 
 {% endblock body_content %}
