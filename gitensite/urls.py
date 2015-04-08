@@ -6,6 +6,7 @@ from gitensite.apps.content.views import HomePageView
 from gitensite.apps.content.views import NewsletterView
 from gitensite.apps.content.views import BookRepoListView
 from gitensite.apps.content.views import GetInvolvedView
+from gitensite.apps.content.views import FAQView
 
 
 urlpatterns = [
@@ -13,7 +14,8 @@ urlpatterns = [
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
     url(r'^books/?$', BookRepoListView.as_view(), name='books'),
     url(r'^get-involved/?$', GetInvolvedView.as_view(), name='get-involved'),
-    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^faq/?$', FAQView.as_view(), name='faq'),
+    url(r'^.*$', HomePageView.as_view(), name='home'),
 ]
 
 if settings.DEBUG:
