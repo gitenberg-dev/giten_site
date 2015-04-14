@@ -1,7 +1,7 @@
 # Custom ignores
 venv/*
 *.swp
-.ropeproject/*
+*.ropeproject/*
 .idea
 
 # Created by https://www.gitignore.io
