@@ -6,7 +6,7 @@
   </div> <!-- .row -->
   <div class="row">
     <div class="small-12 columns">
-      <input style="width:100%" type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+      <input style="width:100%; margin-bottom:.2em;" type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
     </div>
     <div style="text-align:center;" class="small-12 columns">
       <small>

@@ -3,55 +3,84 @@
 <div class="row">
     <div class="large-12 columns">
         <div class="row">
-
-        <!-- left column -->
+            <!-- left column -->
             <div class="large-8 small-12 columns">
                 <h3>Interested in contributing?</h3>
                 <hr>
-                <p>Awesome! For now there are a few things you can do depending on your interest and skill level. Firstly, if you find an error or typo in any of the books, report it in the 'Issues' tab on that repo. If you would like to offer changes: fork, edit and create a Pull Request. If you would like to make suggestions, help in another way, or would like to get more involved, you can join the project mailing list.
+                <p style="text-align:justify">Awesome! For now there are a few things you can do depending on your interest and skill level. </p>
+                <p style="text-align:center">
+                    All of these things will require a Github account, so <a href="https://github.com/join">please make one.</a>
+                </p>
+                <p style="text-align:justify">
+                    Firstly, if you find an error or typo in any of the books, report it in the 'Issues' tab on that repo. If you would like to offer changes: fork, edit and create a Pull Request. If you would like to make suggestions, help in another way, or would like to get more involved, you can join the project mailing list.
                 </p>
             </div>
-
-        <!-- right column -->
+            <!-- right column -->
             <div class="large-4 small-12 columns">
-                <h4 class="centered">Join our mailing list</h4>
+                <h3>Join our mailing list</h3>
                 <hr> {% include 'partials/sign-up-announce.htmldjango' %}
             </div>
         </div>
     </div>
 </div>
-
 <!-- Classifications & Portals -->
 <div class="row">
-  <div class="large-12 columns">
-    <div class="row">
-
-      <!-- left column -->
-      <div class="large-4 small-6 columns">
-        <h4 class="centered">Developers</h4>
-        <hr>
-
-      </div>
-
-      <!-- center column -->
-      <div class="large-4 small-6 columns">
-        <h4>Editors & Lit People</h4>
-        <hr>
-       
-      </div>
-
-
-      <!-- right column -->
-      <div class="large-4 small-6 columns">
-        <h4 class="centered">Everyone Else</h4>
-        <hr>
-      </div>
-
-
-
+    <div class="large-12 columns">
+        <div class="row">
+            <!-- left column -->
+            <div class="large-4 small-6 columns">
+                <h4 class="centered"><i class="fa fa-pencil"></i> Developers</h4>
+                <hr>
+                <p></p>
+                <ul>
+                    <li>
+                        Join the <a href="http://github.us10.list-manage.com/subscribe?u=46e966504bd829085d3ac3aca&id=c710d81de4">main email list</a> (low traffic)
+                    </li>
+                    <li>Join the <a href="https://groups.google.com/
+forum/?utm_source=digest&utm_medium=email#!forum/gitenberg-project">google group</a> and introduce yourself (high traffic)</li>
+                    <li>Fork <a href="https://github.com/gitenberg-dev">this site</a> and submit pull requests</li>
+                    <li>
+                        Convert Project Gutenberg <a href="https://github.com/gitenberg-dev/pg-epubmaker">HTML to ePub</a>
+                    </li>
+                    <li>
+                        Help develop and implement a <a href="https://github.com/gitenberg-dev/metadata">metadata specification for books.</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- center column -->
+            <div class="large-4 small-6 columns">
+                <h4 class="centered"><i class="fa fa-pencil"></i> Editors</h4>
+                <hr>
+                <ul>
+                   <li>
+                        Join the <a href="http://github.us10.list-manage.com/subscribe?u=46e966504bd829085d3ac3aca&id=c710d81de4">main email list</a> (low traffic)
+                    </li>
+                    <li>Join the <a href="https://groups.google.com/
+forum/?utm_source=digest&utm_medium=email#!forum/gitenberg-project">google group</a> and introduce yourself (high traffic)</li>
+                     <li>
+                        Help develop and implement a <a href="https://github.com/gitenberg-dev/metadata">metadata specification for books.</a>
+                    </li>
+                    <li>
+                      Read the asciidoc spec ??
+                    </li>
+                    <li><a href="/books">Choose a book</a> you'd like to edit</li>
+                    <li>Edit it</li>
+                </ul>
+            </div>
+            <!-- right column -->
+            <div class="large-4 small-6 columns">
+                <h4 class="centered"><i class="fa fa-plus"></i> Everyone Else</h4>
+                <hr>
+                <ul>
+                  <li>
+                        Join the <a href="http://github.us10.list-manage.com/subscribe?u=46e966504bd829085d3ac3aca&id=c710d81de4">main email list</a> (low traffic)
+                    </li>
+                    <li>Join the <a href="https://groups.google.com/
+forum/?utm_source=digest&utm_medium=email#!forum/gitenberg-project">google group</a> and introduce yourself (high traffic)</li>
+                    <li>What other sorts of help do we need?</li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
 {% endblock body_content %}
