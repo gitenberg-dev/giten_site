@@ -36,13 +36,14 @@
     </div>
     <!-- .row .panel -->
 </div>
+<div class="row" style="height:2em"></div>
 <div class="row">
     <div class="large-12 columns">
         <div class="row">
             <div class="large-4 small-12 columns centered">
                 <a href="/books">
-                    <i class="fa fa-5x fa-book"></i>
-                    <h4 class="">Get eBooks</h4>
+                    <i style="color:black;" class="fa fa-5x fa-book"></i>
+                    <h4>Get eBooks</h4>
                 </a>
                 <hr>
                 <p>Download our books in HTML, ePub, PDF, and AsciiDoc formats</p>
@@ -53,8 +54,8 @@
             <div class="large-4 small-12 columns centered">
                 <!-- The docs still need to be migrated to giten-site -->
                 <a href="https://github.com/gitenberg-dev/documentation">
-                    <i class="fa fa-5x fa-file-text"></i>
-                    <h4 class="">Read the Docs</h4>
+                    <i style="color:black;" class="fa fa-5x fa-file-text"></i>
+                    <h4>Read the Docs</h4>
                 </a>
                 <hr>
                 <p>See the technical details and discussion surrounding gitenberg.</p>
@@ -65,8 +66,8 @@
             </div>
             <div class="large-4 small-12 columns centered">
                 <a href="/get-involved">
-                    <i class="fa fa-5x fa-pencil-square"></i>
-                    <h4 class="">Get Involved</h4>
+                    <i style="color:black;" class="fa fa-5x fa-pencil-square"></i>
+                    <h4>Get Involved</h4>
                 </a>
                 <hr>
                 <p>Learn more about contributing to the gitenberg project. All are welcome.</p>
@@ -81,7 +82,7 @@
     <div class="large-12 columns">
         <div class="row">
             <!-- left column -->
-            <div class="large-3 small-12 columns">
+            <div class="large-4 small-12 columns">
                 <h4 class="centered">Updates</h4>
                 <hr>
                 <div class="panel">
@@ -99,12 +100,12 @@
                 </div>
             </div>
             <!-- center column -->
-            <div class="large-6 small-6 columns">
+            <div class="large-4 small-12 columns">
                 <h4>Featured Books</h4>
                 <hr> {% for book in "01234" %} {% include "partials/featured-books.htmldjango" %} {% endfor %}
             </div>
             <!-- right column -->
-            <div class="large-3 small-6 columns">
+            <div class="large-4 small-12 columns">
                 <h4 class="centered">Join our mailing list</h4>
                 <hr> {% include 'partials/sign-up-announce.htmldjango' %}
                 <hr>
