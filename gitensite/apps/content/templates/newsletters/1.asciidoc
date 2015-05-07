@@ -48,10 +48,10 @@ The non-programmer usability of Github is another problem. We're going to set up
 
 Despite the Knight grant, and the efforts of some committed volunteers, this is still a very small effort. GITenberg can't succeed without a lot of help, cooperation, and collaboration. I hope everyone on this list will be help us nurture that success.
 
-Here’s something each of us can do to get the ball rolling: Decide on a Gitenberg repo to contribute to. Star it in Github. Then add it to the list of active repos at https://github.com/gitenberg-dev/wiki/blob/master/activerepos.csv
-(send a PR or create an issue https://github.com/gitenberg-dev/wiki/issues )
+Here’s something each of us can do to get the ball rolling: Decide on a Gitenberg repo to contribute to. Star it in Github. Then add it to the list of active repos at https://github.com/gitenberg-dev/documentation/blob/master/activerepos.csv
+(send a PR or create an issue https://github.com/gitenberg-dev/documentation/issues )
 
-If you’re new to Github, instructions are at https://github.com/gitenberg-dev/wiki/blob/add_how_to/how_to.md
+If you’re new to Github, instructions are at https://github.com/gitenberg-dev/documentation/blob/add_how_to/how_to.md
 
 There's a huge amount that we don't know,
 and so much prior work we've yet to absorb but we're really encouraged by all the expressions of support we've received.

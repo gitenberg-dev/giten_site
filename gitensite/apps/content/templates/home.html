@@ -1,102 +1,93 @@
-{% extends 'frame.html' %}
-{% load fontawesome %}
-{% load staticfiles %}
-
-{% block title %}
-GITenberg - Making beautiful books in the public domain
-{% endblock title %}
-
-{% block css %}
-{% fontawesome_stylesheet %}
-<link href="{% static 'css/site.css' %}" rel="stylesheet">
-{% endblock css %}
-
-{% block body_content %}
-
-
-
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
 <!-- top panel -->
 <div class="row">
-  <div class="large-12 columns">
-
-    <div class="row panel">
-      <div class="small-12 large-8 columns">
-        <div class=row>
-          <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
+    <div class="large-12 columns">
+        <div class="row panel">
+            <div class="large-offset-1 large-7 small-12 columns">
+                <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
+            </div>
+            <div class="large-1 small-4  columns" style="text-align:center;  color:#535554">
+                <i class="fa fa-5x fa-book"></i>
+                <p>
+                    <large>Books</large>
+                </p>
+            </div>
+            <div class="large-1 small-4 columns" style="text-align:center;  color:#535554">
+                <i class="fa fa-5x fa-plus"></i>
+            </div>
+            <div class="large-1 small-4 columns" style="text-align:center;  color:#535554">
+                <i class="fa fa-5x fa-code-fork"></i>
+                <p>
+                    <large>Git</large>
+                </p>
+            </div>
+            <div class="small-12 large-12 columns mission-text">
+                <h4>
+                    Gitenberg is a collaborative open source community curating and publishing highly usable and attractive ebooks in the public domain.
+                </h4>
+                <h4>
+                    Our books are free to use by anyone for any purpose.
+                </h4>
+                <h4>
+                They contain detailed metadata and are accessible in a wide variety of formats.
+                </h4>
+            </div>
         </div>
-        <div class=row>
-          <div class="small-4 columns">
-            <!-- <img src="{% static 'Git-logo.svg' %}"> -->
-            <i class="fa fa-5x fa-book"></i> <large>books</large>
-          </div>
-          <div class="small-4 columns">
-            <i class="fa fa-5x fa-plus"></i>
-          </div>
-          <div class="small-4 columns">
-            <i class="fa fa-5x fa-code-fork"></i> <large>Git</large>
-          </div>
-          <!-- <div class="small-3 columns"> -->
-          <!--   <i class="fa fa-5x fa-equals">=</i> -->
-          <!-- </div> -->
-        </div>
-        <!-- <div class=row> -->
-        <!--   <div class="small-4 columns"> -->
-        <!--     <h5>html</h5> -->
-        <!--   </div> -->
-        <!--   <div class="small-4 columns"> -->
-        <!--     <h5>ebooks</h5> -->
-        <!--   </div> -->
-        <!--   <div class="small-4 columns"> -->
-        <!--     <h5>print</h5> -->
-        <!--   </div> -->
-        <!-- </div> -->
-      </div>
-
-      <div class="small-12 large-3 columns">
-        <h5>Free books built by us!</h5>
-        <p>
-          Our mission is to curate a free and open library of books.
-          All books are in the public domain and can be corrected, pulled, and forked for any purpose.
-        </p>
-      </div>
-    </div> <!-- .row .panel -->
-  </div>
+    </div>
+    <!-- .row .panel -->
 </div>
-
+<div class="row" style="height:2em"></div>
 <div class="row">
-  <div class="large-12 columns">
-    <div class="row">
-
-      <!-- left column -->
-      <div class="large-3 small-6 columns">
-        <h4 class="centered">Join our mailing list</h4>
-        {% include 'partials/sign-up-announce.htmldjango' %}
-
-        <hr>
-
-        <h4 class="centered">Follow us on twitter</h4>
-        {% include 'partials/follow-us.htmldjango' %}
-        <hr>
-
-      </div>
-
-      <!-- center column -->
-      <div class="large-6 small-6 columns">
-        <h4>Featured Books</h4><hr>
-        {% for book in "01234" %}
-          {% include "partials/featured-books.htmldjango" %}
-        {% endfor %}
-      </div>
-
-
-      <!-- right column -->
-      <div class="large-3 small-12 columns">
-        <h4>Updates</h4>
-        <hr>
-        <div class="panel">
-          <h5><a href="/newsletter/1">Status Report #1</a></h5>
-
-          <h6 class="subheader">
+    <div class="large-12 columns">
+        <div class="row">
+            <div class="large-4 small-12 columns centered">
+                <a href="/books">
+                    <i style="color:black;" class="fa fa-5x fa-book"></i>
+                    <h4>Get eBooks</h4>
+                </a>
+                <hr>
+                <p>Download our books in HTML, ePub, PDF, and AsciiDoc formats</p>
+                <form action="/books">
+                    <input style="width:100%" type="submit" value="Get eBooks" class="button">
+                </form>
+            </div>
+            <div class="large-4 small-12 columns centered">
+                <!-- The docs still need to be migrated to giten-site -->
+                <a href="https://github.com/gitenberg-dev/documentation">
+                    <i style="color:black;" class="fa fa-5x fa-file-text"></i>
+                    <h4>Read the Docs</h4>
+                </a>
+                <hr>
+                <p>See the technical details and discussion surrounding gitenberg.</p>
+                
+                <form action="https://github.com/gitenberg-dev/documentation">
+                    <input style="width:100%" type="submit" value="Documentation" class="button">
+                </form>
+            </div>
+            <div class="large-4 small-12 columns centered">
+                <a href="/get-involved">
+                    <i style="color:black;" class="fa fa-5x fa-pencil-square"></i>
+                    <h4>Get Involved</h4>
+                </a>
+                <hr>
+                <p>Learn more about contributing to the gitenberg project. All are welcome.</p>
+                <form action="/get-involved">
+                    <input style="width:100%" type="submit" value="Get Involved" class="button">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <div class="row">
+            <!-- left column -->
+            <div class="large-4 small-12 columns">
+                <h4 class="centered">Updates</h4>
+                <hr>
+                <div class="panel">
+                    <h5><a href="/newsletter/1">Status Report #1</a></h5>
+                    <h6 class="subheader">
             <ul>
               <li>Knight Foundation Grant</li>
               <li>Next Steps</li>
@@ -105,14 +96,21 @@ GITenberg - Making beautiful books in the public domain
               <li>Issues</li>
             </ul>
           </h6>
-
-          <h6><a href="/newsletter/1">Read More »</a></h6>
+                    <h6><a href="/newsletter/1">Read More »</a></h6>
+                </div>
+            </div>
+            <!-- center column -->
+            <div class="large-4 small-12 columns">
+                <h4>Featured Books</h4>
+                <hr> {% for book in "01234" %} {% include "partials/featured-books.htmldjango" %} {% endfor %}
+            </div>
+            <!-- right column -->
+            <div class="large-4 small-12 columns">
+                <h4 class="centered">Join our mailing list</h4>
+                <hr> {% include 'partials/sign-up-announce.htmldjango' %}
+                <hr>
+            </div>
         </div>
-
-      </div>
-
     </div>
-  </div>
 </div>
-
 {% endblock body_content %}

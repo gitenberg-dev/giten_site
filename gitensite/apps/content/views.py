@@ -28,3 +28,17 @@ class BookRepoListView(ListView):
         context = super(BookRepoListView, self).get_context_data(**kwargs)
 
         return context
+
+class GetInvolvedView(TemplateView):
+    template_name = 'get-involved.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(GetInvolvedView, self).get_context_data(**kwargs)
+        return context
+
+class FAQView(TemplateView):
+    template_name = 'faq.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FAQView, self).get_context_data(**kwargs)
+        return context

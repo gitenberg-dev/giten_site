@@ -6,6 +6,13 @@
   text-align: center;
 }
 
+.mission-text {
+    text-align: center;
+    line-height: 1.25;
+    letter-spacing: .1em;
+}
+
+
 .blue {
   color: blue;
 }

@@ -1,14 +1,16 @@
 {% extends 'foundation/base.html' %}
+{% load fontawesome %}
 {% load staticfiles %}
 
 {# Custom CSS #}
 {% block css %}
+{% fontawesome_stylesheet %}
+<link rel="shortcut icon" href="{%static 'favicon.ico' %}" />
 <link href="{% static 'css/site.css'%}" rel="stylesheet"/>
 {% endblock css %}
 
 {% block base_body %}
 
-{% include "header.html" %}
 
 <!-- START BLOCK_CONTENT -->
 {% block body_content %}
