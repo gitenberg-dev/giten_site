@@ -14,19 +14,8 @@ try:
 except Exception as e:
     print(e)
 
-
-ENVIRONMENT = os.getenv('ENVIRONMENT')
-
-if ENVIRONMENT == 'STAGING':
-    settings = 'staging'
-elif ENVIRONMENT == 'PRODUCTION':
-    settings = 'production'
-else:
-    settings = 'development'
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gitensite.settings')
-os.environ.setdefault('DJANGO_CONFIGURATION', settings.title())
 
-from configurations.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
