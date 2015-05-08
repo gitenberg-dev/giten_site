@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'gitensite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'database',
+        'NAME': 'db.sqlite3',
     }
 }
 
