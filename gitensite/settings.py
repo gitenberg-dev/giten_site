@@ -11,124 +11,133 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
 
-from configurations import Configuration, values
 
 
-class Common(Configuration):
-    # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+# class Common(Configuration):
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = values.SecretValue()
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'g35iofot4ijfs'
 
-    # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = values.BooleanValue(False)
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = '3tw489ijovseaaewafsf'
 
-    TEMPLATE_DEBUG = values.BooleanValue(DEBUG)
+TEMPLATE_DEBUG = False
 
-    ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
-    # Application definition
-    COMMON_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
+# Application definition
+COMMON_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-        'django_extensions',
-        'foundation',
-        'fontawesome',
-    ]
+    'django_extensions',
+    'foundation',
+    'fontawesome',
+]
 
-    LOCAL_APPS = [
-        'gitensite.apps.content',
-        'gitensite.apps.bookrepos',
-    ]
+LOCAL_APPS = [
+    'gitensite.apps.content',
+    'gitensite.apps.bookrepos',
+]
 
-    INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
+INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
 
-    MIDDLEWARE_CLASSES = (
-        'djangosecure.middleware.SecurityMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    )
+MIDDLEWARE_CLASSES = (
+    # 'djangosecure.middleware.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
 
-    ROOT_URLCONF = 'gitensite.urls'
+ROOT_URLCONF = 'gitensite.urls'
 
-    WSGI_APPLICATION = 'gitensite.wsgi.application'
+WSGI_APPLICATION = 'gitensite.wsgi.application'
 
-    # Database
-    # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue(
-        'sqlite:///{}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-    )
+# Database
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-    # Internationalization
-    # https://docs.djangoproject.com/en/1.7/topics/i18n/
-    LANGUAGE_CODE = 'en-us'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
+}
 
-    TIME_ZONE = 'UTC'
+# Internationalization
+# https://docs.djangoproject.com/en/1.7/topics/i18n/
+LANGUAGE_CODE = 'en-us'
 
-    USE_I18N = True
+TIME_ZONE = 'UTC'
 
-    USE_L10N = True
+USE_I18N = True
 
-    USE_TZ = True
+USE_L10N = True
 
-    # Static files (CSS, JavaScript, Images)
-    # https://docs.djangoproject.com/en/1.7/howto/static-files/
-    STATIC_URL = '/static/'
+USE_TZ = True
 
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "static"),
-    )
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+STATIC_URL = '/static/'
 
-
-class Development(Common):
-    """
-    The in-development settings and the default configuration.
-    """
-    DEBUG = True
-
-    TEMPLATE_DEBUG = True
-
-    ALLOWED_HOSTS = []
-
-    INSTALLED_APPS = Common.INSTALLED_APPS + [
-        'debug_toolbar',
-    ]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 
-class Staging(Common):
-    """
-    The in-staging settings.
-    """
-    INSTALLED_APPS = Common.INSTALLED_APPS + [
-        'djangosecure',
-    ]
+"""
+The in-development settings and the default configuration.
+"""
+DEBUG = True
 
-    # django-secure
-    SESSION_COOKIE_SECURE = values.BooleanValue(True)
-    SECURE_SSL_REDIRECT = values.BooleanValue(True)
-    SECURE_HSTS_SECONDS = values.IntegerValue(31536000)
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = values.BooleanValue(True)
-    SECURE_FRAME_DENY = values.BooleanValue(True)
-    SECURE_CONTENT_TYPE_NOSNIFF = values.BooleanValue(True)
-    SECURE_BROWSER_XSS_FILTER = values.BooleanValue(True)
-    SECURE_PROXY_SSL_HEADER = values.TupleValue(
-        ('HTTP_X_FORWARDED_PROTO', 'https')
-    )
+TEMPLATE_DEBUG = True
+
+ALLOWED_HOSTS = []
+
+INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
+    'debug_toolbar',
+]
 
 
-class Production(Staging):
-    """
-    The in-production settings.
-    """
-    pass
+"""
+The in-staging settings.
+"""
+INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
+    # 'djangosecure',
+]
+
+# django-secure
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_FRAME_DENY = True
+SECURE_CONTENT_TYPE_NOSNIFF = False
+SECURE_BROWSER_XSS_FILTER = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_FRAME_DENY = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# class Production(Staging):
+#     """
+#     The in-production settings.
+#     """
+#     pass

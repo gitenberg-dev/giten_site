@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import base64
-import datetime
 
+from django.utils import timezone
 from django.db import models
 
 class BookRepo(models.Model):
@@ -15,7 +15,7 @@ class BookRepo(models.Model):
     contributors = models.CharField(max_length=255, null=True, blank=True)
     cover_url = models.URLField(max_length=255, null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True, default=datetime.datetime.utcnow)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.name
