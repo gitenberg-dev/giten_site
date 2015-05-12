@@ -46,7 +46,7 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     # 'djangosecure.middleware.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 ROOT_URLCONF = 'gitensite.urls'
 
@@ -100,10 +100,9 @@ STATICFILES_DIRS = (
 
 
 # The in-development settings and the default configuration.
-if 'GB-DEVEL' in os.environ:
+if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
     DEBUG = True
-
-    TEMPLATE_DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
 
     ALLOWED_HOSTS = []
 
