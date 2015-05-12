@@ -1,8 +1,92 @@
 {% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
 <!-- top panel -->
 <div class="row">
-    <div class="large-12 columns">
-    <h1>Some General Info</h1>
+    <div class="large-offset-2 large-8 small-10 columns">
+      <h1>Frequently Asked Questions</h1>
+      <h2 id="why-github">Why are we putting books on Github?</h2>
+      <p>
+        In the world of modern software development, Github is the equivalent of the Library of Alexandria.  
+        It is a massive collection of software source code consisting of text.
+        This source code is available as Free and Open Source Software (<abbr>FOSS</abbr>) with open licensing allowing developers and users to do what they wish with the source code.
+      </p>
+      <p>
+        On a computer, books and source code look much the same: files with lines of text.
+        We believe that the tools that have enabled collaboration on FOSS can can also be applied to the world of books.
+      </p>
+      <p>
+      Repositories (which in our case, is a collection of text files with a history that represent a book and its metadata) can be <em>forked</em>.  
+      Forking means making a copy of a repository where you are free to make any changes you wish.
+      </p>
+      <p>
+        More pragmatically, GitHub is <em>free</em> for public open source projects.
+      </p>
+
+
+      <h2 id="who-is-this-for">Who is this for?</h2>
+      <p>
+        The early versions of GITenberg are going to be mainly for developers,
+        and for people who know how to use git and GitHub.
+        But the books that we curate and publish are for the benefit of all.
+      </p>
+
+
+      <h2 id="what-can-i-do-with">What can I do with these books?</h2>
+      <p>
+        Anything you want, really! 
+        These books are in the public domain. 
+        You may quote them, edit them, print them, sell them, or give them away in whole or in part.
+      </p>
+      <p>
+        See our <a href="{% url 'license' %}">license</a> page for details.
+      </p>
+      <p>
+        There are other nifty other projects that use public domain books. If you know of any (you may, as you're reading this), please let us know what they are so that we can link them here!
+      </p>
+
+      <h2 id="can-i-sell-these">Can I sell these books?</h2>
+      <p>
+        Yes, that is an acceptable use of works that are in the Public Domain.
+      </p>
+      <p>
+        Note that not all of our covers are available for commercial use.
+        See our <a href="{% url 'license' %}">license</a> page for the specifics..
+      </p>
+
+      <h2 id="find-books">How do I find books?</h2>
+      <p>
+        We are working on a way to easily search for books in our collection.
+        For now, the easiest way is to use the 
+        <a href="https://github.com/search?utf8=%E2%9C%93&q=user%3Agitenberg+">GitHub search</a>
+      </p>
+
+      <h2 id="report-issue">I found a problem in a book, who do I tell?</h2>
+      <ol>
+        <li> Find the book on github </li>
+        <li> Click the "issues" tab </li>
+        <li> Click "New Issue" (you may have to register for Github (and you should, github is awesome!)) </li>
+        <li> In the issue, copy and paste the sentence with an error as written so we can find the error in the book </li>
+        <li> Describe what the text should say instead </li>
+      </ol>
+
+      <p>
+        If you follow these steps, we (or you) should have enough information to fix the book.
+      </p>
+
+
+
+      <h2 id="fix-issues">Can I fix issues in books?</h2>
+      <p>
+        Yes <strong>please!</strong>.
+        This project is a collaboration between many people from all over the world.
+        We are using the
+        <a href="https://guides.github.com/introduction/flow/index.html">GitHub Flow</a>
+        workflow as our process for suggesting changes to books.
+        These suggested changes are called <em>Pull Requests</em>.
+      </p>
+      <p>
+        
+      </p>
+
     </div>
 </div>
 

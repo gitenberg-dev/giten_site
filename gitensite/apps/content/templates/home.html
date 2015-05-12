@@ -1,4 +1,10 @@
-{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
+{% extends 'frame.html' %} 
+{% load fontawesome %} 
+{% load staticfiles %} 
+
+{% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} 
+
+{% block body_content %}
 <!-- top panel -->
 <div class="row">
     <div class="large-12 columns">
@@ -23,13 +29,10 @@
             </div>
             <div class="small-12 large-12 columns mission-text">
                 <h4>
-                    Gitenberg is a collaborative open source community curating and publishing highly usable and attractive ebooks in the public domain.
-                </h4>
-                <h4>
-                    Our books are free to use by anyone for any purpose.
-                </h4>
-                <h4>
-                They contain detailed metadata and are accessible in a wide variety of formats.
+                  Gitenberg is a <em>collaborative</em>,
+                  open source community curating and publishing highly usable and attractive ebooks in the public domain.
+                  Our books are <a href="{% url 'license' %}">free to use by anyone for any purpose</a>.
+                  They contain detailed metadata and are accessible in a wide variety of formats.
                 </h4>
             </div>
         </div>
