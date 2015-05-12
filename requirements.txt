@@ -7,7 +7,10 @@ django-secure==1.0.1
 gunicorn==19.2.1
 psycopg2==2.6
 Werkzeug==0.10.1
-github3.py==0.9.3
 
 django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2
+
+# requests must be installed before github3 for this to install properly
+requests==2.5.3
+github3.py==1.0.0a1
