@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 
 
-# class Common(Configuration):
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -20,9 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'g35iofot4ijfs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = '3tw489ijovseaaewafsf'
-
-TEMPLATE_DEBUG = False
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +36,7 @@ COMMON_APPS = [
     'django_extensions',
     'foundation',
     'fontawesome',
+    'djcelery',
 ]
 
 LOCAL_APPS = [
@@ -84,19 +83,15 @@ else:
     }
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
+# https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
@@ -104,50 +99,24 @@ STATICFILES_DIRS = (
 )
 
 
-"""
-The in-development settings and the default configuration.
-"""
-DEBUG = True
+# The in-development settings and the default configuration.
+if 'GB-DEVEL' in os.environ:
+    DEBUG = True
 
-TEMPLATE_DEBUG = True
+    TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = []
 
-INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
-    'debug_toolbar',
-]
-
-
-"""
-The in-staging settings.
-"""
-INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
-    # 'djangosecure',
-]
+    INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
+        'debug_toolbar',
+    ]
 
 # django-secure
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False
-SECURE_HSTS_SECONDS = 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_FRAME_DENY = True
-SECURE_CONTENT_TYPE_NOSNIFF = False
-SECURE_BROWSER_XSS_FILTER = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
 # SESSION_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = 31536000
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_SSL_REDIRECT = False
+# SECURE_HSTS_SECONDS = 0
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 # SECURE_FRAME_DENY = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_CONTENT_TYPE_NOSNIFF = False
 # SECURE_BROWSER_XSS_FILTER = True
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
-# class Production(Staging):
-#     """
-#     The in-production settings.
-#     """
-#     pass
