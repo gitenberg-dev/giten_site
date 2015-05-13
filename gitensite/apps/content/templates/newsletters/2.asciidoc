@@ -1,0 +1,48 @@
+== GITenberg Status Report #2
+
+Quite a bit of work has occurred since our last status report, though it's rather scattered work in progress and still needs to be put together and documented.
+
+* We have 14 PG texts converted to asciidoc 
+* We have a working asciidoc-to-epub build machine
+* We have the start of a django website 
+* We'll be at http://www.bookexpoamerica.com/[Book Expo America]
+* We'll be participating in a hackathon in SFO in June
+
+In addition, our distribution partners were highlighted by President Obama in his ConnectED!
+
+
+=== Ebook pipeline
+Conversions to asciidoc have been done using Pandoc + retouched by hand.  epub building is done using Travis CI, and is triggered by a "tag"(so the epub files only get built when a version is declared, in analogy with the way software distributions are bundled and distributed.) So for example, the release files for the "Brothers Karamazov" repo:
+https://github.com/sethwoodworth/The-Brothers-Karamazov_28054
+are made available at https://github.com/sethwoodworth/The-Brothers-Karamazov_28054/releases/tag/v0.0.3
+The travis config is at
+https://github.com/sethwoodworth/The-Brothers-Karamazov_28054/blob/master/.travis.yml
+
+We're very thankful to the folks at Travis-CI who have gone the extra mile to get their systems working with the large numbers of repos in the GITenberg organization.
+
+Note that this is just proof of concept and does not reflect any decisions about repo layout, for example. The list of releases so far is here:
+https://github.com/sethwoodworth/nyplcodex/blob/master/final.asciidoc
+
+Obviously, this work will get migrated to the gitenberg-dev organization once it's assembled properly.
+
+Thanks to Nessie, and Sam Wilson for conversions to asciidoc; Raymond and Seth have done the work on the build system.
+
+=== New website
+Al has been working on the website- it will provide search and linking to the corpus as well as a gateway into the documentation. His work is at https://github.com/gitenberg-dev/giten_site/ Feel free to contribute. It's running on http://www.gitenberg.org/ but please don't publicize it yet.
+
+=== Upcoming events
+We'll be presenting at BookExpo America on May 27th at New York City's Javits Center as part of the BookExpo Challenge. Please come by and say hello! http://www.bookexpochallenge.com/
+
+We're among the organizers in the CODEXHackathon. June 27 and 28 in San Francisco, to coincide with the American Library Association Annual Conference. Plans are still coming together on that.
+
+
+=== NYPL, DPLA, RTC and Whitehouse partnership
+
+Buried in the details of President Obama's ConnectED announcement on April 30th was https://www.whitehouse.gov/the-press-office/2015/04/30/fact-sheet-spreading-joy-reading-more-children-and-young-adults[this tidbit]:
+
+* The Digital Public Library of America: Their network of librarians will volunteer with the New York Public Library to help make sure popular books reach the most appropriate audience. DPLA, in conjunction with Recovering the Classics are also add age-appropriate public domain titles whose text and cover art has been redesigned by leading graphic designers and artists.
+
+We've been working with http://shop.thecreativeactionnetwork.com/collections/recovering-the-classics[_Recovering the Classics_], which draws on the Creative Action Network's community of thousands of artists and designers, to build these public domain ebooks!
+
+=== Next steps
+Progress has been slower in our metadata workflow development and in our community building work, but overall I think we've made some good progress, though there much work left to be done. Thank you for all your comments and support.
