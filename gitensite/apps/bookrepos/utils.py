@@ -29,8 +29,10 @@ class BookRepoGenerator():
         self.org = org
 
     def run(self, save=True, max_count=100):
+        repo_iterator = self.org.repositories(number=max_count)
+        etag = repo_iterator.etag
 
-        for repo in self.org.repositories(number=max_count):
+        for repo in repo_iterator:
             # TODO: fetch existing book as update form
             interface = GithubToBookRepoInterface(repo)
             book_repo = interface.fulfill()
@@ -41,5 +43,3 @@ class BookRepoGenerator():
 def fetch_repos(org):
     repo_gen = BookRepoGenerator(org)
     repo_gen.run()
-
-
