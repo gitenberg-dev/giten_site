@@ -23,3 +23,19 @@
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
+
+i.fa-magic {
+  -webkit-transform:rotateY(180deg);
+  -moz-transform:rotateY(180deg);
+  -o-transform:rotateY(180deg);
+  -ms-transform:rotateY(180deg);
+}
+
+.icon-box {
+  text-align:center;
+  color:#535554;
+}
+
+.text-center {
+  text-align: center;
+}
