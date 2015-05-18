@@ -1,11 +1,111 @@
 {% load staticfiles %}
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/the-star-lord.jpg' %}">
+    <img src="{% static 'covers/Adventures-of-Huckleberry-Finn_76.png' %}">
   </div>
 
   <div class="large-9 columns">
-    <h5><a href="#">The Warded Man</a></h5>
-    <p>by Peter V. Brett</p>
+    <h5><a href="https://github.com/sethwoodworth/Adventures-of-Huckleberry-Finn_76/releases/tag/v0.0.2">The Adventures of Huckleberry Finn</a></h5>
+    <p>by Twain, Mark</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Don-Quixote_996.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Don-Quixote_996/releases/tag/v0.0.3">Don Quixote</a></h5>
+    <p>by Cervantes Saavedra, Miguel de Ormsby</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Frankenstein_84.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Frankenstein_84/releases/tag/v0.0.5">Frankenstein</a></h5>
+    <p>by Shelley, Mary Wollstonecraft</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Jane-Eyre_1260.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Jane-Eyre_1260/releases/tag/v0.0.2">Jane Eyre</a></h5>
+    <p>by Brontë, Charlotte</p>
+  </div>
+</div><hr>
+
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23/releases/tag/v0.0.1">The Narrative of the Life of Frederick Douglass an American Slave</a></h5>
+    <p>by Douglass, Frederick</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Pride-and-Prejudice_1342.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Pride-and-Prejudice_1342/releases/tag/v0.0.4">Pride and Prejudice</a></h5>
+    <p>by Austen, Jane</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/The-Adventures-of-Sherlock-Holmes_1661.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/The-Adventures-of-Sherlock-Holmes_1661/releases/tag/v0.0.8">The Adventures of Sherlock Holmes</a></h5>
+    <p>by Doyle, Arthur Conan</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/The-Brothers-Karamazov_28054.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/The-Brothers-Karamazov_28054/releases/tag/v0.0.3">The Brothers Karamazov</a></h5>
+    <p>by Dostoyevsky, Fyodor</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/The-Time-Machine_35.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/The-Time-Machine_35/releases/tag/v0.0.9">The Time Machine</a></h5>
+    <p>by Wells, H. G. (Herbert George)</p>
+  </div>
+</div><hr>
+
+<div class="row">
+  <div class="large-3 column">
+    <img src="{% static 'covers/Twenty-Thousand-Leagues-under-the-Sea_164.png' %}">
+  </div>
+
+  <div class="large-9 columns">
+    <h5><a href="https://github.com/sethwoodworth/Twenty-Thousand-Leagues-under-the-Sea_164/releases/tag/v0.0.2">Twenty Thousand Leagues under the Sea</a></h5>
+    <p>by Verne, Jules</p>
   </div>
 </div><hr>
