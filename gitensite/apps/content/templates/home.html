@@ -1,32 +1,31 @@
-{% extends 'frame.html' %} 
-{% load fontawesome %} 
-{% load staticfiles %} 
+{% extends 'frame.html' %}
+{% load fontawesome %}
+{% load staticfiles %}
 
-{% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} 
+{% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %}
 
 {% block body_content %}
 <!-- top panel -->
 <div class="row">
     <div class="large-12 columns">
-        <div class="row panel">
+        <div class="row">
             <div class="large-offset-1 large-7 small-12 columns">
                 <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
             </div>
-            <div class="large-1 small-4  columns" style="text-align:center;  color:#535554">
-                <i class="fa fa-5x fa-book"></i>
-                <p>
-                    <large>Books</large>
-                </p>
+            <div class="large-1 small-2 columns icon-box">
+              <i class="fa fa-5x fa-book"></i>
+              <h4>Books</h4>
             </div>
-            <div class="large-1 small-4 columns" style="text-align:center;  color:#535554">
-                <i class="fa fa-5x fa-plus"></i>
+
+            <div class="large-1 small-4 columns icon-box">
+              <i class="fa fa-5x fa-plus"></i>
             </div>
-            <div class="large-1 small-4 columns" style="text-align:center;  color:#535554">
-                <i class="fa fa-5x fa-code-fork"></i>
-                <p>
-                    <large>Git</large>
-                </p>
+
+            <div class="large-1 small-4 columns icon-box">
+              <i class="fa fa-5x fa-code-fork"></i>
+              <h4>Git</h4>
             </div>
+
             <div class="small-12 large-12 columns mission-text">
                 <h4>
                   Gitenberg is a <em>collaborative</em>,
@@ -62,7 +61,6 @@
                 </a>
                 <hr>
                 <p>See the technical details and discussion surrounding gitenberg.</p>
-                
                 <form action="https://github.com/gitenberg-dev/documentation">
                     <input style="width:100%" type="submit" value="Documentation" class="button">
                 </form>
@@ -81,6 +79,34 @@
         </div>
     </div>
 </div>
+<div class="row panel">
+  <div class="row">
+    <div class="small-8 small-centered columns">
+      <h2 class="text-center">Featured books</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+    <div class="small-2 columns">
+      <img src="{% static 'covers/the-star-lord.jpg' %}">
+    </div>
+  </div>
+</div>
+
 <div class="row">
     <div class="large-12 columns">
         <div class="row">
