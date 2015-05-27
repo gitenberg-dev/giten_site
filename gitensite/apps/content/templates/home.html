@@ -94,28 +94,40 @@
   </div>
   <div class="row">
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/Don-Quixote_996.png' %}">
-      <h4 class="text-center">Don Quixote</h4>
+      <a href="https://github.com/sethwoodworth/Don-Quixote_996/releases/tag/v0.0.3">
+        <img src="{% static 'covers/Don-Quixote_996.png' %}">
+        <h4 class="text-center">Don Quixote</h4>
+      </a>
     </div>
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/Frankenstein_84.png' %}">
-      <h4 class="text-center">Frankenstein</h4>
+      <a href="https://github.com/sethwoodworth/Frankenstein_84/releases/tag/v0.0.5">
+        <img src="{% static 'covers/Frankenstein_84.png' %}">
+        <h4 class="text-center">Frankenstein</h4>
+      </a>
     </div>
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/Moby-Dick--Or-The-Whale_2701.jpg' %}">
-      <h4 class="text-center">Moby Dick</h4>
+      <a href="https://github.com/sethwoodworth/Moby-Dick--Or-The-Whale_2701/releases/tag/v0.0.4">
+        <img src="{% static 'covers/Moby-Dick--Or-The-Whale_2701.jpg' %}">
+        <h4 class="text-center">Moby Dick</h4>
+      </a>
     </div>
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' %}">
-      <h4 class="text-center">Frederick Douglass</h4>
+      <a href="https://github.com/sethwoodworth/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23/releases/tag/v0.0.1">
+        <img src="{% static 'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' %}">
+        <h4 class="text-center">Frederick Douglass</h4>
+      </a>
     </div>
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/Pride-and-Prejudice_1342.png' %}">
-      <h4 class="text-center">Pride and Prejudice</h4>
+      <a href="https://github.com/sethwoodworth/Pride-and-Prejudice_1342/releases/tag/v0.0.4">
+        <img src="{% static 'covers/Pride-and-Prejudice_1342.png' %}">
+        <h4 class="text-center">Pride and Prejudice</h4>
+      </a>
     </div>
     <div class="large-2 small-4 columns">
-      <img src="{% static 'covers/The-Time-Machine_35.png' %}">
-      <h4 class="text-center">The Time Machine</h4>
+      <a href="https://github.com/sethwoodworth/The-Time-Machine_35/releases/tag/v0.0.9">
+        <img src="{% static 'covers/The-Time-Machine_35.png' %}">
+        <h4 class="text-center">The Time Machine</h4>
+      </a>
     </div>
   </div>
 </div>
@@ -128,7 +140,7 @@
                 <h4 class="centered">Updates</h4>
                 <hr>
                 <div class="panel">
-                    <h5><a href="/newsletter/2">Status Report #1</a></h5>
+                    <h5><a href="/newsletter/2">Status Report #2</a></h5>
                     <h6 class="subheader">
             <ul>
                 <li>
@@ -155,7 +167,7 @@
             <!-- center column -->
             <div class="large-4 small-12 columns">
                 <h4>Featured Books</h4>
-                <hr> {% include "partials/featured-books.htmldjango" %}
+                <hr> {% for book in "01234" %} {% include "partials/featured-books.htmldjango" %} {% endfor %}
             </div>
             <!-- right column -->
             <div class="large-4 small-12 columns">
