@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .forms import BookRepoForm
+# from .forms import BookRepoForm
 from .models import BookRepo
 from .interfaces import GithubToBookRepoInterface
 
