@@ -4,12 +4,14 @@
 Django management command invoked with:
     ./manage.py pull_repos <username>
 """
+from __future__ import print_function
 import getpass
 
 from django.core.management.base import BaseCommand
 from github3 import login
 
 from gitensite.apps.bookrepos.utils import fetch_repos
+from gitensite.apps.bookrepos.models import GitHubAuthToken
 
 class Command(BaseCommand):
     """
@@ -25,13 +27,17 @@ class Command(BaseCommand):
            """
 
     def handle(self, *args, **options):
-        self.stdout.write('I need to log into your account:')
+        try:
+            gh_token = GitHubAuthToken.objects.get(id=1)
+            gh = login(token=gh_token.token)
+        except GitHubAuthToken.DoesNotExist:
+            self.stdout.write('GitHub Token not found, try running make_github_token')
+            self.stdout.write('I need to log into your account:')
+            if not args:
+                self.stdout.write('You must supply a username, quitting')
+                exit(1)
+            gh = login(args[0], password=getpass.getpass())
 
-        if not args:
-            self.stdout.write('You must supply a username, quitting')
-            exit(1)
-
-        gh = login(args[0], password=getpass.getpass())
         self.stdout.write('Login successful, beginning sync')
 
         org = gh.organization('gitenberg')

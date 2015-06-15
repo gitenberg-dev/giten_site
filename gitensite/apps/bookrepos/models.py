@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import base64
 
-from django.utils import timezone
+# from django.utils import timezone
 from django.db import models
 
 class BookRepo(models.Model):
@@ -29,3 +29,9 @@ class Readme(models.Model):
         text = base64.base64decode(content)
         return Readme(text=text)
 
+
+class GitHubAuthToken(models.Model):
+    token = models.TextField()
+    auth_id = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
