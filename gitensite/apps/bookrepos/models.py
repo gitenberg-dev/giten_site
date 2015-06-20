@@ -16,6 +16,8 @@ class BookRepo(models.Model):
     cover_url = models.URLField(max_length=255, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    etag = models.CharField(max_length=255, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
