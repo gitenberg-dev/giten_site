@@ -10,7 +10,48 @@ from .models import BookRepo
 
 logger = logging.getLogger(__name__)
 
-class GithubToBookRepoInterface():
+class BookRepoInterface(object):
+
+    def _get_book_id(self):
+        """ get bookid out of repo.title """
+        name = self.repo.name
+        try:
+            return int(name.split('_')[-1])
+        except ValueError:
+            return
+
+    def _derive_contributor_string(self):
+        """ Primative version stringification of contributors to the project """
+        # TODO: replace with a db model and a m2m fkey, BookRepo >< GHUsers
+        contrib = [contrib.login for contrib in self.repo.contributors()]
+        return ', '.join(contrib)
+
+    def _do_fulfill(self):
+
+        # properties of the same name in a github3.Repo & a BookRepo db model
+        direct_set = ('clone_url', 'name', 'open_issues', 'html_url')
+        for key in direct_set:
+            setattr(self.book_repo, key, self.repo.__dict__[key])
+
+        self.book_repo.cover_url = 'http://placehold.it/140x200'  # placeholder img
+        self.book_repo.contributors = self._derive_contributor_string()
+        self.book_repo.book_id = self._get_book_id()
+
+
+class GHSearchBookRepo(BookRepoInterface):
+    """ """
+    def __init__(self, repo):
+        super(GHSearchBookRepo, self).__init__()
+        self.repo = repo
+        self.book_id = self._get_book_id()
+        self.book_repo, _ = BookRepo.objects.get_or_create(book_id=self.book_id)
+
+    def fulfill(self):
+        self._do_fulfill()
+        return self.book_repo
+
+
+class GithubToBookRepoInterface(BookRepoInterface):
     """
     Takes a github3.Repository
     prepares a BookRepo model instance
