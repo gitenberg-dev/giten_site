@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import base64
+import getpass
+import logging
 
-# from django.utils import timezone
 from django.db import models
+from github3 import login
+
+logger = logging.getLogger(__name__)
 
 class BookRepo(models.Model):
     book_id = models.IntegerField(null=True, blank=True, unique=True)
@@ -37,3 +41,18 @@ class GitHubAuthToken(models.Model):
     auth_id = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_token_or_login():
+        # TODO: make the exception generate a token
+        try:
+            gh_token = GitHubAuthToken.objects.latest('created_at')
+            gh = login(token=gh_token.token)
+            logger.debug("Recovered gh token from db, used that to log in.")
+        except GitHubAuthToken.DoesNotExist:
+            logger.debug("GitHub Token not found, try running make_github_token")
+
+            logger.info("Logging in to github but not saving token")
+            gh = login(raw_input("username:"), password=getpass.getpass())
+
+        return gh
