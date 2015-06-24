@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import BookRepo
-# Register your models here.
+from .models import GitHubAuthToken
 
 admin.site.register(BookRepo)
+admin.site.register(GitHubAuthToken)
