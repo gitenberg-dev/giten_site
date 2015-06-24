@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import getpass
 import logging
 import time
 
-
-from gitensite.apps.bookrepos.models import GitHubAuthToken
-# from .forms import BookRepoForm
-# from .models import BookRepo
 from .interfaces import GithubToBookRepoInterface
+from .interfaces import GHSearchBookRepo
 from .models import BookRepo
 from .models import GitHubAuthToken
 
@@ -30,24 +26,16 @@ class SearchAllRepos():
 
     def run(self):
         for repo in self.gh.repositories_by('gitenberg'):
-            interface = GithubToBookRepoInterface(repo)
+            interface = GHSearchBookRepo(repo)
             book_repo = interface.fulfill()
             logger.debug(interface)
             book_repo.save()
-
-
 
 
 class BookRepoGenerator():
     def __init__(self, start=1, count=10):
         self.gh = GitHubAuthToken.get_token_or_login()
         self.check_ratelimit()
-        # range(n..max(PG id)), search gh with user:GITenberg
-
-    def search_repos(self):
-        """ Search the list of GITenberg repos
-        sort by most recent"""
-        pass
 
     def get_bookrepo(self, pg_id):
         """ takes `pg_id` a PG book id
@@ -89,21 +77,10 @@ class BookRepoGenerator():
 
         self.run()
 
-class BookRepoSearchAllGenerator(BookRepoGenerator):
-    def __init__(self, page=None):
-        """ Search for all user:GITenberg and paginate/save
-        as bookrepos
-        """
-
-class SearchOneGenerator(BookRepoGenerator):
-    def __init__(self, page=None):
-        """ Search for all user:GITenberg and paginate/save
-        as bookrepos
-        """
-        self.todo = range(start, count)
 
 def get_latest_etag():
     # Not using this at the moment.
     latest_updated_book_repo = BookRepo.objects.order_by('-updated_at')[0]
     logger.debug("Latest updated book: {0}".format(latest_updated_book_repo))
     latest_etag = latest_updated_book_repo.etag
+    return latest_etag

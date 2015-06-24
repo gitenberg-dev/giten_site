@@ -9,7 +9,7 @@ import logging
 
 from django.core.management.base import BaseCommand
 
-from gitensite.apps.bookrepos.utils import BookRepoGenerator
+from gitensite.apps.bookrepos.utils import SearchAllRepos
 
 logger = logging.getLogger(__name__)
 
@@ -27,5 +27,5 @@ class Command(BaseCommand):
            """
 
     def handle(self, *args, **options):
-        repo_gen = BookRepoGenerator()
+        repo_gen = SearchAllRepos()
         repo_gen.run()
