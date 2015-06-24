@@ -15,12 +15,10 @@ class GithubToBookRepoInterface():
     Takes a github3.Repository
     prepares a BookRepo model instance
     """
-    def __init__(self, repo, etag=None):
+    def __init__(self, repo):
         """ takes: a Github3.Repoitory """
         self.repo = repo
         self.book_repo = BookRepo()
-
-        self.etag = etag
 
     def _get_bookid(self):
         """ get bookid out of repo.title """
@@ -32,7 +30,6 @@ class GithubToBookRepoInterface():
 
     def fulfill(self):
         try:
-            logger.debug("Trying to fulfill the first book from github")
             self._do_fulfill()
             return self.book_repo
         except github3.exceptions.ForbiddenError:
@@ -54,9 +51,7 @@ class GithubToBookRepoInterface():
 
         self.book_repo.cover_url = 'http://placehold.it/140x200'  # placeholder img
         self.book_repo.contributors = self._derive_contributor_string()
-        self.book_repo.etag = self.etag  # passed to init argument
-
-        self.book_id = self._get_bookid()
+        self.book_repo.book_id = self._get_bookid()
 
     def __str__(self):
         return "A BookRepo: " + self.book_repo.name + str(self.book_repo.open_issues)
