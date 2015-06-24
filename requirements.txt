@@ -15,3 +15,5 @@ requests==2.5.3
 github3.py==1.0.0a1
 celery==3.1.18
 django-celery==3.1.16
+#highlander-one==0.1.1
+amqp==1.4.6
