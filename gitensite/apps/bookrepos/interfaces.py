@@ -6,9 +6,27 @@ import logging
 import github3
 
 from .models import BookRepo
+from .models import GHContributor
 
 
 logger = logging.getLogger(__name__)
+
+class GHContributorInterface(object):
+    def __init__(self, book_repo, repo):
+        """ Takes a BookRepo and a github repository obj
+        """
+        self.book_repo = book_repo
+        self.repo = repo
+
+    def fulfill(self):
+        for user in self.repo.contributors():
+            ghc = GHContributor()
+
+            ghc.username = user.login
+            ghc.book_repo = self.book_repo
+            ghc.contributions = user.contributions
+
+            ghc.save()
 
 class BookRepoInterface(object):
 
@@ -34,8 +52,15 @@ class BookRepoInterface(object):
             setattr(self.book_repo, key, self.repo.__dict__[key])
 
         self.book_repo.cover_url = 'http://placehold.it/140x200'  # placeholder img
-        self.book_repo.contributors = self._derive_contributor_string()
         self.book_repo.book_id = self._get_book_id()
+        self.book_repo.save()
+
+        self.contributorint = GHContributorInterface(self.book_repo, self.repo)
+        self.contributorint.fulfill()
+
+
+
+        self.book_repo.contributors = self._derive_contributor_string()
 
 
 class GHSearchBookRepo(BookRepoInterface):
@@ -49,6 +74,9 @@ class GHSearchBookRepo(BookRepoInterface):
     def fulfill(self):
         self._do_fulfill()
         return self.book_repo
+
+    def __repr__(self):
+        return u"Interface for {0} and {1}".format(self.book_repo, self.repo)
 
 
 class GithubToBookRepoInterface(BookRepoInterface):

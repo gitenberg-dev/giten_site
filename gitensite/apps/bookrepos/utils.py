@@ -27,9 +27,8 @@ class SearchAllRepos():
     def run(self):
         for repo in self.gh.repositories_by('gitenberg'):
             interface = GHSearchBookRepo(repo)
-            book_repo = interface.fulfill()
+            interface.fulfill()
             logger.debug(interface)
-            book_repo.save()
 
 
 class BookRepoGenerator():
