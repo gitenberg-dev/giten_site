@@ -27,6 +27,15 @@ class BookRepo(models.Model):
         return self.name
 
 
+class GHContributor(models.Model):
+    username = models.CharField(max_length=255, null=True, blank=True)
+    book_repo = models.ForeignKey(BookRepo)
+    contributions = models.IntegerField(default=0, null=True, blank=True)
+
+    def __unicode__(self):
+        return "GHContributor {0} on {1}".format(self.username, self.book_repo.name)
+
+
 class Readme(models.Model):
     text = models.TextField()
 
