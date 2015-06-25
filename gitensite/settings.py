@@ -132,7 +132,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             # TODO: create and use a /var/log location
-            'filename': os.environ.get('DJANGO_LOG', './django.log'),
+            'filename': os.environ.get('DJANGO_LOG', '/tmp/django.log'),
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
         },
