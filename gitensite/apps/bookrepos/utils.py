@@ -23,6 +23,20 @@ class CommitTree():
 class SearchAllRepos():
     def __init__(self):
         self.gh = GitHubAuthToken.get_token_or_login()
+        self.check_ratelimit()
+
+    def check_ratelimit(self):
+        """ Check to see if we have enough ratelimits to continue, or if we
+        should wait until timestamp
+        Check on each run of run to see if we have >100 rate limits remaining
+        if we do not, fetch the timestamp for when we can begin again """
+        # TODO: break if not enough ratelimits remaining
+        self.rates = self.gh.rate_limit()
+        logger.debug("\tGitHub api allocation {0}".format(self.rates['resources']['core']['remaining']))
+        logger.debug("\t{0} seconds until refresh".format(
+            self.rates['resources']['core']['reset'] -
+            int(time.time())
+        ))
 
     def run(self):
         for repo in self.gh.repositories_by('gitenberg'):
@@ -49,18 +63,6 @@ class BookRepoGenerator():
         logger.debug(result)
         return result.repository
 
-    def check_ratelimit(self):
-        """ Check to see if we have enough ratelimits to continue, or if we
-        should wait until timestamp
-        Check on each run of run to see if we have >100 rate limits remaining
-        if we do not, fetch the timestamp for when we can begin again """
-        # TODO: break if not enough ratelimits remaining
-        self.rates = self.gh.rate_limit()
-        logger.debug("\tGitHub api allocation {0}".format(self.rates['resources']['core']['remaining']))
-        logger.debug("\t{0} seconds until refresh".format(
-            self.rates['resources']['core']['reset'] -
-            int(time.time())
-        ))
 
     def run(self):
         for pg_id in self.todo:
