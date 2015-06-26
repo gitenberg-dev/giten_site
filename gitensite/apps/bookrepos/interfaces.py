@@ -55,12 +55,9 @@ class BookRepoInterface(object):
         self.book_repo.book_id = self._get_book_id()
         self.book_repo.save()
 
-        self.contributorint = GHContributorInterface(self.book_repo, self.repo)
-        self.contributorint.fulfill()
-
-
-
-        self.book_repo.contributors = self._derive_contributor_string()
+        # self.contributorint = GHContributorInterface(self.book_repo, self.repo)
+        # self.contributorint.fulfill()
+        # self.book_repo.contributors = self._derive_contributor_string()
 
 
 class GHSearchBookRepo(BookRepoInterface):
