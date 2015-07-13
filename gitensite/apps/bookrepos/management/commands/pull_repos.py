@@ -4,12 +4,14 @@
 Django management command invoked with:
     ./manage.py pull_repos <username>
 """
-import getpass
+from __future__ import print_function
+import logging
 
 from django.core.management.base import BaseCommand
-from github3 import login
 
-from gitensite.apps.bookrepos.utils import fetch_repos
+from gitensite.apps.bookrepos.utils import SearchAllRepos
+
+logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """
@@ -25,14 +27,5 @@ class Command(BaseCommand):
            """
 
     def handle(self, *args, **options):
-        self.stdout.write('I need to log into your account:')
-
-        if not args:
-            self.stdout.write('You must supply a username, quitting')
-            exit(1)
-
-        gh = login(args[0], password=getpass.getpass())
-        self.stdout.write('Login successful, beginning sync')
-
-        org = gh.organization('gitenberg')
-        fetch_repos(org)
+        repo_gen = SearchAllRepos()
+        repo_gen.run()

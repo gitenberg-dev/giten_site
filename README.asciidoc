@@ -1,11 +1,10 @@
 = A Django website for GITenberg
 
-This is a django project based on the django project template from jpadilla/django-project-template.
 The goal of gitensite is to:
 
 * provide information about the GITenberg project
 * document the major areas of work of GITenberg
-* connect visitor to areas to contribute
+* connect visitor with areas to contribute
 * list information about GITenberg books
 * distribute completed ebooks
 
@@ -47,7 +46,8 @@ We use Postgres in production/staging and sqlite in local development.
 
 To start a local db run:
 
-    ./manage.py syncdb
+    ./manage.py migrate
+    ./manage.py createsuperuser
 
 If you have modified the database, generate new database migrations:
 
@@ -69,8 +69,7 @@ NOTE: This can be _any_ github account.  Not only github users who are members o
 
 == Apps
 
-There are currently two apps in the project: 
+There are currently two apps in the project:
 
 * _content_ for containing templates and views for website pages
 * _bookrepo_ for interacting with github and storing info about books
-

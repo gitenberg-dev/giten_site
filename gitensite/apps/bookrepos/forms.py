@@ -4,6 +4,6 @@
 from django.forms import ModelForm
 from .models import BookRepo
 
-class BookRepoForm(ModelForm):
-    class Meta:
-        model = BookRepo
+# class BookRepoForm(ModelForm):
+#     class Meta:
+#         model = BookRepo

@@ -11,6 +11,7 @@ from gitensite.apps.content.views import NewsletterView
 from gitensite.apps.content.views import BookRepoListView
 from gitensite.apps.content.views import GetInvolvedView
 from gitensite.apps.content.views import FAQView
+from gitensite.apps.bookrepos.views import all_repos_txt
 
 
 urlpatterns = [
@@ -20,7 +21,8 @@ urlpatterns = [
     url(r'^get-involved/?$', GetInvolvedView.as_view(), name='get-involved'),
     url(r'^faq/?$', FAQView.as_view(), name='faq'),
     url(r'^license/?$', TemplateView.as_view(template_name="license.html"), name='license'),
-    url(r'^.*$', HomePageView.as_view(), name='home'),
+    url(r'^all_repos.txt$', all_repos_txt, name='all_repos.txt'),
+    url(r'^$', HomePageView.as_view(), name='home'),
 ]
 
 if settings.DEBUG:
