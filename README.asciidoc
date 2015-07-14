@@ -41,6 +41,16 @@ On OSX, apple occasionally moves cffi's location, which bcrypt depends on. This 
     $ pip install bgcrypt
     $ source venv/bin/activate
 
+==== How to install dependencies on OS X with conda
+
+```
+conda create -n giten_site python=2 pip
+conda install psycopg2
+conda install cryptography
+pip install -r requirements.txt
+```
+
+
 === Database(s)
 We use Postgres in production/staging and sqlite in local development.
 
