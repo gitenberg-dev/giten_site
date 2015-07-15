@@ -42,6 +42,7 @@ COMMON_APPS = [
 LOCAL_APPS = [
     'gitensite.apps.content',
     'gitensite.apps.bookrepos',
+    'gitensite.apps.bookinfo',
 ]
 
 INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
