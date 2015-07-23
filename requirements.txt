@@ -19,10 +19,14 @@ django-celery==3.1.16
 amqp==1.4.6
 anyjson==0.3.3
 
-#added for rdf conversion
+#added for rdf and marc conversion
+pymarc==3.0.3 
+PyYAML==3.11
+six==1.9.0
 SPARQLWrapper==1.6.4
 html5lib==0.999999
 isodate==0.5.1
 pyparsing==2.0.3
 rdflib==4.2.0
 rdflib-jsonld==0.3
+git+ssh://git@github.com/gitenberg-dev/metadata.git@cc343fb45d39516b7d93c1ab2522ce7a1714ca27
