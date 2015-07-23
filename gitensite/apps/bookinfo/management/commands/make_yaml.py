@@ -20,9 +20,9 @@ class Command(BaseCommand):
             except IOError:
                 print "couldn't read " + rdffile
                 continue
-            #except Exception,e:
-            #    print "processing " + rdffile
-             #   raise e
+            except Exception,e:
+                print "processing " + rdffile
+                raise e
             i+=1
             if count and i>count:
                 break
