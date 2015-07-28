@@ -12,9 +12,7 @@ class Book(models.Model):
     title = models.CharField(max_length=1000, default="", db_index=True,)
     language = models.CharField(max_length=5, default="en", null=False, db_index=True,)
     description = models.TextField(default="", null=True, blank=True, db_index=True,)
-    yaml = models.TextField(null=True,default="")
+    yaml = models.TextField(null=True, default="")
 
     def __unicode__(self):
         return self.name
-
-
