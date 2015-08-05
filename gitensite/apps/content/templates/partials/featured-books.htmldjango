@@ -1,7 +1,10 @@
 {% load staticfiles %}
+{% load thumbnail %}
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Adventures-of-Huckleberry-Finn_76.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Adventures-of-Huckleberry-Finn_76.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -12,7 +15,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Don-Quixote_996.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Don-Quixote_996.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -23,7 +28,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Frankenstein_84.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Frankenstein_84.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -34,7 +41,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Jane-Eyre_1260.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Jane-Eyre_1260.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -46,7 +55,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -57,7 +68,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Pride-and-Prejudice_1342.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Pride-and-Prejudice_1342.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -68,7 +81,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/The-Adventures-of-Sherlock-Holmes_1661.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/The-Adventures-of-Sherlock-Holmes_1661.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -79,7 +94,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/The-Brothers-Karamazov_28054.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/The-Brothers-Karamazov_28054.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -90,7 +107,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/The-Time-Machine_35.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/The-Time-Machine_35.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">
@@ -101,7 +120,9 @@
 
 <div class="row">
   <div class="large-3 column">
-    <img src="{% static 'covers/Twenty-Thousand-Leagues-under-the-Sea_164.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Twenty-Thousand-Leagues-under-the-Sea_164.png' '80' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
   </div>
 
   <div class="large-9 columns">

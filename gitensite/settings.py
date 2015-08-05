@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
-
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -37,6 +37,7 @@ COMMON_APPS = [
     'foundation',
     'fontawesome',
     'djcelery',
+    'sorl.thumbnail',
 ]
 
 LOCAL_APPS = [
@@ -57,6 +58,9 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 
 ROOT_URLCONF = 'gitensite.urls'
 
@@ -97,6 +101,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "upload"),
 )
 
 
@@ -165,3 +170,6 @@ LOGGING = {
         }
     },
 }
+MEDIA_URL = '/static/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "upload/media")
