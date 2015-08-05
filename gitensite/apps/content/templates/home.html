@@ -1,6 +1,7 @@
 {% extends 'frame.html' %}
 {% load fontawesome %}
 {% load staticfiles %}
+{% load thumbnail %}
 
 {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %}
 
@@ -95,37 +96,49 @@
   <div class="row">
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/Don-Quixote_996/releases/tag/v0.0.3">
-        <img src="{% static 'covers/Don-Quixote_996.png' %}">
+    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Don-Quixote_996.png' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">Don Quixote</h4>
       </a>
     </div>
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/Frankenstein_84/releases/tag/v0.0.5">
-        <img src="{% static 'covers/Frankenstein_84.png' %}">
+        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Frankenstein_84.png' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">Frankenstein</h4>
       </a>
     </div>
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/Moby-Dick--Or-The-Whale_2701/releases/tag/v0.0.4">
-        <img src="{% static 'covers/Moby-Dick--Or-The-Whale_2701.jpg' %}">
+        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Moby-Dick--Or-The-Whale_2701.jpg' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">Moby Dick</h4>
       </a>
     </div>
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23/releases/tag/v0.0.1">
-        <img src="{% static 'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' %}">
+        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">Frederick Douglass</h4>
       </a>
     </div>
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/Pride-and-Prejudice_1342/releases/tag/v0.0.4">
-        <img src="{% static 'covers/Pride-and-Prejudice_1342.png' %}">
+        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Pride-and-Prejudice_1342.png' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">Pride and Prejudice</h4>
       </a>
     </div>
     <div class="large-2 small-4 columns">
       <a href="https://github.com/sethwoodworth/The-Time-Machine_35/releases/tag/v0.0.9">
-        <img src="{% static 'covers/The-Time-Machine_35.png' %}">
+        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/The-Time-Machine_35.png' '200' as im %}
+    <img src="{{ im.url  }}">
+    {% endthumbnail %}
         <h4 class="text-center">The Time Machine</h4>
       </a>
     </div>
