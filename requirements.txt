@@ -29,7 +29,7 @@ isodate==0.5.1
 pyparsing==2.0.3
 rdflib==4.2.0
 rdflib-jsonld==0.3
-git+ssh://git@github.com/gitenberg-dev/metadata.git@0.1.11
+git+https://github.com/gitenberg-dev/metadata.git@0.1.11
 
 #added for thumbnails
 sorl-thumbnail==12.3
