@@ -11,7 +11,7 @@ django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2
 
 # requests must be installed before github3 for this to install properly
-requests==2.5.3
+requests==2.6.2
 github3.py==1.0.0a1
 celery==3.1.18
 django-celery==3.1.16
