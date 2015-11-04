@@ -99,6 +99,9 @@ local_settings.py
 .env
 db.sqlite3
 
+#pillow cache
+*static/
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
