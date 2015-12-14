@@ -15,11 +15,11 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g35iofot4ijfs'
+# use environment variable to set DJANGO_SECRET_KEY
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
@@ -37,6 +37,7 @@ COMMON_APPS = [
     'foundation',
     'fontawesome',
     'djcelery',
+    'storages',
     'sorl.thumbnail',
 ]
 
@@ -82,9 +83,13 @@ if 'RDS_HOSTNAME' in os.environ:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-        }
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'gitensite',
+                'USER': '',
+                'PASSWORD': '',
+                'HOST': 'localhost',
+                'PORT': '5432',
+        }        
     }
 
 # Internationalization
@@ -94,6 +99,34 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# AWS S3 
+# https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
+
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
+AWS_STORAGE_BUCKET_NAME = 'gitensite'
+AWS_ACCESS_KEY_ID = 'AKIAIDP7I26XHV4SCSLA'
+# use environment variable to set AWS_SECRET_ACCESS_KEY
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+
+# Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+# it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+# This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+# We also use it in the next setting.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# This is used by the `static` template tag from `static`, if you're using that. Or if anything else
+# refers directly to STATIC_URL. So it's safest to always set it.
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -138,7 +171,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             # TODO: create and use a /var/log location
-            'filename': os.environ.get('DJANGO_LOG', '/tmp/django.log'),
+            'filename':  '/var/log/django/django.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
         },
@@ -173,3 +206,10 @@ LOGGING = {
 MEDIA_URL = '/static/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload/media")
+
+import logging
+from sorl.thumbnail.log import ThumbnailLogHandler
+
+handler = ThumbnailLogHandler()
+handler.setLevel(logging.ERROR)
+logging.getLogger('sorl.thumbnail').addHandler(handler)

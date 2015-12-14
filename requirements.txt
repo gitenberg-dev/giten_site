@@ -34,3 +34,7 @@ git+https://github.com/gitenberg-dev/metadata.git@0.1.11
 #added for thumbnails
 sorl-thumbnail==12.3
 Pillow==2.9.0
+
+#added for S3
+boto==2.38.0
+django-storages==1.1.8
