@@ -18,7 +18,7 @@ Icon
 
 # Thumbnails
 ._*
-upload/
+upload/media*
 
 # Files that might appear on external disk
 .Spotlight-V100
@@ -98,6 +98,9 @@ local_settings.py
 
 .env
 db.sqlite3
+
+#pillow cache
+*static/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
