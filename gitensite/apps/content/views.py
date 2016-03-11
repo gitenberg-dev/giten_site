@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
+from django.views.generic import TemplateView
+from django.views.generic import ListView
+from django.views.generic import DetailView
+from el_pagination.views import AjaxListView
 
 from gitensite.apps.bookrepos.models import BookRepo
+from gitensite.apps.bookinfo.models import Book
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
@@ -20,14 +23,21 @@ class NewsletterView(TemplateView):
                 issue=str(self.kwargs['issue'])
                 )]
 
-class BookRepoListView(ListView):
-    model = BookRepo
-    template_name = 'bookrepo_list.html'
+class SearchView(AjaxListView):
+    model = Book
+    template_name = 'book_list.html'
+    page_template = 'book_list_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(BookRepoListView, self).get_context_data(**kwargs)
+        context = super(SearchView, self).get_context_data(**kwargs)
 
         return context
+
+    def get_queryset(self):
+        if self.request.GET.has_key('q'):
+            return super(AjaxListView,self).get_queryset().filter(title__icontains=self.request.GET['q'])
+        else:
+            return super(AjaxListView,self).get_queryset()
 
 class GetInvolvedView(TemplateView):
     template_name = 'get-involved.html'

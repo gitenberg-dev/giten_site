@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
+from gitenberg.metadata.pandata import Pandata
 
 from django.db import models
 
 logger = logging.getLogger(__name__)
+
+gh_org = 'GITenberg'
 
 class Book(models.Model):
     book_id = models.IntegerField(unique=True)
@@ -15,4 +18,27 @@ class Book(models.Model):
     yaml = models.TextField(null=True, default="")
 
     def __unicode__(self):
-        return self.name
+        return self.repo_name
+    
+    @property
+    def repo_url(self):
+        return 'https://github.com/{}/{}'.format(gh_org,self.repo_name)
+
+    @property
+    def issues_url(self):
+        return 'https://github.com/{}/{}/issues'.format(gh_org,self.repo_name)
+
+    @property
+    def downloads_url(self):
+        return 'https://github.com/{}/{}//releases'.format(gh_org,self.repo_name)
+
+    @property
+    def pg_url(self):
+        return 'https://www.gutenberg.org/ebooks/{}'.format(self.book_id)
+    
+    _pandata=None
+    def metadata(self):
+        if not self._pandata:
+            self._pandata=Pandata()
+            self._pandata.load(self.yaml)
+        return self._pandata.metadata

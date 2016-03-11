@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 
 === Database(s)
-We use Postgres in production/staging and sqlite in local development.
+We use Postgres.
 
 To start a local db run:
 
@@ -68,18 +68,19 @@ And run them with:
     ./manage.py migrate
 
 ==== Getting db data
-To fill out data in your local db, you can run the provided `pull_repos` management command:
+To fill out data in your local db, you'll first need to download and unpack the Project Gutenberg RDF metadata. you can run the provided `load_repos` management command:
+ from https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip
+ 
+Then run
+    ./manage.py load_repos <rdf_library_path>
 
-    ./manage.py pull_repos <username>
-
-Where `<username>` is your github account username.
-
-NOTE: This can be _any_ github account.  Not only github users who are members of any particular GITenberg organization.
+Where `<rdf_library_path>` is the address where you unzipped the rdf metadata
 
 
 == Apps
 
-There are currently two apps in the project:
+There are currently three apps in the project:
 
 * _content_ for containing templates and views for website pages
-* _bookrepo_ for interacting with github and storing info about books
+* _bookrepo_ [deprecated] for interacting with github and storing info about books
+* _bookinfo_ for metadata for the repos

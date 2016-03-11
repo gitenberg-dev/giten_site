@@ -39,6 +39,7 @@ COMMON_APPS = [
     'djcelery',
     'storages',
     'sorl.thumbnail',
+    'el_pagination',
 ]
 
 LOCAL_APPS = [
@@ -173,7 +174,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             # TODO: create and use a /var/log location
-            'filename':  '/var/log/django/django.log',
+            'filename':  os.environ['DJANGO_LOG'] if 'DJANGO_LOG' in os.environ else '/var/log/django/django.log',
             'maxBytes': 1024*1024*10,  # 10MB
             'backupCount': 5,
         },
@@ -215,3 +216,4 @@ from sorl.thumbnail.log import ThumbnailLogHandler
 handler = ThumbnailLogHandler()
 handler.setLevel(logging.ERROR)
 logging.getLogger('sorl.thumbnail').addHandler(handler)
+

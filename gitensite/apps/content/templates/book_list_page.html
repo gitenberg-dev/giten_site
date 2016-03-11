@@ -1,0 +1,35 @@
+{% load el_pagination_tags %}
+
+{% lazy_paginate object_list %}
+
+{% for book in object_list %}
+  <div class="row book-row">
+    <div class="small-2 columns">
+      {% if book.cover_url %}<img src="{{ book.cover_url }}" />{% else %}<i class="fa fa-5x fa-book"></i>{% endif %}
+    </div>
+    <div class="small-10 columns">
+    <div class=row>
+        <h4 class="booktitle">{{ book.title }}</h4>
+    </div>
+        <div class="row text-center">
+            <div class="small-3  columns">
+                <a href="{{ book.downloads_url }}" class="button"><i class="fa  fa-download"></i> Downloads</a>
+            </div>
+            <div class="small-3 columns">
+                <a href="{{ book.repo_url }}" class="button"><i class="fa  fa-github"></i> Repository</a>
+            </div>
+            <div class="small-3  columns">
+                <a href="{{ book.issues_url }}" class="button"><i class="fa  fa-comments"></i> Issues</a>
+            </div>
+            <div class="small-3  columns">
+                <a href="{{ book.pg_url }}" class="button">Gutenberg</a>
+            </div>
+        </div>
+        <div class="row">
+            {{book.description}}
+        </div>
+    </div>
+</div>
+<hr />
+{% endfor %}
+{% show_more %}
