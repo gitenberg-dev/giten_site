@@ -15,7 +15,7 @@ class Command(BaseCommand):
         for (pg_id, repo_name) in repo_list:
             try:
                 (book,created) = Book.objects.get_or_create(book_id=int(pg_id), repo_name=repo_name)
-                metadata=BookMetadata(book,rdf_library=rdf_library, enrich=False)
+                metadata=BookMetadata(book,rdf_library=rdf_library, enrich=True)
                 book.language = metadata.language if isinstance(metadata.language,str) else 'mul'
                 book.description = metadata.description
                 book.title = metadata.title
