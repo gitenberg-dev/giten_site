@@ -6,7 +6,7 @@
     {% load staticfiles %}
     {{ block.super }}
      <script src="{% static "foundation/js/vendor/jquery.js" %}"></script>
-    <script src="{{ STATIC_URL }}el-pagination/js/el-pagination.js"></script>
+    <script src="{% static "el-pagination/js/el-pagination.js" %}"></script>
     <script>$.endlessPaginate({paginateOnScroll: true});</script>
 {% endblock %}
 

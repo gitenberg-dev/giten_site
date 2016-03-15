@@ -12,7 +12,7 @@ django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2
 
 # requests must be installed before github3 for this to install properly
-requests==2.6.2
+requests>=2.6.1,<2.7
 github3.py==0.9.5
 celery==3.1.18
 django-celery==3.1.16
@@ -40,5 +40,14 @@ boto==2.38.0
 django-storages==1.1.8
 
 #added for gitberg
-git+https://github.com/gitenberg-dev/gitberg.git@880b121a5c4bdd9d36d9c9c6923d8d2439929959
-sh==1.09
+sh==1.9
+Jinja2==2.7.3
+wikipedia==1.4.0
+semver==2.2.0
+docopt==0.6.1
+uritemplate.py==0.3.0
+beautifulsoup4==4.4.1
+appdirs==1.4.0
+coverage==3.7.1
+tox==2.1.1
+xgitberg==0.2.4

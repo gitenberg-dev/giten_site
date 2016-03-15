@@ -84,3 +84,20 @@ There are currently three apps in the project:
 * _content_ for containing templates and views for website pages
 * _bookrepo_ [deprecated] for interacting with github and storing info about books
 * _bookinfo_ for metadata for the repos
+
+== Elastic Beanstalk
+this website is deployed on Elastic Beanstalk. The main difficulty has been managing python dependencies- EB doesn't manage nested dependencies, so you have to stage the install. To load up the initial database, push the metadata feed from pg along with the install, then 
+
+    eb ssh
+
+into an instance, then execute
+
+    cd /opt/python/current
+    source ./env
+    sudo mkdir -m 777 tmp
+    unzip ./app/assets/rdf-files.tar.zip -d ./tmp
+    cd tmp
+    tar -xf rdf-files.tar
+    cd ..
+    python ./app/manage.py load_repos /opt/python/current/tmp/cache/epub
+

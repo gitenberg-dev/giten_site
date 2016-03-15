@@ -40,6 +40,8 @@ COMMON_APPS = [
     'storages',
     'sorl.thumbnail',
     'el_pagination',
+    'sh',
+    'gitenberg',
 ]
 
 LOCAL_APPS = [
