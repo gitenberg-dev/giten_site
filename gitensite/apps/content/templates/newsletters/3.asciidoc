@@ -1,0 +1,18 @@
+== GITenberg Status Report #3
+
+At our last report, most of the pieces were in place, but putting them all together, not so much. Since then, progress was very slow, as team members had to shift around responsibilities. 
+
+* Repos have been updated and cleaned. 
+* We have a working asciidoc-to-epub building machine is operating
+* This website!!!!
+
+In addition, our distribution partners were highlighted by President Obama in his ConnectED!
+
+
+=== Repo updates
+
+=== The build system
+
+=== Distribution
+
+=== Website!!!

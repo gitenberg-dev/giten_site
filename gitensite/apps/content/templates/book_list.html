@@ -1,0 +1,18 @@
+{% extends 'frame.html' %}
+{% block title %} GITenberg - Search for a book {% endblock title %}
+
+{% block body_content %}
+{% block body_js %}
+    {% load staticfiles %}
+    {{ block.super }}
+     <script src="{% static "foundation/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "el-pagination/js/el-pagination.js" %}"></script>
+    <script>$.endlessPaginate({paginateOnScroll: true});</script>
+{% endblock %}
+
+{% include "header.html" %}
+<div class="endless_page_template">
+{% include page_template %}
+</div>
+
+{% endblock body_content %}
