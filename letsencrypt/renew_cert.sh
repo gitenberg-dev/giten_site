@@ -8,7 +8,7 @@ else
     cd /opt/letsencrypt/letsencrypt
 fi
 
-PROJECT_DIR=$(cat prj_dir)
+PROJECT_DIR="/opt/python/current/app"
 
 # TODO: Remove --dry-run to do it for real
 ./letsencrypt-auto --webroot -w "$PROJECT_DIR"/letsencrypt/ --renew -d www.gitenberg.org -d gitenberg.org --dry-run certonly
