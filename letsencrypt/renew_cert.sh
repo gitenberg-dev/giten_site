@@ -11,7 +11,7 @@ fi
 PROJECT_DIR="/opt/python/current/app"
 
 # TODO: Remove --dry-run to do it for real
-./letsencrypt-auto certonly --webroot -w "$PROJECT_DIR"/letsencrypt/ -d www.gitenberg.org -d gitenberg.org --debug --dry-run --config /opt/letsencrypt/cli.ini
+./letsencrypt-auto certonly --webroot -w "$PROJECT_DIR"/letsencrypt/ -d www.gitenberg.org -d gitenberg.org --debug --dry-run --agree-tos --config /opt/letsencrypt/cli.ini
 
 # Check the return code
 if [ $? -ne 0 ]; then
