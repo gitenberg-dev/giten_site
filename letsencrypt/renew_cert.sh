@@ -15,10 +15,12 @@ PROJECT_DIR="/opt/python/current/app"
 
 # Check the return code
 if [ $? -ne 0 ]; then
-    echo "An error occurred"
+    echo "An error occurred with the letsencrypt cert process."
 else
-    echo "Success! Upload it."
+    echo "Successfully renewed the certificate.  Upload it to IAM."
     # aws iam upload-server-certificate --server-certificate-name gitenberg-both --certificate-body /etc/letsencrypt/live/www.gitenberg.org/cert.pem --private-key /etc/letsencrypt/live/www.gitenberg.org/privkey.pem --certificate-chain /etc/letsencrypt/live/www.gitenberg.org/chain.pem
+    echo "Upload Certs to S3."
+    # aws s3 cp /etc/letsencrypt/live/www.gitenberg.org/* s3://letsencrypt/
 fi
 
 exit 0
