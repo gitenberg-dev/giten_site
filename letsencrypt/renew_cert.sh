@@ -20,3 +20,5 @@ else
     echo "Success! Upload it."
     # aws iam upload-server-certificate --server-certificate-name gitenberg-both --certificate-body /etc/letsencrypt/live/www.gitenberg.org/cert.pem --private-key /etc/letsencrypt/live/www.gitenberg.org/privkey.pem --certificate-chain /etc/letsencrypt/live/www.gitenberg.org/chain.pem
 fi
+
+exit 0
