@@ -30,6 +30,7 @@ if [ $? -ne 0 ]; then
 else
     echo "Successfully renewed the certificate.  Upload to AWS IAM."
     aws iam upload-server-certificate --server-certificate-name gitenberg-lencrypt-${curdate} --certificate-body file:///etc/letsencrypt/live/www.gitenberg.org/cert.pem --private-key file:///etc/letsencrypt/live/www.gitenberg.org/privkey.pem --certificate-chain file:///etc/letsencrypt/live/www.gitenberg.org/chain.pem | tee /tmp/aws_upload.response
+
     if [ $? -ne 0 ]; then
         echo "An error occurred uploading the certificate to AWS IAM"
     else
@@ -43,5 +44,8 @@ else
         aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
     fi
 fi
+
+# Make *sure* we don't lose the logs in the event of instance restart
+aws s3 cp /var/log/letsencrypt_renewal.log s3://lencrypt/letsencrypt_renewal.log-${curdate}
 
 exit 0
