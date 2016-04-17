@@ -10,6 +10,9 @@ else
     echo "Certificate already present locally"
 fi
 
+# Grab the modification time for the certificate
+OLD_MOD_TIME=$(stat -c %Y /etc/letsencrypt/live/www.gitenberg.org/cert.pem)
+
 # Download letsencrypt client
 if [ -d /opt/letsencrypt/letsencrypt ]; then
     cd /opt/letsencrypt/letsencrypt
@@ -28,20 +31,26 @@ PROJECT_DIR="/opt/python/current/app"
 if [ $? -ne 0 ]; then
     echo "An error occurred with the letsencrypt cert process."
 else
-    echo "Successfully renewed the certificate.  Upload to AWS IAM."
-    aws iam upload-server-certificate --server-certificate-name gitenberg-lencrypt-${curdate} --certificate-body file:///etc/letsencrypt/live/www.gitenberg.org/cert.pem --private-key file:///etc/letsencrypt/live/www.gitenberg.org/privkey.pem --certificate-chain file:///etc/letsencrypt/live/www.gitenberg.org/chain.pem | tee /tmp/aws_upload.response
+    NEW_MOD_TIME=$(stat -c %Y /etc/letsencrypt/live/www.gitenberg.org/cert.pem)
+    if [ "${OLD_MOD_TIME}" != "${NEW_MOD_TIME}" ]; then
+        # Certificate file was modified, proceed
+        echo "Successfully renewed the certificate.  Upload to AWS IAM."
+        aws iam upload-server-certificate --server-certificate-name gitenberg-lencrypt-${curdate} --certificate-body file:///etc/letsencrypt/live/www.gitenberg.org/cert.pem --private-key file:///etc/letsencrypt/live/www.gitenberg.org/privkey.pem --certificate-chain file:///etc/letsencrypt/live/www.gitenberg.org/chain.pem | tee /tmp/aws_upload.response
 
-    if [ $? -ne 0 ]; then
-        echo "An error occurred uploading the certificate to AWS IAM"
+        if [ $? -ne 0 ]; then
+            echo "An error occurred uploading the certificate to AWS IAM"
+        else
+            cert_arn=$(grep 'Arn' /tmp/aws_upload.response | sed -e "s/^.*\"arn:/arn:/" -e "s/\",\s*$//")
+            echo "Found ARN ${cert_arn} for uploaded certificate"
+            # ARN contains a / character, so use alternate separators for sed command
+            sed -e "s~REPLACEME~${cert_arn}~" /tmp/arn_options.json > /tmp/arn_options_${curdate}.json
+            echo "Update environment configuration with the new certificate"
+            aws elasticbeanstalk update-environment --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
+            echo "Upload Certs to S3 for future reference"
+            aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
+        fi
     else
-        cert_arn=$(grep 'Arn' /tmp/aws_upload.response | sed -e "s/^.*\"arn:/arn:/" -e "s/\",\s*$//")
-        echo "Found ARN ${cert_arn} for uploaded certificate"
-        # ARN contains a / character, so use alternate separators for sed command
-        sed -e "s~REPLACEME~${cert_arn}~" /tmp/arn_options.json > /tmp/arn_options_${curdate}.json
-        echo "Update environment configuration with the new certificate"
-        aws elasticbeanstalk update-environment --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
-        echo "Upload Certs to S3 for future reference"
-        aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
+        echo "Certificate file not modified, but the process succeeded. Assuming no renewal happened."
     fi
 fi
 
