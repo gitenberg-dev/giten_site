@@ -60,7 +60,7 @@ else
             #echo "Update environment configuration with the new certificate"
             #aws elasticbeanstalk update-environment --region us-east-1 --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
             # Send an email instead:
-            echo -e "The SSL Certificate from Let's Encrypt for the gitenberg.org site has been renewed.  Please update it via the Amazon admin console for the site.\n\n\tNew Certificate: gitenberg-lencrypt-${curdate}" | mail -s "New gitenberg.org certificate gitenberg-lencrypt-${curdate}" eric@hellman.net moss.paul@gmail.com
+            echo -e "The SSL Certificate from Let's Encrypt for the gitenberg.org site has been renewed.  Please update it via the Amazon admin console for the site.\n\n\tNew Certificate: gitenberg-lencrypt-${curdate}" | mail -s "New gitenberg.org certificate gitenberg-lencrypt-${curdate}" eric@hellman.net,moss.paul@gmail.com
         fi
 
         echo "Upload Certs to S3 for future reference"
