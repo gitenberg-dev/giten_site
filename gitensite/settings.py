@@ -88,11 +88,11 @@ else:
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'gitensite',
-                'USER': '',
-                'PASSWORD': '',
+                'USER': 'postgres',
+                'PASSWORD': 'gitensite',
                 'HOST': 'localhost',
                 'PORT': '5432',
-        }        
+        }
     }
 
 # Internationalization
@@ -103,7 +103,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# AWS S3 
+# AWS S3
 # https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
 
 AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
@@ -153,6 +153,8 @@ if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
     ]
 else:
     # django-secure
+    ALLOWED_HOSTS = ['gitenberg.org', 'www.gitenberg.org']
+
     SESSION_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 3600
@@ -161,8 +163,8 @@ else:
     # SECURE_CONTENT_TYPE_NOSNIFF = False
     # SECURE_BROWSER_XSS_FILTER = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    
-    
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
