@@ -53,20 +53,27 @@ else
             echo "Found ARN ${cert_arn} for uploaded certificate"
             # ARN contains a / character, so use alternate separators for sed command
             sed -e "s~REPLACEME~${cert_arn}~" /tmp/arn_options.json > /tmp/arn_options_${curdate}.json
-            echo "Update environment configuration with the new certificate"
-            aws elasticbeanstalk update-environment --region us-east-1 --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
-            echo "Upload Certs to S3 for future reference"
-            # S3 doesn't store symlinks, so keep a manual copy
-            cd /etc/letsencrypt/live/www.gitenberg.org/
-            rm -f symlinks
-            touch symlinks
-            for i in `ls *.pem`;
-            do
-                LNK=$(readlink $i)
-                echo "$i|$LNK" >> symlinks
-            done
-            aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
+            # This command is BROKEN
+            # update-environment will break the environment if it is sent bad
+            # configuration params, which seems to include basically any
+            # configuration that changes the SSL Cert.  So just don't do it.  
+            #echo "Update environment configuration with the new certificate"
+            #aws elasticbeanstalk update-environment --region us-east-1 --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
+            # Send an email instead:
+            echo -e "The SSL Certificate from Let's Encrypt for the gitenberg.org site has been renewed.  Please update it via the Amazon admin console for the site.\n\n\tNew Certificate: gitenberg-lencrypt-${curdate}" | mail -s "New gitenberg.org certificate gitenberg-lencrypt-${curdate}" eric@hellman.net moss.paul@gmail.com
         fi
+
+        echo "Upload Certs to S3 for future reference"
+        # S3 doesn't store symlinks, so keep a manual copy
+        cd /etc/letsencrypt/live/www.gitenberg.org/
+        rm -f symlinks
+        touch symlinks
+        for i in `ls *.pem`;
+        do
+            LNK=$(readlink $i)
+            echo "$i|$LNK" >> symlinks
+        done
+        aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
     else
         echo "Certificate file not modified, but the process succeeded. Assuming no renewal happened."
     fi
