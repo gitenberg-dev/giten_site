@@ -26,12 +26,12 @@ parts of each are:
 directories and such necessary for the process to run.
   * packages > yum > mailx -- The mailx package is required to send an email when a certificate requires renewal
   * files > /var/log/letsencrypt_renewal.log -- This log will contain the output of the periodic renewal process.
-  * files > /opt/elasticbeanstalk/tasks/* -- These files contain a configuration which tells EB to include the log for this process in the logs visible through the AWS Management Console.
+  * files > /opt/elasticbeanstalk/tasks/\* -- These files contain a configuration which tells EB to include the log for this process in the logs visible through the AWS Management Console.
   * files > /tmp/arn_options.json -- This *should* be the set of environment configuration updates to make after we're done, but this process is currently broken
   * commands > \* The command section prepares the folder /opt/letsencrypt which is where all of the process will run.
   * container_commands -- The whole process:
     1. Copy the renew_cert.sh and cli.ini files to the working directory.
-    1. Create a cronjob which will run (0 5 2 * *) on the 2nd of the month, every month at 5AM
+    1. Create a cronjob which will run (0 5 2 \* \*) on the 2nd of the month, every month at 5AM
     1. Install that cronjob
 
 1. letsencrypt/cli.ini -- This is a basic configuration file for letsencrypt
@@ -42,7 +42,7 @@ the certificate.
   * Store the OLD_MOD_TIME of the cert for later comparison to see if any update happened (which will *not* happen if we try to renew too soon)
   * Then we run letsencrypt-auto with these arguments:
     * --webroot -- Use the [webroot](https://letsencrypt.readthedocs.org/en/latest/using.html#webroot) plugin method
-    * -w "$PROJECT_DIR"/letsencrypt/ -- Use this webroot root directory.  A static path of "http://gitenberg.org/.well-known/acme-challenge/" --> letsencrypt/.well-known/acme-challenge/ *must* be configured
+    * -w "$PROJECT_DIR"/letsencrypt/ -- Use this webroot root directory.  A static path of "http://gitenberg.org/.well-known/acme-challenge/" --> letsencrypt/.well-known/acme-challenge/ *must* be configured.  Let's Encrypt will automatically create a file at this location for the verification challenge.
     * -d www.gitenberg.org -d gitenberg.org -- These are the domains to create certs for
     * --debug -- currently Amazon AMI linux is not fully supported (but works fine)
     * --agree-tos -- Agree to the TOS with no prompting
@@ -66,3 +66,10 @@ this process is for someone to login and change the Configuration > Network
 Tier > Load Balancing > SSL certificate ID setting after each renewal of the
 certificate.  The certificate is named with the renewal date so it should be
 easy to find the most recent one.
+
+The verification challenge that gets something at an address
+http://gitenberg.org/.well-known/acme-challenge/ will only work if the machine
+running the process can change that address and there are no other running
+instances to serve something else (or something non-existent).  Basically this
+means that if we run with more than one server, the verification may only
+intermittently work correctly.
