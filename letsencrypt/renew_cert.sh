@@ -6,6 +6,15 @@ curdate=$(date +"%Y-%m-%d")
 if [ ! -d /etc/letsencrypt ]; then
     echo "Existing certificate not found on server.  Pulling a backup copy from S3"
     aws s3 cp --recursive s3://lencrypt /etc/letsencrypt
+    # Restore symlinks
+    cd /etc/letsencrypt/live/www.gitenberg.org/
+    rm -f ./*.pem
+    for i in `cat symlinks`;
+    do
+        NAME=$(echo $i | cut -f1 -d"|")
+        LNK=$(echo $i | cut -f2 -d"|")
+        ln -s $LNK $NAME
+    done
 else
     echo "Certificate already present locally"
 fi
@@ -25,7 +34,7 @@ fi
 PROJECT_DIR="/opt/python/current/app"
 
 # This will renew the certificate
-./letsencrypt-auto certonly --webroot -w "$PROJECT_DIR"/letsencrypt/ -d www.gitenberg.org -d gitenberg.org --debug --agree-tos --config /opt/letsencrypt/cli.ini
+./letsencrypt-auto certonly --webroot -w "$PROJECT_DIR"/letsencrypt/ -d www.gitenberg.org -d gitenberg.org --debug --agree-tos --non-interactive --keep-until-expiring --config /opt/letsencrypt/cli.ini
 
 # Check that everything succeeded
 if [ $? -ne 0 ]; then
@@ -45,8 +54,17 @@ else
             # ARN contains a / character, so use alternate separators for sed command
             sed -e "s~REPLACEME~${cert_arn}~" /tmp/arn_options.json > /tmp/arn_options_${curdate}.json
             echo "Update environment configuration with the new certificate"
-            aws elasticbeanstalk update-environment --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
+            aws elasticbeanstalk update-environment --region us-east-1 --environment-name giten-site-dev --option-settings file:///tmp/arn_options_${curdate}.json
             echo "Upload Certs to S3 for future reference"
+            # S3 doesn't store symlinks, so keep a manual copy
+            cd /etc/letsencrypt/live/www.gitenberg.org/
+            rm -f symlinks
+            touch symlinks
+            for i in `ls *.pem`;
+            do
+                LNK=$(readlink $i)
+                echo "$i|$LNK" >> symlinks
+            done
             aws s3 cp --recursive /etc/letsencrypt s3://lencrypt/
         fi
     else
