@@ -1,0 +1,113 @@
+---
+# Provisioning a dev box
+#
+- name: Add Postgres Role
+  become: yes
+  become_user: root
+  hosts: all
+  roles:
+    - ANXS.postgresql
+  vars_files:
+    - ./pg_vars.yml
+
+- name: Configuring Base System
+  hosts: all
+  tasks:
+    - name: apt-get install stuff 
+      apt: pkg={{ item }} state=installed update_cache=true
+      become: yes
+      become_user: root
+      with_items:
+        - build-essential
+        - git
+        - libpq-dev
+        - python
+        - python-dev
+        - python-pip
+        - python-setuptools
+        - shellcheck
+        - unzip
+
+    - name: Checkout gitensite repo
+      git: repo=git@github.com:gitenberg-dev/giten_site.git dest=/home/vagrant/giten_site accept_hostkey=True
+
+    - name: pip install stuff
+      pip: name={{ item }}
+      become: yes
+      become_user: root
+      with_items:
+        - awscli
+        - awsebcli
+        - virtualenv 
+
+- name: Virtualenv setup
+  hosts: all
+  tasks:
+    - name: check if virtualenv already exists
+      stat: path=/home/vagrant/venv
+      register: venv_dir
+
+    - name: create virtualenv for Django web app
+      shell: virtualenv /home/vagrant/venv
+      when: venv_dir.stat.isdir is not defined
+
+    - name: install web application dependencies
+      pip: requirements=/home/vagrant/giten_site/requirements.txt virtualenv=/home/vagrant/venv
+
+
+- name: Make logs
+  become: yes
+  become_user: root
+  hosts: all
+  tasks:
+    - name: Make folder
+      file: path=/var/log/django state=directory mode=0777
+
+    - name: Make log file
+      file: path=/var/log/django/django.log state=touch mode=777
+
+- name: Setup the database
+  hosts: all
+  environment:
+    DJANGO_SECRET_KEY: STEVESTEVESTEVE
+    ENVIRONMENT: DEVELOPMENT
+    AWS_SECRET_ACCESS_KEY: STEVESTEVESTEVE
+    DJANGO_DEBUG: yes
+  tasks:
+    - name: Django syncdb
+      django_manage: command=syncdb app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
+
+    - name: Django migrate
+      django_manage: command=migrate app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
+
+    - name: Django createsuperuser
+      django_manage: command="createsuperuser --noinput --username=admin --email=admin@example.com" app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
+
+    - name: check if rdf-files already exists
+      stat: path=/home/vagrant/rdf-files
+      register: rdf_dir
+
+    - name: Make folder
+      file: path=/home/vagrant/rdf-files state=directory mode=0776
+
+    #- name: Download RDF dataset
+    #  get_url: url=https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip dest=/home/vagrant/rdf-files/rdf-files.tar.zip
+    #  when: rdf_dir.stat.isdir is not defined
+    
+    - name: Download RDF dataset
+      shell: "wget --quiet https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip -O/home/vagrant/rdf-files/rdf-files.tar.zip"
+      when: rdf_dir.stat.isdir is not defined
+
+    - name: Unzip RDF dataset
+      #unarchive: src=/home/vagrant/rdf-files/rdf-files.tar.zip dest=/home/vagrant/rdf-files/
+      shell: "cd /home/vagrant/rdf-files && unzip rdf-files.tar.zip && tar -xf rdf-files.tar"
+      when: rdf_dir.stat.isdir is not defined
+
+      #- name: Untar RDF dataset
+      #unarchive: src=/home/vagrant/rdf-files/rdf-files.tar dest=/home/vagrant/rdf-files/
+      #when: rdf_dir.stat.isdir is not defined
+
+    - name: Populate DB with data (takes a very long time)
+      django_manage: command="load_repos /home/vagrant/rdf-files/cache/epub" app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
+      when: rdf_dir.stat.isdir is not defined
+    

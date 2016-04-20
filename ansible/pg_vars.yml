@@ -1,0 +1,18 @@
+---
+
+# Basic settings
+postgresql_version: 9.4
+postgresql_encoding: 'UTF-8'
+postgresql_locale: 'en_US.UTF-8'
+
+postgresql_admin_user: "postgres"
+postgresql_default_auth_method: "trust"
+
+postgresql_databases:
+  - name: gitensite 
+    owner: postgres
+
+postgresql_users:
+  - name: postgres
+    pass: gitensite
+    encrypted: no

@@ -101,3 +101,30 @@ into an instance, then execute
     cd ..
     python ./app/manage.py load_repos /opt/python/current/tmp/cache/epub
 
+== Vagrant
+
+To install with Vagrant, follow these steps:
+
+. First install (on the local machine):
+  ** VirtualBox
+  ** Vagrant
+  ** Ansible
+. Then run this command:
+
+    vagrant up
+
+. Then wait about 2 hours while it does its thing (loading the DB takes a very
+long time)
+. To log in:
+
+    vagrant ssh
+
+. Once logged in
+
+    source venv/bin/activate
+    cd giten_site
+
+. Make the proper .env file and `source` it.
+. python manage.py runserver 0.0.0.0:5001
+. Go to http://localhost:5001
+. Done.
