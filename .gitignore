@@ -109,3 +109,6 @@ db.sqlite3
 
 # Ansible roles
 ansible/roles/*
+
+# Vagrant
+.vagrant
