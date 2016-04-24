@@ -111,3 +111,16 @@
       django_manage: command="load_repos /home/vagrant/rdf-files/cache/epub" app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
       when: rdf_dir.stat.isdir is not defined
     
+- name: Setup the environment
+  hosts: all
+  environment:
+    DJANGO_SECRET_KEY: STEVESTEVESTEVE
+    ENVIRONMENT: DEVELOPMENT
+    AWS_SECRET_ACCESS_KEY: STEVESTEVESTEVE
+    DJANGO_DEBUG: yes
+  tasks:
+    - name: create env file
+      shell: "echo \"export DJANGO_SECRET_KEY=STEVESTEVESTEVE\nexport ENVIRONMENT=DEVELOPMENT\nexport AWS_SECRET_ACCESS_KEY=STEVESTEVESTEVE\nexport DJANGO_DEBUG=yes\" > /home/vagrant/giten_site/.env"
+
+    - name: Add env setup to bashrc
+      shell: "echo \"source /home/vagrant/venv/bin/activate\nsource /home/vagrant/giten_site/.env\" >> ~/.bashrc"
