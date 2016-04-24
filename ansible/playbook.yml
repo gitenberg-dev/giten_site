@@ -90,22 +90,15 @@
     - name: Make folder
       file: path=/home/vagrant/rdf-files state=directory mode=0776
 
-    #- name: Download RDF dataset
-    #  get_url: url=https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip dest=/home/vagrant/rdf-files/rdf-files.tar.zip
-    #  when: rdf_dir.stat.isdir is not defined
-    
+    # Note: get_url ansible command fails for https
     - name: Download RDF dataset
       shell: "wget --quiet https://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.zip -O/home/vagrant/rdf-files/rdf-files.tar.zip"
       when: rdf_dir.stat.isdir is not defined
 
-    - name: Unzip RDF dataset
-      #unarchive: src=/home/vagrant/rdf-files/rdf-files.tar.zip dest=/home/vagrant/rdf-files/
+    # Note: unarchive ansible command fails to unzip for some reason
+    - name: Unzip and untar RDF dataset
       shell: "cd /home/vagrant/rdf-files && unzip rdf-files.tar.zip && tar -xf rdf-files.tar"
       when: rdf_dir.stat.isdir is not defined
-
-      #- name: Untar RDF dataset
-      #unarchive: src=/home/vagrant/rdf-files/rdf-files.tar dest=/home/vagrant/rdf-files/
-      #when: rdf_dir.stat.isdir is not defined
 
     - name: Populate DB with data (takes a very long time)
       django_manage: command="load_repos /home/vagrant/rdf-files/cache/epub" app_path=/home/vagrant/giten_site virtualenv=/home/vagrant/venv
