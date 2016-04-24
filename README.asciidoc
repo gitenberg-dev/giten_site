@@ -109,7 +109,7 @@ To install with Vagrant, follow these steps:
   ** VirtualBox
   ** Vagrant
   ** Ansible
-. Then run this command:
+. Then from the project directory run this command:
 
     vagrant up
 
@@ -121,10 +121,13 @@ long time)
 
 . Once logged in
 
-    source venv/bin/activate
     cd giten_site
 
-. Make the proper .env file and `source` it.
-. python manage.py runserver 0.0.0.0:5001
+The virtualenv and environment variables should be automatically loaded upon login.
+. Start the server
+    
+    python manage.py runserver 0.0.0.0:5001
+
+Use port 5001 since the Vagrantfile will automatically forward this port to the local port 5001.  To use a different port, change the Vagrantfile on the host machine and run `vagrant halt` and `vagrant up`.  Using the IP 0.0.0.0 will permit django to serve this on any IP.  When running in vagrant the webserver doesn't recognize `localhost` addresses as being from localhost since it is port-forwarded into the virtual machine.
 . Go to http://localhost:5001
 . Done.
