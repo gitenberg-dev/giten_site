@@ -101,3 +101,35 @@ into an instance, then execute
     cd ..
     python ./app/manage.py load_repos /opt/python/current/tmp/cache/epub
 
+== Vagrant
+
+To install with Vagrant, follow these steps:
+
+. First install (on the local machine):
+  ** VirtualBox
+  ** Vagrant
+  ** Ansible
+. Then from the project directory run this command:
+
+    vagrant up
+
+. Then wait about 2 hours while it does its thing (loading the DB takes a very
+long time)
+. To log in:
+
+    vagrant ssh
+
+. Once logged in
+
+    cd giten_site
++
+The virtualenv and environment variables should be automatically loaded upon login.
+
+. Start the server
+    
+    python manage.py runserver 0.0.0.0:5001
++
+Use port 5001 since the Vagrantfile will automatically forward this port to the local port 5001.  To use a different port, change the Vagrantfile on the host machine and run `vagrant halt` and `vagrant up`.  Using the IP 0.0.0.0 will permit django to serve this on any IP.  When running in vagrant the webserver doesn't recognize `localhost` addresses as being from localhost since it is port-forwarded into the virtual machine.
+
+. Go to http://localhost:5001
+. Done.
