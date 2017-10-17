@@ -1,35 +1,51 @@
 {% load staticfiles %}
 <div class="contain-to-grid">
-<nav class="top-bar" data-topbar>
-  <ul class="title-area">
-
-    <li class="name">
-      <h1>
-        <a href="/">
-          <h3 style="color:#ffffff">GITenberg</h3>
-        </a>
-      </h1>
-    </li>
-  </ul>
-
-  <section class="top-bar-section ">
-
-    <ul class="right">
-    <li class="has-form">
-      <div class="row collapse">
-       <form action="/search" >
-        <div class="large-8 small-9 columns">
-          <input type="search" name="q" placeholder="search title" />
-        </div>
-        <div class="large-4 small-3 columns">
-          <input type="submit" value="Search" class="alert button expand">Search</a>
-        </div>
-        </form>
-      </div>
-    </li>
+  <nav class="top-bar" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+        <h1>
+          <a href="/">
+            <img src="{% static 'Gitenberg_full_white_stroke.svg' %}" alt="GITenberg logo" style="height:32px; width:178px;">
+          </a>
+        </h1>
+      </li>
     </ul>
-  </section>
-</nav>
+
+    <section class="top-bar-section ">
+      <ul class="left">
+        <li class="has-form">
+          <a href="#" style="padding-left:0;">Updates</a>
+        </li>
+        <li class="divider"></li>
+        <li class="has-form">
+          <a href="#" style="padding-left:0;">Browse Books</a>
+        </li>
+        <li class="divider"></li>
+        <li class="has-form">
+          <a href="/get-involved" style="padding-left:0;">Get Involved</a>
+        </li>
+      </ul>
+      <form action="/search">
+        <ul class="right">
+          <li class="has-form">
+            <input type="submit" value="Search" class="alert button" />
+          </li>
+        </ul>
+        <ul class="right">
+          <li class="has-form">
+            <select style="height: 28px; width:70px; margin-top:9px; padding: 2px 8px;">
+              <option>Title</option>
+              <option>Author</option>
+              <option>Genre</option>
+            </select>
+          </li>
+        </ul>
+        <ul class="right">
+          <li class="has-form">
+            <input type="search" name="q" placeholder="search title" />
+          </li>
+        </ul>
+      </form>
+    </section>
+  </nav>
 </div>
-
-
