@@ -1,0 +1,28 @@
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
+
+{% include "header.html" %}
+<!-- top panel -->
+
+<script language="javascript" type="text/javascript">
+    //Automatically set the height of the iframe based on the height of its contents
+    function resizeIframe(obj){
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+</script>
+
+<style>
+    iframe {
+        width: 100%;
+        border: 0;
+    }
+</style>
+
+<div class="row">
+    <div class="large-12 columns">
+        <iframe src="newsletter/3" onload="resizeIframe(this);"></iframe>
+        <iframe src="newsletter/2" onload="resizeIframe(this);"></iframe>
+        <iframe src="newsletter/1" onload="resizeIframe(this);"></iframe>
+    </div>
+</div>
+
+{% endblock body_content %}

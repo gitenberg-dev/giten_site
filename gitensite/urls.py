@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView
 
 from gitensite.apps.content.views import HomePageView
 from gitensite.apps.content.views import NewsletterView
+from gitensite.apps.content.views import UpdatesView
 from gitensite.apps.content.views import SearchView
 from gitensite.apps.content.views import GetInvolvedView
 from gitensite.apps.content.views import FAQView
@@ -18,6 +19,7 @@ from gitensite.apps.bookinfo.views import metadata
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
+    url(r'^updates/?$', UpdatesView.as_view(), name='updates'),
     url(r'^books/?$', SearchView.as_view(), name='books'),
     url(r'^search/?$', SearchView.as_view(), name='search'),
     url(r'^get-involved/?$', GetInvolvedView.as_view(), name='get-involved'),

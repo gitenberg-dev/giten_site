@@ -23,6 +23,13 @@ class NewsletterView(TemplateView):
                 issue=str(self.kwargs['issue'])
                 )]
 
+class UpdatesView(TemplateView):
+    template_name = 'updates.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdatesView, self).get_context_data(**kwargs)
+        return context
+
 class SearchView(AjaxListView):
     model = Book
     template_name = 'book_list.html'
