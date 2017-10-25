@@ -6,6 +6,8 @@
 {% block title %} GITenberg - Maintaining our Cultural Heritage in eBooks {% endblock title %}
 
 {% block body_content %}
+
+{% include "header.html" %}
 <!-- top panel -->
 <div class="row">
     <div class="small-12 columns">
@@ -46,42 +48,42 @@
     <!-- .row .panel -->
 </div>
 
-<div class="row" style="height:2em"></div>
+<div class="row" style="height: 2em;"></div>
 <div class="row">
     <div class="large-12 columns">
         <div class="row">
             <div class="large-4 small-12 columns centered">
                 
-                    <i style="color:black;" class="fa fa-5x fa-search"></i>
+                    <i style="color: black;" class="fa fa-5x fa-search"></i>
                     <h4>Find eBooks</h4>
                 
                 <hr>
                 <p>Find free ebooks to download, read, improve, and savor.</p>
-                <form action="/search" style="padding-top:0.5em">
-                    <input style="width:100%" type="search" name="q" placeholder="Moby Dick">
+                <form action="/search" style="padding-top: 0.5em;">
+                    <input style="width: 100%;" type="search" name="q" placeholder="Moby Dick">
                 </form>
             </div>
             <div class="large-4 small-12 columns centered">
                 <!-- The docs still need to be migrated to giten-site -->
                 <a href="https://github.com/gitenberg-dev/documentation">
-                    <i style="color:black;" class="fa fa-5x fa-file-text"></i>
+                    <i style="color: black;" class="fa fa-5x fa-file-text"></i>
                     <h4>Read the Docs</h4>
                 </a>
                 <hr>
                 <p>See the technical details and discussion surrounding gitenberg.</p>
                 <form action="https://github.com/gitenberg-dev/documentation">
-                    <input style="width:100%" type="submit" value="Documentation" class="button">
+                    <input style="width: 100%;" type="submit" value="Documentation" class="button">
                 </form>
             </div>
             <div class="large-4 small-12 columns centered">
                 <a href="/get-involved">
-                    <i style="color:black;" class="fa fa-5x fa-pencil-square"></i>
+                    <i style="color: black;" class="fa fa-5x fa-pencil-square"></i>
                     <h4>Get Involved</h4>
                 </a>
                 <hr>
                 <p>Learn more about contributing to the gitenberg project. All are welcome.</p>
                 <form action="/get-involved">
-                    <input style="width:100%" type="submit" value="Get Involved" class="button">
+                    <input style="width: 100%;" type="submit" value="Get Involved" class="button">
                 </form>
             </div>
         </div>
