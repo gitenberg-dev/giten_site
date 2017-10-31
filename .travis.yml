@@ -6,6 +6,9 @@ python:
 env:
   - AWS_SECRET_ACCESS_KEY=abc DJANGO_SECRET_KEY=abc
 
+before_install:
+  - mkdir /var/log/django
+
 install: pip install -r requirements.txt
 
 script: python manage.py test
