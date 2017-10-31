@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - '2.7'
+
+env:
+  - AWS_SECRET_ACCESS_KEY=abc DJANGO_SECRET_KEY=abc BOTO_CONFIG=/tmp
+
+before_install:
+  - sudo mkdir /var/log/django
+  - sudo chmod 777 /var/log/django
+
+install: pip install -r requirements.txt
+
+script: python manage.py test --settings=gitensite.travis_settings
