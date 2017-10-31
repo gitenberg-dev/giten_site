@@ -8,6 +8,7 @@ env:
 
 before_install:
   - sudo mkdir /var/log/django
+  - sudo chmod 777 /var/log/django
 
 install: pip install -r requirements.txt
 
