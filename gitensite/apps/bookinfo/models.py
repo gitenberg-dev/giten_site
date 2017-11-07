@@ -16,6 +16,12 @@ logger = logging.getLogger(__name__)
 
 gh_org = 'GITenberg'
 
+def smart_truncate(content, length=100, suffix='...'):
+    if len(content) <= length:
+        return content
+    else:
+        return ' '.join(content[:length+1].split(' ')[0:-1]) + suffix
+
 class Book(models.Model):
     book_id = models.IntegerField(unique=True)
     repo_name = models.CharField(max_length=255, null=True, blank=True)
@@ -39,6 +45,14 @@ class Book(models.Model):
             return ""
 
     @property
+    def title_short(self):
+        return smart_truncate(self.title, 65)
+    
+    @property
+    def description_short(self):
+        return smart_truncate(self.description, 300)
+
+    @property
     def repo_url(self):
         return 'https://github.com/{}/{}'.format(gh_org,self.repo_name)
 
@@ -53,7 +67,7 @@ class Book(models.Model):
     @property
     def pg_url(self):
         return 'https://www.gutenberg.org/ebooks/{}'.format(self.book_id)
-    
+
     _pandata=None
     def metadata(self):
         if not self._pandata:
