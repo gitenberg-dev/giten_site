@@ -6,7 +6,9 @@
 <script language="javascript" type="text/javascript">
     //Automatically set the height of the iframe based on the height of its contents
     function resizeIframe(obj){
-        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        window.setTimeout(function(){
+            obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }, 500);
     }
 </script>
 
@@ -14,6 +16,7 @@
     iframe {
         width: 100%;
         border: 0;
+        height: 2000px; /* initial height - will be overridden by resizeIframe function */
     }
 </style>
 
