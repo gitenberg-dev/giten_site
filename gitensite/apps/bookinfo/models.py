@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
+
+import yaml as PyYAML
+def default_ctor(loader, tag_suffix, node):
+    return tag_suffix + ' ' + node.value
+PyYAML.add_multi_constructor('!lcc', default_ctor)
+PyYAML.add_multi_constructor('!lcsh', default_ctor)
+
 from gitenberg.metadata.pandata import Pandata
 
 from django.db import models
@@ -20,6 +27,17 @@ class Book(models.Model):
     def __unicode__(self):
         return self.repo_name
     
+    @property
+    def author(self):
+        if self.yaml:
+            try:
+                obj = PyYAML.load(self.yaml)
+                return obj["creator"]["author"]["agent_name"]
+            except:
+                return ""
+        else:
+            return ""
+
     @property
     def repo_url(self):
         return 'https://github.com/{}/{}'.format(gh_org,self.repo_name)
