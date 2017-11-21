@@ -1,32 +1,34 @@
 {% load el_pagination_tags %}
+{% load staticfiles %}
 
 {% lazy_paginate object_list %}
 
 {% for book in object_list %}
-  <div class="row book-row">
-    <div class="small-2 columns">
+<div class="row book-row">
+    <div class="large-2 small-6 columns">
       {% if book.cover_url %}<img src="{{ book.cover_url }}" />{% else %}<i class="fa fa-5x fa-book"></i>{% endif %}
     </div>
-    <div class="small-10 columns">
-    <div class=row>
-        <h4 class="booktitle">{{ book.title }}</h4>
+    <div class="large-3 small-6 columns">
+        <h5 class="booktitle" style="font-weight: bold;">{{ book.title_short }}</h5>
+        <p class="bookauthor">{{ book.author }}</p>
     </div>
+    <div class="large-7 small-12 columns">
         <div class="row text-center">
-            <div class="small-3  columns">
-                <a href="{{ book.downloads_url }}" class="button"><i class="fa  fa-download"></i> Downloads</a>
+            <div class="row">
+                <div class="large-12 columns" style="margin-bottom: 15px;">{{book.description_short}}</div>
+                <div class="small-3 columns">
+                    <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i><br />Downloads</a>
+                </div>
+                <div class="small-3 columns">
+                    <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i><br />Repository</a>
+                </div>
+                <div class="small-3 columns">
+                    <a href="{{ book.issues_url }}" class="button radius expand"><i class="fa fa-comments"></i><br />Issues</a>
+                </div>
+                <div class="small-3 columns">
+                    <a href="{{ book.pg_url }}" class="button radius expand"><img src="{% static 'gutenberg-logo-small.png' %}" style="width: 16px; height: 16px;" /><br />Gutenberg</a>
+                </div>
             </div>
-            <div class="small-3 columns">
-                <a href="{{ book.repo_url }}" class="button"><i class="fa  fa-github"></i> Repository</a>
-            </div>
-            <div class="small-3  columns">
-                <a href="{{ book.issues_url }}" class="button"><i class="fa  fa-comments"></i> Issues</a>
-            </div>
-            <div class="small-3  columns">
-                <a href="{{ book.pg_url }}" class="button">Gutenberg</a>
-            </div>
-        </div>
-        <div class="row">
-            {{book.description}}
         </div>
     </div>
 </div>
