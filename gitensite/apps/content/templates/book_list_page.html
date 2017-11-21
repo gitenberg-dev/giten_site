@@ -4,7 +4,7 @@
 {% lazy_paginate object_list %}
 
 {% for book in object_list %}
-<div class="row book-row">
+<div class="row book-row" style="margin-top: 15px;">
     <div class="large-2 small-6 columns">
       {% if book.cover_url %}<img src="{{ book.cover_url }}" />{% else %}<i class="fa fa-5x fa-book"></i>{% endif %}
     </div>
