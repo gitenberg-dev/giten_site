@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import logging
+
+import yaml as PyYAML
+def default_ctor(loader, tag_suffix, node):
+    return tag_suffix + ' ' + node.value
+PyYAML.add_multi_constructor('!lcc', default_ctor)
+PyYAML.add_multi_constructor('!lcsh', default_ctor)
+
 from gitenberg.metadata.pandata import Pandata
 
 from django.db import models
@@ -8,6 +15,12 @@ from django.db import models
 logger = logging.getLogger(__name__)
 
 gh_org = 'GITenberg'
+
+def smart_truncate(content, length=100, suffix='...'):
+    if len(content) <= length:
+        return content
+    else:
+        return ' '.join(content[:length+1].split(' ')[0:-1]) + suffix
 
 class Book(models.Model):
     book_id = models.IntegerField(unique=True)
@@ -20,6 +33,25 @@ class Book(models.Model):
     def __unicode__(self):
         return self.repo_name
     
+    @property
+    def author(self):
+        if self.yaml:
+            try:
+                obj = PyYAML.load(self.yaml)
+                return obj["creator"]["author"]["agent_name"]
+            except:
+                return ""
+        else:
+            return ""
+
+    @property
+    def title_short(self):
+        return smart_truncate(self.title, 65)
+    
+    @property
+    def description_short(self):
+        return smart_truncate(self.description, 300)
+
     @property
     def repo_url(self):
         return 'https://github.com/{}/{}'.format(gh_org,self.repo_name)
@@ -35,7 +67,7 @@ class Book(models.Model):
     @property
     def pg_url(self):
         return 'https://www.gutenberg.org/ebooks/{}'.format(self.book_id)
-    
+
     _pandata=None
     def metadata(self):
         if not self._pandata:
