@@ -22,27 +22,31 @@ def smart_truncate(content, length=100, suffix='...'):
     else:
         return ' '.join(content[:length+1].split(' ')[0:-1]) + suffix
 
+class Author(models.Model):
+    author_id = models.IntegerField(unique=True)
+    name = models.CharField(max_length=255, default="", null=True, blank=True)
+    aliases = models.CharField(max_length=255, default="", null=True, blank=True)
+    birth = models.DateField()
+    death = models.DateField()
+    wikipedia_url = models.URLField(max_length=500)
+
 class Book(models.Model):
     book_id = models.IntegerField(unique=True)
     repo_name = models.CharField(max_length=255, null=True, blank=True)
-    title = models.CharField(max_length=1000, default="", db_index=True,)
-    language = models.CharField(max_length=5, default="en", null=False, db_index=True,)
-    description = models.TextField(default="", null=True, blank=True,)
+    title = models.CharField(max_length=1000, default="", db_index=True)
+    language = models.CharField(max_length=5, default="en", null=False, db_index=True)
+    description = models.TextField(default="", null=True, blank=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, db_index=True, null=True)
+    gutenberg_type = models.CharField(max_length=255, default="", null=True, blank=True)
+    gutenberg_bookshelf = models.CharField(max_length=1000, default="")
+    subjects = models.CharField(max_length=1000, default="")
+    full_text = models.TextField(default="", null=True, blank=True)
+    num_downloads = models.IntegerField(default=0)
+    
     yaml = models.TextField(null=True, default="")
 
     def __unicode__(self):
         return self.repo_name
-    
-    @property
-    def author(self):
-        if self.yaml:
-            try:
-                obj = PyYAML.load(self.yaml)
-                return obj["creator"]["author"]["agent_name"]
-            except:
-                return ""
-        else:
-            return ""
 
     @property
     def title_short(self):
@@ -74,3 +78,15 @@ class Book(models.Model):
             self._pandata=Pandata()
             self._pandata.load(self.yaml)
         return self._pandata.metadata
+
+class Cover(models.Model):
+    cover_id = models.IntegerField(unique=True)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
+    link = models.URLField(max_length=500)
+    default_cover = models.BooleanField(default=False)
+
+class External_Link(models.Model):
+    link_id = models.IntegerField(unique=True)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
+    url = models.URLField(max_length=500)
+    source = models.CharField(max_length=255)
