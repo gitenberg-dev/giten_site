@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView
 
 from gitensite.apps.content.views import HomePageView
 from gitensite.apps.content.views import NewsletterView
+from gitensite.apps.content.views import EbookListingView
 from gitensite.apps.content.views import SearchView
 from gitensite.apps.bookinfo.views import all_repos_txt
 from gitensite.apps.bookinfo.views import metadata
@@ -16,6 +17,7 @@ from gitensite.apps.bookinfo.views import metadata
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
+    url(r'^book/(?P<bookid>\d+)$', EbookListingView.as_view(), name='book'),
     url(r'^updates/?$', TemplateView.as_view(template_name='updates.html'), name='updates'),
     url(r'^books/?$', SearchView.as_view(), name='books'),
     url(r'^search/?$', SearchView.as_view(), name='search'),

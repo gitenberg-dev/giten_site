@@ -1,0 +1,43 @@
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
+
+{% include "header.html" %}
+
+<div class="row" style="margin-top: 10px;">
+    <div class="large-3 columns">
+        <div class="thumbnail">
+            <img src="https://gitensite.s3.amazonaws.com/cache/79/42/79428159265ae6db6f3727581ea5a9e9.jpg" />
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <h2>{{ book.title }}</h2>
+        <h3>{{ book.author }}</h3>
+        <p><strong>Tags:</strong> {{ book.tags_str }}</p>
+    </div>
+    <div class="large-3 columns">
+        <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
+        <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i> Repository</a><br />
+        <a href="{{ book.issues_url }}" class="button radius expand"><i class="fa fa-comments"></i> Issues</a><br />
+        <a href="{{ book.pg_url }}" class="button radius expand"><img src="{% static 'gutenberg-logo-small.png' %}" style="width: 16px; height: 16px;" /> Gutenberg</a>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <p>{{ book.description }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <h3>Other Books by {{ book.author_first_last }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <ul>
+        {% for sameauthor_book in sameauthor %}
+            <li>{{ sameauthor_book.title }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock body_content %}

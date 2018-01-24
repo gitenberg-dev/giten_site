@@ -23,6 +23,22 @@ class NewsletterView(TemplateView):
                 issue=str(self.kwargs['issue'])
                 )]
 
+class EbookListingView(TemplateView):
+    model = Book
+    template_name = 'listing.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(EbookListingView, self).get_context_data(**kwargs)
+
+        results = Book.objects.filter(book_id=self.kwargs['bookid'])
+        if len(results) > 0:
+            matchedBook = Book.objects.filter(book_id=self.kwargs['bookid'])[0]
+            context['book'] = matchedBook
+        
+        
+
+        return context
+
 class SearchView(AjaxListView):
     model = Book
     template_name = 'book_list.html'
