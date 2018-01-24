@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 book.yaml = metadata.__unicode__()
                 book.save()
             except (ValueError,IndexError):
-                print "!! {}".format(reponame)
+                print ("!! {}".format(reponame))
                 continue
-        print "{} books created".format(Book.objects.count())
+        print ("{} books created".format(Book.objects.count()))
 
