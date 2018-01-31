@@ -6,8 +6,13 @@ from django.views.generic import ListView
 from django.views.generic import DetailView
 from el_pagination.views import AjaxListView
 
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
+from gitensite.apps.bookinfo.db import addBookFromYaml
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
@@ -38,3 +43,15 @@ class SearchView(AjaxListView):
             return super(AjaxListView,self).get_queryset().filter(title__icontains=self.request.GET['q'])
         else:
             return super(AjaxListView,self).get_queryset()
+
+class BookPostView(TemplateView):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(BookPostView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        yaml = request.body
+        addBookFromYaml(yaml)
+
+        response = HttpResponse('OK')
+        return response
