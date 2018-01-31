@@ -23,11 +23,10 @@ def smart_truncate(content, length=100, suffix='...'):
         return ' '.join(content[:length+1].split(' ')[0:-1]) + suffix
 
 class Author(models.Model):
-    author_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=255, default="", null=True, blank=True)
     aliases = models.CharField(max_length=255, default="", null=True, blank=True)
-    birth = models.DateField()
-    death = models.DateField()
+    birth_year = models.IntegerField(null=True)
+    death_year = models.IntegerField(null=True)
     wikipedia_url = models.URLField(max_length=500)
 
 class Book(models.Model):
