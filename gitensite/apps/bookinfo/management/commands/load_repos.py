@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- coding: utf-8 -*-
 import csv
 import requests
@@ -31,7 +32,7 @@ class Command(BaseCommand):
                 book.yaml = metadata.__unicode__()
                 book.save()
             except (ValueError,IndexError):
-                print "!! {}".format(reponame)
+                print ("!! {}".format(reponame))
                 continue
-        print "{} books created".format(Book.objects.count())
+        print ("{} books created".format(Book.objects.count()))
 
