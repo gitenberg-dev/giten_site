@@ -7,7 +7,7 @@ PyYAML.add_multi_constructor('!lcc', default_ctor)
 PyYAML.add_multi_constructor('!lcsh', default_ctor)
 
 def addBookFromYaml(yaml):
-    obj = PyYAML.load(yaml)
+    obj = PyYAML.safe_load(yaml)
 
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']), repo_name=obj['_repo'])
 
