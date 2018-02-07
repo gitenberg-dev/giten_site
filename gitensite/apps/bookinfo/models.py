@@ -30,7 +30,7 @@ class Author(models.Model):
     wikipedia_url = models.URLField(max_length=500)
 
 class Book(models.Model):
-    book_id = models.IntegerField(unique=True)
+    book_id = models.IntegerField()
     repo_name = models.CharField(max_length=255, null=True, blank=True)
     title = models.CharField(max_length=1000, default="", db_index=True)
     language = models.CharField(max_length=5, default="en", null=False, db_index=True)
