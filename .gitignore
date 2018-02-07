@@ -112,5 +112,3 @@ ansible/roles/*
 
 # Vagrant
 .vagrant
-
-book-post-secret

@@ -14,6 +14,8 @@ from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
 from gitensite.apps.bookinfo.db import addBookFromYaml
 
+import os
+
 class HomePageView(TemplateView):
     template_name = 'home.html'
 
@@ -50,8 +52,9 @@ class BookPostView(TemplateView):
         return super(BookPostView, self).dispatch(request, *args, **kwargs)
 
     def post(self, request):
-        yaml = request.body
-        addBookFromYaml(yaml)
-
-        response = HttpResponse('OK')
-        return response
+        if "HTTP_X_GITENBERG_SECRET" in request.META and request.META["HTTP_X_GITENBERG_SECRET"] == os.environ["GITENBERG_SECRET"]:
+            yaml = request.body
+            addBookFromYaml(yaml)
+            return HttpResponse("OK")
+        else:
+            return HttpResponse("Incorrect key or key not present", status=401)

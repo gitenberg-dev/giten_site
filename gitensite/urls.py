@@ -13,11 +13,6 @@ from gitensite.apps.content.views import BookPostView
 from gitensite.apps.bookinfo.views import all_repos_txt
 from gitensite.apps.bookinfo.views import metadata
 
-#The secret must be stored in a file called "book-post-secret" located at the project root
-secretfile = open("book-post-secret", "rw")
-secret = secretfile.read()
-secretfile.close()
-
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
@@ -30,7 +25,7 @@ urlpatterns = [
     url(r'^all_repos.txt$', all_repos_txt, name='all_repos.txt'),
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^books/(?P<book_id>\d+)\.(?P<ext>json|yaml)$', metadata, name='metadata'),
-    url(r'^books/post/' + secret, BookPostView.as_view(), name='book-post')
+    url(r'^books/post/', BookPostView.as_view(), name='book-post')
 ]
 
 if settings.DEBUG:
