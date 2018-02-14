@@ -50,7 +50,15 @@ class Book(models.Model):
     @property
     def title_short(self):
         return smart_truncate(self.title, 65)
+
+    @property
+    def subjects_str(self):
+        return self.subjects.replace(";", ", ")
     
+    @property
+    def author_first_last(self):
+        return " ".join(self.author.name.split(", ")[::-1])
+
     @property
     def description_short(self):
         return smart_truncate(self.description, 300)
@@ -71,6 +79,16 @@ class Book(models.Model):
     def pg_url(self):
         return 'https://www.gutenberg.org/ebooks/{}'.format(self.book_id)
 
+    @property
+    def cover_url(self):
+        existing_covers = list(Cover.objects.filter(book=self))
+        for cover in existing_covers:
+            if cover.default_cover:
+                return cover.link
+        if len(existing_covers) > 0:
+            return existing_covers[0].link
+        return None
+
     _pandata=None
     def metadata(self):
         if not self._pandata:
@@ -79,13 +97,11 @@ class Book(models.Model):
         return self._pandata.metadata
 
 class Cover(models.Model):
-    cover_id = models.IntegerField(unique=True)
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
     link = models.URLField(max_length=500)
     default_cover = models.BooleanField(default=False)
 
 class External_Link(models.Model):
-    link_id = models.IntegerField(unique=True)
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
     url = models.URLField(max_length=500)
     source = models.CharField(max_length=255)

@@ -4,6 +4,7 @@
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.views.generic import View
 from el_pagination.views import AjaxListView
 
 from django.http import HttpResponse
@@ -39,11 +40,11 @@ class EbookListingView(TemplateView):
 
         results = Book.objects.filter(book_id=self.kwargs['bookid'])
         if len(results) > 0:
-            matchedBook = Book.objects.filter(book_id=self.kwargs['bookid'])[0]
+            matchedBook = results[0]
             context['book'] = matchedBook
+            sameauthor = Book.objects.filter(author=matchedBook.author).order_by("title")
+            context['sameauthor'] = sameauthor
         
-        
-
         return context
 
 class SearchView(AjaxListView):
@@ -62,7 +63,7 @@ class SearchView(AjaxListView):
         else:
             return super(AjaxListView,self).get_queryset()
 
-class BookPostView(TemplateView):
+class BookPostView(View):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super(BookPostView, self).dispatch(request, *args, **kwargs)
