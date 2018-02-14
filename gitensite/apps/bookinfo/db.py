@@ -1,4 +1,4 @@
-from gitensite.apps.bookinfo.models import Author, Book
+from gitensite.apps.bookinfo.models import Author, Book, Cover
 
 import yaml as PyYAML
 def default_ctor(loader, tag_suffix, node):
@@ -19,6 +19,12 @@ def addBookFromYaml(yaml):
             author.death_year = obj["creator"]["author"]["deathdate"]
         book.author = author
         author.save()
+    
+    if "cover" in obj:
+        num_existing_covers = len(list(Cover(book=book).objects.all()))
+        (cover, created) = Cover.objects.get_or_create(link=obj["cover"])
+        cover.book = book
+        cover.default_cover = (num_existing_covers == 0)
 
     book.title = obj["title"]
     book.language = obj["language"] if isinstance(obj["language"], str) else 'mul'
