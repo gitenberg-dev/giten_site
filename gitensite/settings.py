@@ -20,7 +20,6 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
@@ -91,7 +90,7 @@ else:
                 'NAME': 'gitensite',
                 'USER': 'postgres',
                 'PASSWORD': 'gitensite',
-                'HOST': 'db',
+                'HOST': 'localhost',
                 'PORT': '5432',
         }
     }
@@ -147,23 +146,23 @@ if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
     DEBUG = True
     TEMPLATE_DEBUG = DEBUG
 
-    ALLOWED_HOSTS = ['localhost']
+    ALLOWED_HOSTS = []
 
     INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
         'debug_toolbar',
     ]
 else:
     # django-secure
-    ALLOWED_HOSTS = ['gitenberg.org', 'www.gitenberg.org', 'localhost', "192.168.99.100"]
+    ALLOWED_HOSTS = ['gitenberg.org', 'www.gitenberg.org']
 
-    #SESSION_COOKIE_SECURE = True
-    #SECURE_SSL_REDIRECT = True
-    #SECURE_HSTS_SECONDS = 3600
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
     # SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     # SECURE_FRAME_DENY = True
     # SECURE_CONTENT_TYPE_NOSNIFF = False
     # SECURE_BROWSER_XSS_FILTER = True
-    #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 LOGGING = {
