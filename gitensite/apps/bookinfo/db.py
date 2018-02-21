@@ -9,14 +9,21 @@ PyYAML.add_multi_constructor('!lcsh', default_ctor)
 def addBookFromYaml(yaml):
     obj = PyYAML.safe_load(yaml)
 
-    (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']), repo_name=obj['_repo'])
+    print obj
 
-    if "creator" in obj and "author" in obj["creator"]:
-        (author, created) = Author.objects.get_or_create(name=obj["creator"]["author"]["agent_name"])
-        if "birthdate" in obj["creator"]["author"]:
-            author.birth_year = obj["creator"]["author"]["birthdate"]
-        if "deathdate" in obj["creator"]["author"]:
-            author.death_year = obj["creator"]["author"]["deathdate"]
+    (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))
+
+    creator = None
+    if "creator" in obj:
+        creator = obj["creator"]
+    elif "metadata" in obj and "creator" in obj.metadata:
+        creator = obj.metadata["creator"]
+    if creator is not None and "author" in creator:
+        (author, created) = Author.objects.get_or_create(name=creator["author"]["agent_name"])
+        if "birthdate" in creator["author"]:
+            author.birth_year = creator["author"]["birthdate"]
+        if "deathdate" in creator["author"]:
+            author.death_year = creator["author"]["deathdate"]
         book.author = author
         author.save()
     
@@ -28,19 +35,45 @@ def addBookFromYaml(yaml):
 
     book.title = obj["title"]
     book.language = obj["language"] if isinstance(obj["language"], str) else 'mul'
-    book.gutenberg_type = obj["gutenberg_type"]
-    if "gutenberg_bookshelf" in obj:
-        if type(obj["gutenberg_bookshelf"]) is str:
-            book.gutenberg_bookshelf = obj["gutenberg_bookshelf"]
-        else:
-            book.gutenberg_bookshelf = ";".join(obj["gutenberg_bookshelf"])
-    if "subjects" in obj:
-        if type(obj["subjects"]) is str:
-            book.subjects = obj["subjects"]
-        else:
-            subjectList = [x[1] for x in obj["subjects"]]
-            book.subjects = ";".join(subjectList)
     
+    if "description" in obj:
+        book.description = obj["description"]
+    if "gutenberg_type" in obj:
+        book.gutenberg_type = obj["gutenberg_type"]
+    elif "metadata" in obj and "gutenberg_type" in obj.metadata:
+        book.gutenberg_type = obj.metadata["gutenberg_type"]
+    
+    bookshelf = None
+    if "gutenberg_bookshelf" in obj:
+        bookshelf = obj["gutenberg_bookshelf"]
+    elif "metadata" in obj and "gutenberg_bookshelf" in obj.metadata:
+        bookshelf = obj.metadata["gutenberg_bookshelf"]
+
+    if bookshelf is not None:
+        if type(bookshelf) is str:
+            book.gutenberg_bookshelf = bookshelf
+        else:
+            book.gutenberg_bookshelf = ";".join(bookshelf)
+    
+    subjects = None
+    if "subjects" in obj:
+        subjects = obj["subjects"]
+    elif "metadata" in obj and "subjects" in obj.metadata:
+        subjects = obj.metadata["subjects"]
+    
+    print subjects
+
+    if subjects is not None:
+        if type(subjects) is str:
+            book.subjects = subjects
+        else:
+            if len(subjects) > 0:
+                if type(subjects[0]) is str:
+                    book.subjects = ";".join(subjects)
+                else:
+                    subjectList = [x[1] for x in subjects]
+                    book.subjects = ";".join(subjectList)
+        
     book.yaml = yaml
     book.save()
 
