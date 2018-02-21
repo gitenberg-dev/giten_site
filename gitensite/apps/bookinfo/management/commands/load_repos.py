@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- coding: utf-8 -*-
 import csv
 import requests
@@ -28,7 +29,7 @@ class Command(BaseCommand):
                 metadata=BookMetadata(Book(book_id=pg_id), rdf_library=rdf_library, enrich=should_enrich)    
                 addBookFromYaml(metadata.__unicode__())
             except (ValueError,IndexError):
-                print "!! {}".format(repo_name)
+                print("!! {}".format(reponame))
                 continue
-        print "{} books created".format(Book.objects.count())
+        print ("{} books created".format(Book.objects.count()))
 
