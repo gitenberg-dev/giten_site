@@ -42,8 +42,8 @@ creator:
     url: http://www.gutenberg.org/2009/agents/68
     wikipedia: http://en.wikipedia.org/wiki/Jane_Austen
 gutenberg_bookshelf:
-- Best Books Ever Listings
-- Harvard Classics
+  - Best Books Ever Listings
+  - Harvard Classics
 gutenberg_issued: '1998-06-01'
 gutenberg_type: Text
 identifiers:
@@ -53,14 +53,14 @@ publisher: Project Gutenberg
 rights: Public domain in the USA.
 rights_url: http://creativecommons.org/about/pdm
 subjects:
-- '!lcsh: Love stories'
-- '!lcc: PR'
-- '!lcsh: Domestic fiction'
-- '!lcsh: Young women -- Fiction'
-- '!lcsh: England -- Fiction'
-- '!lcsh: Social classes -- Fiction'
-- '!lcsh: Courtship -- Fiction'
-- '!lcsh: Sisters -- Fiction'
+  - !lcsh Love stories
+  - !lcc PR
+  - !lcsh Domestic fiction
+  - !lcsh Young women -- Fiction
+  - !lcsh England -- Fiction
+  - !lcsh Social classes -- Fiction
+  - !lcsh Courtship -- Fiction
+  - !lcsh Sisters -- Fiction
 title: Pride and Prejudice
 url: http://www.gutenberg.org/ebooks/1342"""
 
