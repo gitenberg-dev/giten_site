@@ -61,7 +61,7 @@ subjects:
 title: Pride and Prejudice
 url: http://www.gutenberg.org/ebooks/1342"""
 
-        r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream')
+        r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream', follow=True)
         self.assertEqual(r.status_code, 200)
 
         book = Book.objects.get(title="Pride and Prejudice")
