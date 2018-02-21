@@ -36,7 +36,7 @@
         <div class="row">
         {% for sameauthor_book in sameauthor %}
             <div class="large-2 small-4 columns end">
-                <a href='/book/{{sameauthor_book.book_id}}'>
+                <a href="{% url 'book' sameauthor_book.book_id %}">
                     {% if book.cover_url %}
                         <img src="{{ book.cover_url }}" />
                     {% else %}

@@ -9,7 +9,7 @@
       {% if book.cover_url %}<img src="{{ book.cover_url }}" />{% else %}<i class="fa fa-5x fa-book"></i>{% endif %}
     </div>
     <div class="large-3 small-6 columns">
-        <h5 class="booktitle" style="font-weight: bold;"><a href="/book/{{ book.book_id }}">{{ book.title_short }}</a></h5>
+        <h5 class="booktitle" style="font-weight: bold;"><a href="{% url 'book' book.book_id %}">{{ book.title_short }}</a></h5>
         <p class="bookauthor">{{ book.author.name }}</p>
     </div>
     <div class="large-7 small-12 columns">
