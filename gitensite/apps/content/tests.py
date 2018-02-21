@@ -29,9 +29,6 @@ class PageTests(TestCase):
         r = anon_client.get("/license/", follow=True)
         self.assertEqual(r.status_code, 200)
 
-        #Test to ensure that secret is in environment variables
-        self.assertEqual("GITENBERG_SECRET" in os.environ, True)
-
         yaml = """_repo: testbook
 creator:
   author:
@@ -64,7 +61,7 @@ subjects:
 title: Pride and Prejudice
 url: http://www.gutenberg.org/ebooks/1342"""
 
-        r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream', HTTP_X_GITENBERG_SECRET=os.environ["GITENBERG_SECRET"])
+        r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream', follow=True)
         self.assertEqual(r.status_code, 200)
 
         book = Book.objects.get(title="Pride and Prejudice")
