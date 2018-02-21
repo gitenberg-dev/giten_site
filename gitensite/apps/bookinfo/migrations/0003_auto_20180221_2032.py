@@ -15,11 +15,10 @@ class Migration(migrations.Migration):
             name='Author',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('author_id', models.IntegerField(unique=True)),
                 ('name', models.CharField(default=b'', max_length=255, null=True, blank=True)),
                 ('aliases', models.CharField(default=b'', max_length=255, null=True, blank=True)),
-                ('birth', models.DateField()),
-                ('death', models.DateField()),
+                ('birth_year', models.IntegerField(null=True)),
+                ('death_year', models.IntegerField(null=True)),
                 ('wikipedia_url', models.URLField(max_length=500)),
             ],
         ),
@@ -27,7 +26,6 @@ class Migration(migrations.Migration):
             name='Cover',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('cover_id', models.IntegerField(unique=True)),
                 ('link', models.URLField(max_length=500)),
                 ('default_cover', models.BooleanField(default=False)),
             ],
@@ -36,7 +34,6 @@ class Migration(migrations.Migration):
             name='External_Link',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('link_id', models.IntegerField(unique=True)),
                 ('url', models.URLField(max_length=500)),
                 ('source', models.CharField(max_length=255)),
             ],
@@ -66,14 +63,19 @@ class Migration(migrations.Migration):
             name='subjects',
             field=models.CharField(default=b'', max_length=1000),
         ),
+        migrations.AlterField(
+            model_name='book',
+            name='book_id',
+            field=models.IntegerField(),
+        ),
         migrations.AddField(
             model_name='external_link',
-            name='book_id',
+            name='book',
             field=models.ForeignKey(to='bookinfo.Book'),
         ),
         migrations.AddField(
             model_name='cover',
-            name='book_id',
+            name='book',
             field=models.ForeignKey(to='bookinfo.Book'),
         ),
         migrations.AddField(
