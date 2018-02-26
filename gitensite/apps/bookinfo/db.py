@@ -9,8 +9,6 @@ PyYAML.add_multi_constructor('!lcsh', default_ctor)
 def addBookFromYaml(yaml):
     obj = PyYAML.safe_load(yaml)
 
-    print obj
-
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))
 
     creator = None
@@ -60,8 +58,6 @@ def addBookFromYaml(yaml):
         subjects = obj["subjects"]
     elif "metadata" in obj and "subjects" in obj.metadata:
         subjects = obj.metadata["subjects"]
-    
-    print subjects
 
     if subjects is not None:
         if type(subjects) is str:
