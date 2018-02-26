@@ -6,8 +6,10 @@ import requests
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-from gitensite.apps.bookinfo.models import Book
+from gitensite.apps.bookinfo.models import Author, Book, Cover, External_Link
 from gitenberg.util.catalog import BookMetadata, repo_list
+
+from gitensite.apps.bookinfo.db import addBookFromYaml
 
 class Command(BaseCommand):
     help = "load ids and repo names from Raymond's text TSV file"
@@ -24,15 +26,10 @@ class Command(BaseCommand):
             if int(pg_id)<start:
                 continue
             try:
-                (book,created) = Book.objects.get_or_create(book_id=int(pg_id), repo_name=repo_name)
-                metadata=BookMetadata(book,rdf_library=rdf_library, enrich=should_enrich)
-                book.language = metadata.language if isinstance(metadata.language,str) else 'mul'
-                book.description = metadata.description
-                book.title = metadata.title
-                book.yaml = metadata.__unicode__()
-                book.save()
+                metadata=BookMetadata(Book(book_id=pg_id), rdf_library=rdf_library, enrich=should_enrich)    
+                addBookFromYaml(metadata.__unicode__())
             except (ValueError,IndexError):
-                print ("!! {}".format(reponame))
+                print("!! {}".format(reponame))
                 continue
         print ("{} books created".format(Book.objects.count()))
 

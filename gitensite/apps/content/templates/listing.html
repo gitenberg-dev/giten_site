@@ -1,0 +1,53 @@
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
+
+{% include "header.html" %}
+<br />
+<div class="row" style="margin-top: 10px;">
+    <div class="large-3 columns">
+        <div class="thumbnail">
+            {% if book.cover_url %}<img src="{{ book.cover_url }}" />{% else %}<i class="fa fa-book" style="font-size: 14em;"></i>{% endif %}
+        </div>
+    </div>
+    <div class="large-6 columns">
+        <h2>{{ book.title }}</h2>
+        <h3>{{ book.author_first_last }}</h3>
+        <p><strong>Subjects:</strong> {{ book.subjects_str }}</p>
+    </div>
+    <div class="large-3 columns">
+        <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
+        <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i> Repository</a><br />
+        <a href="{{ book.issues_url }}" class="button radius expand"><i class="fa fa-comments"></i> Issues</a><br />
+        <a href="{{ book.pg_url }}" class="button radius expand"><img src="{% static 'gutenberg-logo-small.png' %}" style="width: 16px; height: 16px;" /> Gutenberg</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="large-12 columns">
+        <p>{{ book.description|default:"This book currently has no description. Feel free to open a pull request to add one!" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <h3>All Books by {{ book.author_first_last }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <div class="row">
+        {% for sameauthor_book in sameauthor %}
+            <div class="large-2 small-4 columns end">
+                <a href="{% url 'book' sameauthor_book.book_id %}">
+                    {% if book.cover_url %}
+                        <img src="{{ book.cover_url }}" />
+                    {% else %}
+                        <i class="fa fa-book" style="font-size: 10em;"></i>
+                    {% endif %}
+                    <p>{{ sameauthor_book.title }}</p>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock body_content %}

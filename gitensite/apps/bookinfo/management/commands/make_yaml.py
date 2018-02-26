@@ -19,13 +19,13 @@ class Command(BaseCommand):
                 book.yaml = pg_rdf_to_yaml(rdffile, repo_name=book.repo_name )
                 book.save()
             except IOError:
-                print ("couldn't read " + rdffile)
+                print("couldn't read " + rdffile)
                 continue
             except Exception,e:
-                print ("processing " + rdffile)
+                print("processing " + rdffile)
                 raise e
             i+=1
             if count and i>count:
                 break
             if i%100 == 0:
-                print (str(i)+" files completed")
+                print(str(i)+" files completed")
