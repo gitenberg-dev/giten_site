@@ -70,7 +70,7 @@ class Book(models.Model):
 
     @property
     def downloads_url(self):
-        return 'https://github.com/{}/{}//releases'.format(gh_org,self.repo_name)
+        return 'https://github.com/{}/{}/releases'.format(gh_org,self.repo_name)
 
     @property
     def pg_url(self):
