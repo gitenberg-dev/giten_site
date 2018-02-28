@@ -2,12 +2,6 @@
 # -*- coding: utf-8 -*-
 import logging
 
-import yaml as PyYAML
-def default_ctor(loader, tag_suffix, node):
-    return tag_suffix + ' ' + node.value
-PyYAML.add_multi_constructor('!lcc', default_ctor)
-PyYAML.add_multi_constructor('!lcsh', default_ctor)
-
 from gitenberg.metadata.pandata import Pandata
 
 from django.db import models
@@ -41,6 +35,9 @@ class Book(models.Model):
     subjects = models.CharField(max_length=1000, default="")
     full_text = models.TextField(default="", null=True, blank=True)
     num_downloads = models.IntegerField(default=0)
+    
+    added = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
     
     yaml = models.TextField(null=True, default="")
 
