@@ -10,6 +10,8 @@ from el_pagination.views import AjaxListView
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.db.models import F
+from django.shortcuts import redirect
 
 from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
@@ -75,3 +77,16 @@ class BookPostView(View):
             return HttpResponse("OK")
         else:
             return HttpResponse("Incorrect key or key not present", status=401)
+
+class DownloadView(View):
+    model = Book
+
+    def get(self, request, bookid):
+        results = Book.objects.filter(book_id=bookid)
+        if len(results) > 0:
+            matchedBook = results[0]
+
+            matchedBook.num_downloads = F("num_downloads") + 1
+            matchedBook.save()
+
+            return redirect(matchedBook.downloads_url)

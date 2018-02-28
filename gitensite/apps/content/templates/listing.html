@@ -12,9 +12,10 @@
         <h2>{{ book.title }}</h2>
         <h3>{{ book.author_first_last }}</h3>
         <p><strong>Subjects:</strong> {{ book.subjects_str }}</p>
+        <p><strong>Downloads: </strong> {{book.num_downloads }}</p>
     </div>
     <div class="large-3 columns">
-        <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
+        <a href="{% url 'download' book.book_id %}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
         <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i> Repository</a><br />
         <a href="{{ book.issues_url }}" class="button radius expand"><i class="fa fa-comments"></i> Issues</a><br />
         <a href="{{ book.pg_url }}" class="button radius expand"><img src="{% static 'gutenberg-logo-small.png' %}" style="width: 16px; height: 16px;" /> Gutenberg</a>

@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="large-12 columns" style="margin-bottom: 15px; overflow-y: auto; height: 100px;">{{book.description}}</div>
                 <div class="small-3 columns">
-                    <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i><br />Downloads</a>
+                    <a href="{% url 'download' book.book_id %}" class="button radius expand"><i class="fa fa-download"></i><br />Downloads</a>
                 </div>
                 <div class="small-3 columns">
                     <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i><br />Repository</a>
