@@ -26,10 +26,13 @@ class Command(BaseCommand):
             if int(pg_id)<start:
                 continue
             try:
-                metadata=BookMetadata(Book(book_id=pg_id), rdf_library=rdf_library, enrich=should_enrich)    
-                addBookFromYaml(metadata.__unicode__())
+                metadata=BookMetadata(Book(book_id=pg_id), rdf_library=rdf_library, enrich=should_enrich)
+                
+                # Add repo_name to yaml
+                yaml = metadata.__unicode__() + "\nrepo_name: " + repo_name
+                addBookFromYaml(yaml)
             except (ValueError,IndexError):
-                print("!! {}".format(reponame))
+                print("!! {}".format(repo_name))
                 continue
         print ("{} books created".format(Book.objects.count()))
 

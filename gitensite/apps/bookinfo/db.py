@@ -11,6 +11,9 @@ def addBookFromYaml(yaml):
 
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))
 
+    if "repo_name" in obj:
+        book.repo_name = obj["repo_name"]
+
     creator = None
     if "creator" in obj:
         creator = obj["creator"]
