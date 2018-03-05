@@ -12,6 +12,7 @@ from gitensite.apps.content.views import EbookListingView
 from gitensite.apps.content.views import SearchView
 from gitensite.apps.content.views import BookPostView
 from gitensite.apps.content.views import DownloadView
+from gitensite.apps.content.views import BrowseBooksView
 from gitensite.apps.bookinfo.views import all_repos_txt
 from gitensite.apps.bookinfo.views import metadata
 
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^books/(?P<book_id>\d+)\.(?P<ext>json|yaml)$', metadata, name='metadata'),
     url(r'^books/post/', BookPostView.as_view(), name='book-post'),
     url(r'^download/(?P<bookid>\d+)$', DownloadView.as_view(), name='download'),
+    url(r'^browse/?$', BrowseBooksView.as_view(), name='browse')
 ]
 
 if settings.DEBUG:

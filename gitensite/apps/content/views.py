@@ -79,8 +79,6 @@ class BookPostView(View):
             return HttpResponse("Incorrect key or key not present", status=401)
 
 class DownloadView(View):
-    model = Book
-
     def get(self, request, bookid):
         results = Book.objects.filter(book_id=bookid)
         if len(results) > 0:
@@ -90,3 +88,21 @@ class DownloadView(View):
             matchedBook.save()
 
             return redirect(matchedBook.downloads_url)
+
+class BrowseBooksView(TemplateView):
+    model = Book
+    template_name = 'browsebooks.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BrowseBooksView, self).get_context_data(**kwargs)
+
+        popular = Book.objects.filter(num_downloads__gt=0).order_by("-num_downloads")
+        context["popular"] = popular[:12]
+
+        recentlyadded = Book.objects.order_by("-added")
+        context["recentlyadded"] = recentlyadded[:12]
+
+        recentlyupdated = Book.objects.order_by("-updated")
+        context["recentlyupdated"] = recentlyupdated[:12]
+        
+        return context
