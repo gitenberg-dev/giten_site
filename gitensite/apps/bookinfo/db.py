@@ -6,7 +6,7 @@ def default_ctor(loader, tag_suffix, node):
     return tag_suffix + ' ' + node.value
 
 def addBookFromYaml(yaml):
-    if isinstance(yaml, Pandata)
+    if isinstance(yaml, Pandata):
         obj = yaml.metadata
     else:
         pandata = Pandata().load(yaml)
