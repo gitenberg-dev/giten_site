@@ -9,7 +9,8 @@ def addBookFromYaml(yaml):
     if isinstance(yaml, Pandata):
         obj = yaml.metadata
     else:
-        pandata = Pandata().load(yaml)
+        pandata = Pandata(None)
+        pandata.load(yaml)
         obj = pandata.metadata
 
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))

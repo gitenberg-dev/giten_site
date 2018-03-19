@@ -88,7 +88,7 @@ else:
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'gitensite',
-                'USER': 'postgres',
+                'USER': 'eric',
                 'PASSWORD': 'gitensite',
                 'HOST': 'localhost',
                 'PORT': '5432',
