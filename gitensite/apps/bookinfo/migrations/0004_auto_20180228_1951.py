@@ -19,6 +19,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='book',
             name='updated',
-            field=models.DateTimeField(auto_now=True, null=True),
+            field=models.DateTimeField(auto_now_add=True, null=True),
         ),
     ]
