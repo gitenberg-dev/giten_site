@@ -2,9 +2,6 @@ from gitenberg.metadata.pandata import Pandata
 
 from gitensite.apps.bookinfo.models import Author, Book, Cover
 
-def default_ctor(loader, tag_suffix, node):
-    return tag_suffix + ' ' + node.value
-
 def addBookFromYaml(yaml):
     if isinstance(yaml, Pandata):
         obj = yaml.metadata
