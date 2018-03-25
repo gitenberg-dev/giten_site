@@ -12,8 +12,8 @@ def addBookFromYaml(yaml):
 
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))
 
-    if "repo_name" in obj:
-        book.repo_name = obj["repo_name"]
+    if "_repo" in obj:
+        book.repo_name = obj["_repo"]
 
     creator = None
     if "creator" in obj:
@@ -73,8 +73,13 @@ def addBookFromYaml(yaml):
                 else:
                     subjectList = [x[1] for x in subjects]
                     book.subjects = ";".join(subjectList)
-        
-    book.yaml = yaml
+    
+    #yaml can either be a Pandata object or a YAML string, we need to handle either case
+    if isinstance(yaml, Pandata):
+        book.yaml = yaml.__unicode__
+    else:
+        book.yaml = yaml
+
     book.save()
 
     return True

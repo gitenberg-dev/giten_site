@@ -28,9 +28,10 @@ class Command(BaseCommand):
             try:
                 metadata=BookMetadata(Book(book_id=pg_id), rdf_library=rdf_library, enrich=should_enrich)
                 
-                # Add repo_name to yaml
-                yaml = metadata.__unicode__() + "\nrepo_name: " + repo_name
-                addBookFromYaml(yaml)
+                # Add repo_name to metadata object
+                metadata.metadata["_repo"] = repo_name
+                
+                addBookFromYaml(metadata)
             except (ValueError,IndexError):
                 print("!! {}".format(repo_name))
                 continue
