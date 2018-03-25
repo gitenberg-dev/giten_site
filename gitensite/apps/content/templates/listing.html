@@ -10,7 +10,9 @@
     </div>
     <div class="large-6 columns">
         <h2>{{ book.title }}</h2>
-        <h3>{{ book.author_first_last }}</h3>
+        {% if book.author %}
+            <h3>{{ book.author_first_last }}</h3>
+        {% endif %}
         <p><strong>Subjects:</strong> {{ book.subjects_str }}</p>
     </div>
     <div class="large-3 columns">
@@ -26,6 +28,7 @@
         <p>{{ book.description|default:"This book currently has no description. Feel free to open a pull request to add one!" }}</p>
     </div>
 </div>
+{% if book.author %}
 <div class="row">
     <div class="large-12 columns">
         <h3>All Books by {{ book.author_first_last }}</h3>
@@ -49,5 +52,6 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock body_content %}

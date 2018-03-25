@@ -57,7 +57,10 @@ class Book(models.Model):
     
     @property
     def author_first_last(self):
-        return " ".join(self.author.name.split(", ")[::-1])
+        if self.author is None:
+            return None
+        else:
+            return " ".join(self.author.name.split(", ")[::-1])
 
     @property
     def description_short(self):
