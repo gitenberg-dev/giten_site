@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.db.models import F
 from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 
 from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
@@ -80,14 +81,12 @@ class BookPostView(View):
 
 class DownloadView(View):
     def get(self, request, bookid):
-        results = Book.objects.filter(book_id=bookid)
-        if len(results) > 0:
-            matchedBook = results[0]
+        requested_book = get_object_or_404(Book, book_id=bookid)
 
-            matchedBook.num_downloads = F("num_downloads") + 1
-            matchedBook.save()
+        requested_book.num_downloads = F("num_downloads") + 1
+        requested_book.save()
 
-            return redirect(matchedBook.downloads_url)
+        return redirect(requested_book.downloads_url)
 
 class BrowseBooksView(TemplateView):
     model = Book
