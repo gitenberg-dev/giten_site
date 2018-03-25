@@ -1,13 +1,14 @@
+from gitenberg.metadata.pandata import Pandata
+
 from gitensite.apps.bookinfo.models import Author, Book, Cover
 
-import yaml as PyYAML
-def default_ctor(loader, tag_suffix, node):
-    return tag_suffix + ' ' + node.value
-PyYAML.add_multi_constructor('!lcc', default_ctor)
-PyYAML.add_multi_constructor('!lcsh', default_ctor)
-
 def addBookFromYaml(yaml):
-    obj = PyYAML.safe_load(yaml)
+    if isinstance(yaml, Pandata):
+        obj = yaml.metadata
+    else:
+        pandata = Pandata(None)
+        pandata.load(yaml)
+        obj = pandata.metadata
 
     (book,created) = Book.objects.get_or_create(book_id=int(obj['identifiers']['gutenberg']))
 
