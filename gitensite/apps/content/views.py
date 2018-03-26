@@ -10,6 +10,9 @@ from el_pagination.views import AjaxListView
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.db.models import F
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 
 from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
@@ -75,3 +78,30 @@ class BookPostView(View):
             return HttpResponse("OK")
         else:
             return HttpResponse("Incorrect key or key not present", status=401)
+
+class DownloadView(View):
+    def get(self, request, bookid):
+        requested_book = get_object_or_404(Book, book_id=bookid)
+
+        requested_book.num_downloads = F("num_downloads") + 1
+        requested_book.save()
+
+        return redirect(requested_book.downloads_url)
+
+class BrowseBooksView(TemplateView):
+    model = Book
+    template_name = 'browsebooks.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BrowseBooksView, self).get_context_data(**kwargs)
+
+        popular = Book.objects.filter(num_downloads__gt=0).order_by("-num_downloads")
+        context["popular"] = popular[:12]
+
+        recentlyadded = Book.objects.order_by("-added")
+        context["recentlyadded"] = recentlyadded[:12]
+
+        recentlyupdated = Book.objects.order_by("-updated")
+        context["recentlyupdated"] = recentlyupdated[:12]
+        
+        return context

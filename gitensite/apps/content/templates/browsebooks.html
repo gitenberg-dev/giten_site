@@ -1,0 +1,53 @@
+{% extends 'frame.html' %} {% load fontawesome %} {% load staticfiles %} {% block title %} GITenberg - Making beautiful books in the public domain {% endblock title %} {% block body_content %}
+
+{% include "header.html" %}
+<br />
+<div class="row" style="margin-top: 10px;">
+    <h2>Popular Books</h2>
+    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+        {% for book in popular %}
+        <li>
+            <a href="{% url 'book' book.book_id %}">
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" />
+                {% else %}
+                    <i class="fa fa-book" style="font-size: 10em;"></i>
+                {% endif %}
+                <p>{{ book.title_short }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Recently Added</h2>
+    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+        {% for book in recentlyadded %}
+        <li>
+            <a href="{% url 'book' book.book_id %}">
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" />
+                {% else %}
+                    <i class="fa fa-book" style="font-size: 10em;"></i>
+                {% endif %}
+                <p>{{ book.title_short }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Recently Updated</h2>
+    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+        {% for book in recentlyupdated %}
+        <li>
+            <a href="{% url 'book' book.book_id %}">
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" />
+                {% else %}
+                    <i class="fa fa-book" style="font-size: 10em;"></i>
+                {% endif %}
+                <p>{{ book.title_short }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock body_content %}

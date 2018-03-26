@@ -14,9 +14,10 @@
             <h3>{{ book.author_first_last }}</h3>
         {% endif %}
         <p><strong>Subjects:</strong> {{ book.subjects_str }}</p>
+        <p><strong>Downloads: </strong> {{book.num_downloads }}</p>
     </div>
     <div class="large-3 columns">
-        <a href="{{ book.downloads_url }}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
+        <a href="{% url 'download' book.book_id %}" class="button radius expand"><i class="fa fa-download"></i> Downloads</a><br />
         <a href="{{ book.repo_url }}" class="button radius expand"><i class="fa fa-github"></i> Repository</a><br />
         <a href="{{ book.issues_url }}" class="button radius expand"><i class="fa fa-comments"></i> Issues</a><br />
         <a href="{{ book.pg_url }}" class="button radius expand"><img src="{% static 'gutenberg-logo-small.png' %}" style="width: 16px; height: 16px;" /> Gutenberg</a>
@@ -35,22 +36,20 @@
     </div>
 </div>
 <div class="row">
-    <div class="large-12 columns">
-        <div class="row">
-        {% for sameauthor_book in sameauthor %}
-            <div class="large-2 small-4 columns end">
-                <a href="{% url 'book' sameauthor_book.book_id %}">
+    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+            {% for book in sameauthor %}
+            <li>
+                <a href="{% url 'book' book.book_id %}">
                     {% if book.cover_url %}
                         <img src="{{ book.cover_url }}" />
                     {% else %}
                         <i class="fa fa-book" style="font-size: 10em;"></i>
                     {% endif %}
-                    <p>{{ sameauthor_book.title }}</p>
+                    <p>{{ book.title_short }}</p>
                 </a>
-            </div>
-        {% endfor %}
-        </div>
-    </div>
+            </li>
+            {% endfor %}
+        </ul>
 </div>
 {% endif %}
 

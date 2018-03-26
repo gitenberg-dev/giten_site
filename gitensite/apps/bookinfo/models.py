@@ -2,15 +2,10 @@
 # -*- coding: utf-8 -*-
 import logging
 
-import yaml as PyYAML
-def default_ctor(loader, tag_suffix, node):
-    return tag_suffix + ' ' + node.value
-PyYAML.add_multi_constructor('!lcc', default_ctor)
-PyYAML.add_multi_constructor('!lcsh', default_ctor)
-
 from gitenberg.metadata.pandata import Pandata
 
 from django.db import models
+from django.utils import timezone as tz
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +37,24 @@ class Book(models.Model):
     full_text = models.TextField(default="", null=True, blank=True)
     num_downloads = models.IntegerField(default=0)
     
+    added = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now_add=True, null=True)
+    
     yaml = models.TextField(null=True, default="")
+
+    # using a custom save method in order to update the "updated" timestamp when specific fields are updated
+    def save(self, *args, **kwargs):
+        if self.pk: # if object already exists in db
+            old_model = Book.objects.get(pk=self.pk)
+
+            # This is the list of fields that, when modified, should update the "updated" timestamp
+            fields = ["title", "language", "description", "author", "gutenberg_type", "gutenberg_bookshelf", "subjects", "full_text"]
+
+            for field in fields:
+                # If one of the fields was modified, update the timestamp
+                if getattr(old_model, field, None) != getattr(self, field, None):
+                    self.updated = tz.now()
+        super(Book, self).save(*args, **kwargs) # call the inherited save method
 
     def __unicode__(self):
         return self.repo_name
@@ -76,7 +88,7 @@ class Book(models.Model):
 
     @property
     def downloads_url(self):
-        return 'https://github.com/{}/{}//releases'.format(gh_org,self.repo_name)
+        return 'https://github.com/{}/{}/releases'.format(gh_org,self.repo_name)
 
     @property
     def pg_url(self):
