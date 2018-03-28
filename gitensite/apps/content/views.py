@@ -25,6 +25,10 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
+
+        popular = Book.objects.filter(num_downloads__gt=0).order_by("-num_downloads")
+        context["popular"] = popular[:6]
+
         return context
 
 class NewsletterView(TemplateView):
