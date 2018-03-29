@@ -8,6 +8,7 @@ from django.conf import settings
 
 from gitensite.apps.bookinfo.models import Author, Book, Cover, External_Link
 from gitenberg.util.catalog import BookMetadata, repo_list
+from gitenberg.config import NotConfigured
 
 from gitensite.apps.bookinfo.db import addBookFromYaml
 
@@ -35,5 +36,7 @@ class Command(BaseCommand):
             except (ValueError,IndexError):
                 print("!! {}".format(repo_name))
                 continue
-        print ("{} books created".format(Book.objects.count()))
+            except NotConfigured:
+                print("Not found: {}".format(repo_name))
+        print("{} books created".format(Book.objects.count()))
 
