@@ -12,30 +12,22 @@
 <div class="row">
     <div class="small-12 columns">
 
-        <div class="row">
-            <div class="small-offset-1 small-10 columns logo-box" >
-                <img src="{% static 'Gitenberg_full.svg' %}" alt="GITenberg logo">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="large-offset-1 large-3 small-2 columns icon-box">
+        <div class="row" style="margin-top: 30px;">
+            <div class="large-1 small-4 columns icon-box" style="margin-top: 41.8px; margin-left: 40px; margin-right: 30px;">
               <i class="fa fa-5x fa-book"></i>
               <h4>Books</h4>
             </div>
 
-            <div class="large-offset-1 large-2 small-4 columns icon-box">
+            <div class="large-1 small-4 columns icon-box" style="margin-top: 41.8px; margin-right: 30px;">
               <i class="fa fa-5x fa-plus"></i>
             </div>
 
-            <div class="large-offset-1 large-3 small-4 columns end icon-box">
+            <div class="large-1 small-4 columns end icon-box" style="margin-top: 41.8px;">
               <i class="fa fa-5x fa-code-fork"></i>
               <h4>Git</h4>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="small-offset-1 small-10 columns mission-text panel">
+            <div class="small-12 large-7 columns mission-text panel">
                 <h4>
                   Gitenberg is a <em>collaborative</em>,
                   open source community curating and publishing highly usable and attractive ebooks in the public domain.
@@ -89,62 +81,28 @@
         </div>
     </div>
 </div>
+
 <div class="row panel">
-  <div class="row">
-    <div class="small-8 small-centered columns">
-      <h2 class="text-center">Featured books</h2>
+    <div class="row">
+      <div class="small-8 small-centered columns">
+        <h2 class="text-center">Popular books</h2>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/Don-Quixote_996/releases">
-    {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Don-Quixote_996.png' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">Don Quixote</h4>
-      </a>
-    </div>
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/Frankenstein_84/releases">
-        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Frankenstein_84.png' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">Frankenstein</h4>
-      </a>
-    </div>
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/Moby-Dick--Or-The-Whale_2701/releases">
-        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Moby-Dick--Or-The-Whale_2701.jpg' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">Moby Dick</h4>
-      </a>
-    </div>
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23/releases">
-        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Narrative-of-the-Life-of-Frederick-Douglass-an-American-Slave_23.png' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">Frederick Douglass</h4>
-      </a>
-    </div>
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/Pride-and-Prejudice_1342/releases">
-        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/Pride-and-Prejudice_1342.png' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">Pride and Prejudice</h4>
-      </a>
-    </div>
-    <div class="large-2 small-4 columns">
-      <a href="https://github.com/GITenberg/The-Time-Machine_35/releases">
-        {% thumbnail request.scheme|add:'://'|add:request.get_host|add:STATIC_URL|add:'covers/The-Time-Machine_35.png' '200' as im %}
-    <img src="{{ im.url  }}">
-    {% endthumbnail %}
-        <h4 class="text-center">The Time Machine</h4>
-      </a>
-    </div>
-  </div>
+    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+        {% for book in popular %}
+        <li>
+            <a href="{% url 'book' book.book_id %}">
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" />
+                {% else %}
+                    <i class="fa fa-book" style="font-size: 10em;"></i>
+                {% endif %}
+                <p class="text-center" style="margin-bottom: 0px;">{{ book.title_short }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <p class="text-right"><a href="{% url 'browse' %}">View more...</a></p>
 </div>
 
 <div class="row">
@@ -154,30 +112,50 @@
             <div class="large-6 small-12 columns">
                 <h4 class="centered">Updates</h4>
                 <hr>
-                <div class="panel">
-                    <h5><a href="/newsletter/2">Status Report #3</a></h5>
+                <div class="panel" style="height: 250px; overflow-y: scroll;">
+                    <h5><a href="/updates#update3">Status Report #3</a></h5>
                     <h6 class="subheader">
-            <ul>
-                <li>
-                Repos have been updated and cleaned
-                </li>
-                <li>
-                We have a working asciidoc-to-epub building machine is operating
-                </li>
-                <li>
-                This website!!!!
-                </li>
-            </ul>
-          </h6>
-                    <h6><a href="/newsletter/3">Read More »</a></h6>
-                    <h6><a href="/newsletter/2">Previous »</a></h6>
+                        <ul>
+                            <li>Repos have been updated and cleaned</li>
+                            <li>We have a working asciidoc-to-epub building machine is operating</li>
+                            <li>This website!!!!</li>
+                        </ul>
+                    </h6>
+                    <h6><a href="/updates#update3">Read More »</a></h6>
+                    <br>
+                    <h5><a href="/updates#update2">Status Report #2</a></h5>
+                    <h6 class="subheader">
+                        <ul>
+                            <li>Ebook pipeline</li>
+                            <li>New website</li>
+                            <li>Upcoming events</li>
+                            <li>NYPL, DPLA, RTC and Whitehouse partnership</li>
+                        </ul>
+                    </h6>
+                    <h6><a href="/updates#update2">Read More »</a></h6>
+                    <br>
+                    <h5><a href="/updates#update1">Status Report #1</a></h5>
+                    <h6 class="subheader">
+                        <ul>
+                            <li>Knight Foundation Grant</li>
+                            <li>Next Steps</li>
+                            <li>Core Vision </li>
+                            <li>Book Formats</li>
+                            <li>Issues</li>
+                        </ul>
+                    </h6>
+                    <h6><a href="/updates#update1">Read More »</a></h6>
                 </div>
             </div>
             <!-- right column -->
             <div class="large-6 small-12 columns">
-                <h4 class="centered">Join our mailing list</h4>
-                <hr> {% include 'partials/sign-up-announce.htmldjango' %}
+                <h4 class="centered">Join Our Mailing List</h4>
                 <hr>
+                <div class="panel">
+                <h6 class="centered subheader">Join the mailing list to get updates from the GITenberg community and the Free Ebook Foundation!</h6>
+                {% include 'partials/sign-up-announce.htmldjango' %}
+                <hr>
+                </div>
             </div>
         </div>
     </div>
