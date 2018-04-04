@@ -37,20 +37,53 @@
 </div>
 <div class="row">
     <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
-            {% for book in sameauthor %}
-            <li>
-                <a href="{% url 'book' book.book_id %}">
-                    {% if book.cover_url %}
-                        <img src="{{ book.cover_url }}" />
-                    {% else %}
-                        <i class="fa fa-book" style="font-size: 10em;"></i>
-                    {% endif %}
-                    <p>{{ book.title_short }}</p>
-                </a>
-            </li>
-            {% endfor %}
+        {% for book in sameauthor %}
+        <li>
+            <a href="{% url 'book' book.book_id %}">
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" />
+                {% else %}
+                    <i class="fa fa-book" style="font-size: 10em;"></i>
+                {% endif %}
+                <p>{{ book.title_short }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="row" id="externallinks" style="display: none;">
+    <div class="large-12 columns">
+        <h3>Other Ways to Read This Book</h3>
+    </div>
+    <div class="large-12 columns">
+        <ul>
         </ul>
+    </div>
 </div>
 {% endif %}
+
+<script>
+    $(document).ready(function(){
+        //Perform AJAX call to retreive external links for "Other Ways to Read This Book"
+        $.get("{% url 'external' book.book_id %}", function(data){
+            let results = Object.keys(data);
+            if (results.length > 0){
+                //Append results to the externallinks div on the page
+                for (var i = 0; i < results.length; i++){
+                    var li = $("<li></li>");
+                    var a = $("<a></a>");
+                    a.text(results[i]);
+                    a.attr("href", data[results[i]]);
+                    a.attr("target", "_blank");
+                    li.append(a);
+                    $("#externallinks").find("ul").append(li);
+                }
+                //Unhide the div
+                $("#externallinks").slideDown(500);
+            }
+            
+        });
+    });
+</script>
 
 {% endblock body_content %}

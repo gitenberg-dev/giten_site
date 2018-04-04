@@ -8,6 +8,7 @@ from django.views.generic import View
 from el_pagination.views import AjaxListView
 
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.db.models import F
@@ -17,6 +18,7 @@ from django.shortcuts import get_object_or_404
 from gitensite.apps.bookrepos.models import BookRepo
 from gitensite.apps.bookinfo.models import Book
 from gitensite.apps.bookinfo.db import addBookFromYaml
+from gitensite.apps.bookinfo.external import getExternalLinks
 
 import os
 
@@ -109,3 +111,12 @@ class BrowseBooksView(TemplateView):
         context["recentlyupdated"] = recentlyupdated[:12]
         
         return context
+
+class ExternalLinksView(View):
+    def get(self, request, bookid):
+        requested_book = get_object_or_404(Book, book_id=bookid)
+
+        links = getExternalLinks(requested_book)
+
+        return JsonResponse(links)
+        
