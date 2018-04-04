@@ -15,7 +15,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
 from gitensite.apps.bookrepos.models import BookRepo
-from gitensite.apps.bookinfo.models import Book
+from gitensite.apps.bookinfo.models import Book, Author
 from gitensite.apps.bookinfo.db import addBookFromYaml
 
 import os
@@ -61,8 +61,16 @@ class SearchView(AjaxListView):
         return context
 
     def get_queryset(self):
-        if self.request.GET.has_key('q'):
-            return super(AjaxListView,self).get_queryset().filter(title__icontains=self.request.GET['q'])
+        if self.request.GET.has_key('q') and self.request.GET.has_key('search-type'):
+            q = self.request.GET['q']
+            searchType = self.request.GET['search-type']
+
+            if searchType == "author":
+                return super(AjaxListView,self).get_queryset().filter(author__name__icontains=q)
+            elif searchType == "subjects":
+                return super(AjaxListView,self).get_queryset().filter(subjects__icontains=q)
+            else:
+                return super(AjaxListView,self).get_queryset().filter(title__icontains=q)
         else:
             return super(AjaxListView,self).get_queryset()
 
