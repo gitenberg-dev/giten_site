@@ -14,7 +14,11 @@ def librivox_api(book):
         author_last = book.author.name
 
     result = cached_session.get("https://librivox.org/api/feed/audiobooks/", params={"author": author_last, "limit": 500, "format": "json"})
-    result_json = result.json()
+    
+    try:
+        result_json = result.json()
+    except:
+        return ""
 
     if not "books" in result_json:
         return ""
@@ -33,7 +37,10 @@ def librivox_api(book):
 def standard_ebooks_api(book):
     opds = cached_session.get("https://standardebooks.org/opds/all")
 
-    tree = ElementTree.fromstring(opds.content)
+    try:
+        tree = ElementTree.fromstring(opds.content)
+    except:
+        return ""
 
     for entry in tree.iter("{http://www.w3.org/2005/Atom}entry"):
         for source in entry.iter("{http://purl.org/dc/elements/1.1/}source"):
