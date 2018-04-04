@@ -65,7 +65,7 @@
 <script>
     $(document).ready(function(){
         //Perform AJAX call to retreive external links for "Other Ways to Read This Book"
-        $.get("/external/{{ book.book_id }}", function(data){
+        $.get("{% url 'external' book.book_id %}", function(data){
             let results = Object.keys(data);
             if (results.length > 0){
                 //Append results to the externallinks div on the page
