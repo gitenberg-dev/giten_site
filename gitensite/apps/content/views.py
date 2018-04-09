@@ -15,7 +15,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
 from gitensite.apps.bookrepos.models import BookRepo
-from gitensite.apps.bookinfo.models import Book, Author
+from gitensite.apps.bookinfo.models import Book
 from gitensite.apps.bookinfo.db import addBookFromYaml
 
 import os
