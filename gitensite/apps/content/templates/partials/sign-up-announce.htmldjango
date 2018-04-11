@@ -16,3 +16,11 @@
   </div> <!-- .row -->
 </form>
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) { 
+  $("#mc-embedded-subscribe-form").submit(function(){
+    var message = $("<div class='alert-box success'>Thanks for subscribing! Please check your email for a confirmation message.</div>");
+    $("#mc-embedded-subscribe-form").append(message);
+  });
+});
+</script>
