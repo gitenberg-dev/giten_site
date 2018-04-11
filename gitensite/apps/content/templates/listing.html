@@ -29,6 +29,15 @@
         <p>{{ book.description|default:"This book currently has no description. Feel free to open a pull request to add one!" }}</p>
     </div>
 </div>
+<div class="row" id="externallinks" style="display: none;">
+    <div class="large-12 columns">
+        <h3>Other Ways to Read This Book</h3>
+    </div>
+    <div class="large-12 columns">
+        <ul>
+        </ul>
+    </div>
+</div>
 {% if book.author %}
 <div class="row">
     <div class="large-12 columns">
@@ -36,9 +45,20 @@
     </div>
 </div>
 <div class="row">
-    <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
+    <div class="small-2 columns">
+        <button id="leftarrow" class="left">&lt;</button>
+    </div>
+    <div class="small-8 columns">
+        <p id="pagenumber" class="text-center"></p>
+    </div>
+    <div class="small-2 columns">
+        <button id="rightarrow" class="right">&gt;</button>
+    </div>  
+</div>
+<div class="row">
+    <ul id="sameauthor" class="small-block-grid-2 medium-block-grid-4 large-block-grid-6">
         {% for book in sameauthor %}
-        <li>
+        <li style="display: none;">
             <a href="{% url 'book' book.book_id %}">
                 {% if book.cover_url %}
                     <img src="{{ book.cover_url }}" />
@@ -50,15 +70,6 @@
         </li>
         {% endfor %}
     </ul>
-</div>
-<div class="row" id="externallinks" style="display: none;">
-    <div class="large-12 columns">
-        <h3>Other Ways to Read This Book</h3>
-    </div>
-    <div class="large-12 columns">
-        <ul>
-        </ul>
-    </div>
 </div>
 {% endif %}
 
@@ -81,8 +92,68 @@
                 //Unhide the div
                 $("#externallinks").slideDown(500);
             }
-            
         });
+        
+        var lis = $("#sameauthor li");
+        var pageSize;
+        var currentPage = 1;
+
+        var MEDIUM_THRESHOLD = 625;
+        var LARGE_THRESHOLD = 1008;
+        
+        var maxPage;
+        
+        function updateBookDisplay(){
+            //Calculate the page size based on the window width
+            var width = $(window).width();
+            var originalPageSize = pageSize;
+            if (width < MEDIUM_THRESHOLD){
+                pageSize = 2;
+            } else if (width < LARGE_THRESHOLD){
+                pageSize = 4;
+            } else {
+                pageSize = 6;
+            }
+            if (pageSize != originalPageSize){
+                currentPage = 1;
+            }
+            
+            //Calculate the maximum page number based on the number of books and the page size
+            maxPage = Math.ceil(lis.length / pageSize);
+
+            for (var i = 0; i < lis.length; i++){
+                var minimum = pageSize * (currentPage - 1);
+                var maximum = (pageSize * currentPage) - 1;
+                if (i >= minimum && i <= maximum){
+                    lis.eq(i).show();
+                } else {
+                    lis.eq(i).hide();
+                }
+            }
+            $("#pagenumber").html("Page " + currentPage + " of " + maxPage);
+            $("#leftarrow").prop("disabled", (currentPage == 1));
+            $("#rightarrow").prop("disabled", (currentPage == maxPage));
+        }
+        
+        //Function for clicking the left arrow button
+        $("#leftarrow").click(function() {
+            currentPage--;
+            if (currentPage < 1) currentPage = 1; //Prevent user from going beyond page 1
+            updateBookDisplay();
+        });
+        
+        //Function for clicking the right arrow button
+        $("#rightarrow").click(function() {
+            currentPage++;
+            if (currentPage > maxPage) currentPage = maxPage; //Prevent user from going beyond last page
+            updateBookDisplay();
+        });
+        
+        //Perform initial update of book display
+        updateBookDisplay();
+        
+        //Listener for updating book display when window is resized
+        $(window).resize(updateBookDisplay);
     });
 </script>
 
