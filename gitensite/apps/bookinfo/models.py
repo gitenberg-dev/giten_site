@@ -113,7 +113,7 @@ class Book(models.Model):
 
 class Cover(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
-    link = models.URLField(max_length=500)
+    file = models.FileField(upload_to=path_for_file)
     default_cover = models.BooleanField(default=False)
 
 class External_Link(models.Model):
