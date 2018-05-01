@@ -98,10 +98,13 @@ class Book(models.Model):
     def cover_url(self):
         existing_covers = list(Cover.objects.filter(book=self))
         for cover in existing_covers:
-            if cover.default_cover:
-                return cover.link
+            if cover.default_cover and cover.file and hasattr(cover.file, "url"):
+                return cover.file.url
+        #No cover is set as default, so return the first cover that has a url
         if len(existing_covers) > 0:
-            return existing_covers[0].link
+            for cover in existing_covers:
+                if cover.file and hasattr(cover.file, "url"):
+                    return cover.file.url
         return None
 
     _pandata=None
@@ -113,7 +116,7 @@ class Book(models.Model):
 
 class Cover(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
-    file = models.FileField(upload_to=path_for_file)
+    file = models.FileField(upload_to="bookcovers/", null=True, blank=True)
     default_cover = models.BooleanField(default=False)
 
 class External_Link(models.Model):

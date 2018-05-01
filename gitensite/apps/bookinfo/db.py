@@ -21,14 +21,13 @@ def addBookFromYaml(yaml):
     if "_repo" in obj:
         book.repo_name = obj["_repo"]
         if "covers" in obj:
-            num_existing_covers = len(list(Cover(book=book).objects.all()))
+            num_existing_covers = Cover.objects.filter(book=book).count()
             for cover in obj["covers"]:
                 #Upload cover to S3
-                url = urlparse.urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover.image_path)
+                url = urlparse.urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover["image_path"])
                 r = requests.get(url)
                 contentfile = ContentFile(r.content)
-                uploadpath = "/covers/" + obj["_repo"] & ".png"
-                path = default_storage.save(uploadpath, contentfile)
+                uploadpath = obj["_repo"] + ".png"
 
                 #Add cover to database
                 coverobject = Cover.objects.create(
