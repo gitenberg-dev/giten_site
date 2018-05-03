@@ -1,6 +1,12 @@
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+
 from gitenberg.metadata.pandata import Pandata
 
 from gitensite.apps.bookinfo.models import Author, Book, Cover
+
+import urlparse
+import requests
 
 def addBookFromYaml(yaml):
     if isinstance(yaml, Pandata):
@@ -14,6 +20,23 @@ def addBookFromYaml(yaml):
 
     if "_repo" in obj:
         book.repo_name = obj["_repo"]
+        if "covers" in obj:
+            num_existing_covers = Cover.objects.filter(book=book).count()
+            for cover in obj["covers"]:
+                #Upload cover to S3
+                url = urlparse.urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover["image_path"])
+                r = requests.get(url)
+                if r.status_code == 200:
+                    contentfile = ContentFile(r.content)
+                    uploadpath = obj["_repo"] + ".png"
+
+                    #Add cover to database
+                    coverobject = Cover.objects.create(
+                        book=book,
+                        default_cover=(num_existing_covers == 0)
+                    )
+                    coverobject.file.save(uploadpath, contentfile)
+                    coverobject.file.close()
 
     creator = None
     if "creator" in obj:
