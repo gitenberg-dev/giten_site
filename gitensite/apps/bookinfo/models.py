@@ -116,7 +116,7 @@ class Book(models.Model):
 
 class Cover(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, db_index=True)
-    file = models.FileField(upload_to="bookcovers/", null=True, blank=True)
+    file = models.FileField(upload_to="bookcovers/", null=True, blank=True, max_length=500)
     default_cover = models.BooleanField(default=False)
 
 class External_Link(models.Model):
