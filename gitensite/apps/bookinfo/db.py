@@ -21,22 +21,35 @@ def addBookFromYaml(yaml):
     if "_repo" in obj:
         book.repo_name = obj["_repo"]
         if "covers" in obj:
-            num_existing_covers = Cover.objects.filter(book=book).count()
+            #Delete any existing covers for this book
+            Cover.objects.filter(book=book).delete()
+
+            defaultCover = True
             for cover in obj["covers"]:
                 #Upload cover to S3
                 url = urlparse.urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover["image_path"])
                 r = requests.get(url)
                 if r.status_code == 200:
                     contentfile = ContentFile(r.content)
-                    uploadpath = obj["_repo"] + ".png"
+
+                    #Get image file extension from original filename
+                    if "." in cover["image_path"]:
+                        extension = cover["image_path"].split(".")[-1]
+                    else:
+                        extension = "png"
+                    
+                    uploadpath = obj['identifiers']['gutenberg'] + "." + extension
 
                     #Add cover to database
                     coverobject = Cover.objects.create(
                         book=book,
-                        default_cover=(num_existing_covers == 0)
+                        default_cover=defaultCover
                     )
                     coverobject.file.save(uploadpath, contentfile)
                     coverobject.file.close()
+                    
+                    #The first cover added will be the default cover
+                    defaultCover = False
 
     creator = None
     if "creator" in obj:
