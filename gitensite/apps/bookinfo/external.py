@@ -1,6 +1,6 @@
 import requests
 from cachecontrol import CacheControl
-from xml.etree import ElementTree
+from lxml import etree
 
 request_session = requests.session()
 cached_session = CacheControl(request_session)
@@ -38,7 +38,7 @@ def standard_ebooks_api(book):
     opds = cached_session.get("https://standardebooks.org/opds/all")
 
     try:
-        tree = ElementTree.fromstring(opds.content)
+        tree = etree.fromstring(opds.content)
     except:
         return ""
 
