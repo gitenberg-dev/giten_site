@@ -38,7 +38,8 @@ def standard_ebooks_api(book):
     opds = cached_session.get("https://standardebooks.org/opds/all")
 
     try:
-        tree = etree.fromstring(opds.content)
+        parser = etree.XMLParser(recover=True)
+        tree = etree.fromstring(opds.content, parser)
     except:
         return ""
 
