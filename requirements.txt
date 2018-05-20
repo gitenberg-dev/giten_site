@@ -7,6 +7,7 @@ django-secure==1.0.1
 gunicorn==19.2.1
 psycopg2==2.7
 Werkzeug==0.10.1
+lxml==4.2.1
 
 django-zurb-foundation==5.5.0
 django-fontawesome==0.2.2
