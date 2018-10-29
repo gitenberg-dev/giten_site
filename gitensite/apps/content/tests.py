@@ -59,9 +59,13 @@ title: Alice's Adventures in Wonderland
 url: http://www.gutenberg.org/ebooks/11"""
 
         #Test submitting a book to the database via the POST route
+        os.environ['CI'] = ''
         r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream', secure=True)
-        self.assertEqual(r.status_code, 200)  
-        
+        self.assertEqual(r.status_code, 401)  # unauthenticated
+        os.environ['CI'] = 'true'
+        r = anon_client.post("/books/post/", data=yaml, content_type='application/octet-stream', secure=True)
+        self.assertEqual(r.status_code, 200)  # authenticated
+        os.environ['CI'] = ''
         #Test retrieving a book from the database by title
         book = Book.objects.get(title="Alice's Adventures in Wonderland")
         self.assertEqual(book.title, "Alice's Adventures in Wonderland")
