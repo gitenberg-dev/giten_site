@@ -9,10 +9,3 @@ At our last report, most of the pieces were in place, but putting them all toget
 In addition, our distribution partners were highlighted by President Obama in his ConnectED!
 
 
-=== Repo updates
-
-=== The build system
-
-=== Distribution
-
-=== Website!!!

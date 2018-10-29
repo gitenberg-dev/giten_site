@@ -1,0 +1,49 @@
+== GITenberg Status Report #4
+
+We've reached a big milestone for the GITenberg Project, which comes after a lot of work over 6 years by several groups of people.
+
+GITenberg is a prototype that explores how Project Gutenberg might work if all the Gutenberg texts were on Github, so that tools like version control, continuous integration, and pull-request workflow tools could be put to work. We hope that Project Gutenberg can take advantage of what we've learned; work in that direction has begun but needs resources and volunteers.  Go check it out! 
+
+
+It's hard to believe, but GITenberg started 6 years ago when Seth Woodworth started making Github repos for Gutenberg texts. I joined the project two years later when I started doing the same and discovered that Seth was 43,000 repos ahead of me. The project got a big boost when the Knight Foundation awarded us a Prototype Fund grant to explore the applicability of open-source methodologies to the maintenance of the cultural heritage that is the Project Gutenberg collection. But there were big chunks of effort left to finish the work when that grant ended. Last year, 6 computer-science seniors from Stevens Institute of Technology took up the challenge and brought the project within sight of a major milestone (if not the finishing-line). There remained only the reprocessing of 58,000 ebooks (with more being created every day!). As of last week, we've done that! Whew.
+
+
+So here's what's been done:
+
+* Almost 57,000 ebooks from Project Gutenberg have been loaded into Github repositories.
+* EPUB, PDF, and Kindle Ebooks have been rebuilt and added to releases for all but about 100 of these.
+* Github webhooks trigger dockerized ebook building machines running on AWS Elastic Beanstock every time a git repo is tagged.
+* Toolchains for asciidoc, HTML and plain text source files are running on the ebook builders.
+* A website at https://www.gitenberg.org/ uses the webhooks to index and link to all of the ebooks.
+www.gitenberg.org presents links to Github, Project Gutenberg, Librivox, and Standard Ebooks.
+* Cover images are supplied for every ebook.
+* Human-readable metadata files are available for every ebook
+* Syndication feeds for these books are made available in ONIX, MARC and OPDS via Unglue.it.
+
+Everything in this project is built in the hope that the bits can be incorporated into Project Gutenberg wherever appropriate. In January 2019, the US public domain will resume the addition of new books, so it's more important than ever that we strengthen the infrastructure that supports it.
+
+Some details:
+
+* All of the software that's been used is open source and content is openly licensed.
+* PG's epubmaker software has been significantly strengthened and improved.
+* About 200 PG ebooks have had fatal formatting errors remediated to allow for automated ebook file production.
+* 1,363 PG ebooks were omitted from this work due to licensing or because they aren't really books.
+* PG's RDF metadata files were converted to human-readable YAML and enhanced with data from New York Public Library and from Wikipedia.
+* Github API throttling limits the build/release rate to about 600 ebooks/hour/login. A full build takes about 4 full days with one github login.
+
+Acknowledgements:
+
+* Seth Woodworth. In retrospect, the core idea was obvious, audacious, and crazy. Like all great ideas.
+* Github tech support. Always responsive.
+* The O'Reilly HTMLBook team. The asciidoc toolchain is based on their work.
+* Plympton. Many asciidoc versions were contributed to GITenberg as part of the "Recovering the Classics" project. Thanks to Jenny 8. Lee, Michelle Cheng, Max Pevner and Nessie Fox.
+* Albert Carter and Paul Moss contributed to early versions of the GITeneberg website.
+* The Knight Foundation provided funding for GITenberg at a key juncture in the project's development though its prototype fund. The Knight Foundation supports public-benefitting innovation in so many ways even beyond the funding it provides, and we thank them with all our hearts.
+* Travis-CI. The first version of automated ebook building took advantage of Travis-CI. Thanks!
+* Raymond Yee got the automated ebook building to actually work.
+* New York Public Library contributed descriptions, rights info, and generative covers. They also sponsored hackathons that significantly advanced the environment for public domain books. Special thanks to Leonard Richardson, Mauricio Giraldo and Jens Troeger (Bookalope).
+* The Board at the Free Ebook Foundation: Seth, Vicky Reich, Rupert Gatti, Todd Carpenter, Michael Wolfe and Karen Liu.
+* The Stevens GITenberg team: Marc Gotliboym, Nicholas Tang-Mifsud, Brian Silverman, Brandon Rothweiler, Meng Qiu, and Ankur Ramesh. They redesigned the gitenberg.org website, added search, added automatic metadata updates, and built the dockerized elastic beanstalk ebook-builder and queuing system. This work was done as part of  their two-semester capstone (project) course. The course is taught by Prof. David Klappholz, who managed a total of 23 student projects last academic year. 
+* Last, but certainly not least, Greg Newby (Project Gutenberg) for consistent encouragement and tolerance of our nit-discovery, Juliet Sutherland (Distributed Proofreaders) for her invaluable insights into how PG ebooks get made, and to the countless volunteers at both organizations who collectively have made possible the preservation and reuse of our public domain.
+
+I'm sure I've omitted an important acknowledgement or two - please let me know so I can rectify the omission.
