@@ -53,6 +53,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
 
 MIDDLEWARE_CLASSES = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'djangosecure.middleware.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
