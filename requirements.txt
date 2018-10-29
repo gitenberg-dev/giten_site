@@ -1,11 +1,11 @@
 dj-database-url==0.3.0
 Django==1.8.11
-django-debug-toolbar==1.3.0
+django-debug-toolbar==1.9.1
 django-extensions==1.5.0
 django-el-pagination==2.1.1
 django-secure==1.0.1
-gunicorn==19.2.1
-psycopg2==2.7
+psycopg2==2.7.5
+gunicorn==19.9.0
 Werkzeug==0.10.1
 lxml==4.2.1
 
@@ -15,7 +15,7 @@ django-fontawesome==0.2.2
 # requests must be installed before github3 for this to install properly
 requests==2.18.4
 CacheControl==0.12.4
-github3.py==0.9.5
+github3.py>=1.0.0
 celery==3.1.18
 django-celery==3.1.16
 #highlander-one==0.1.1
@@ -25,17 +25,17 @@ anyjson==0.3.3
 #added for rdf and marc conversion
 pymarc==3.0.3 
 PyYAML==3.11
-six==1.9.0
+six>=1.10.0
 SPARQLWrapper==1.6.4
-html5lib==0.999999
+html5lib==1.0.1
 isodate==0.5.1
-pyparsing==2.0.3
+pyparsing==2.1.10
 rdflib==4.2.0
 rdflib-jsonld==0.3
 
 #added for thumbnails
 sorl-thumbnail==12.3
-Pillow==2.9.0
+Pillow==3.4.2
 
 #added for S3
 boto==2.38.0
@@ -48,8 +48,8 @@ wikipedia==1.4.0
 semver==2.2.0
 docopt==0.6.1
 uritemplate.py==0.3.0
-beautifulsoup4==4.4.1
+beautifulsoup4>=4.6.0
 appdirs==1.4.0
 coverage==3.7.1
-tox==2.1.1
-xgitberg==0.2.4
+tox>=2.5.0
+gitberg==0.5.5
