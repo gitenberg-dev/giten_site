@@ -67,9 +67,9 @@ class SearchView(AjaxListView):
         return context
 
     def get_queryset(self):
-        if self.request.GET.has_key('q') and self.request.GET.has_key('search-type'):
+        if self.request.GET.has_key('q'):
             q = self.request.GET['q']
-            searchType = self.request.GET['search-type']
+            searchType = self.request.GET.get('search-type', 'title')
 
             if searchType == "author":
                 return super(AjaxListView,self).get_queryset().filter(author__name__icontains=q)
