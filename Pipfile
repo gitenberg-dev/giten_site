@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "==1.11.28"
+django-celery = "==3.2.2"
+gitberg = ">=0.7.0"
+sorl-thumbnail = "*"
+django-extensions = "*"
+django-zurb-foundation = "*"
+django-fontawesome = "*"
+django-storages = "*"
+django-el-pagination = "*"
+django-debug-toolbar = "*"
+psycopg2 = "*"
+pillow = "*"
+dj-database-url = "*"
+cachecontrol = "*"
+lxml = "*"
+boto3 = "*"
+
+[requires]
+python_version = "3.6"

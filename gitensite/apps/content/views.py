@@ -67,7 +67,7 @@ class SearchView(AjaxListView):
         return context
 
     def get_queryset(self):
-        if self.request.GET.has_key('q'):
+        if 'q' in self.request.GET:
             q = self.request.GET['q']
             searchType = self.request.GET.get('search-type', 'title')
 
