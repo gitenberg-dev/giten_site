@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include, url, patterns
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles import views
 from django.conf import settings
 from django.views.generic.base import TemplateView
 
@@ -37,6 +38,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^static/(?P<path>.*)$', 'serve'),
-    )
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', views.serve),
+    ]
