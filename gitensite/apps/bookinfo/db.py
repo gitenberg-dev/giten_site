@@ -12,7 +12,7 @@ def addBookFromYaml(yaml):
     if isinstance(yaml, Pandata):
         obj = yaml.metadata
     else:
-        pandata = Pandata(None)
+        pandata = Pandata()
         pandata.load(yaml)
         obj = pandata.metadata
 
