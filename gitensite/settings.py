@@ -34,7 +34,6 @@ COMMON_APPS = [
     'django_extensions',
     'foundation',
     'fontawesome',
-    'djcelery',
     'storages',
     'sorl.thumbnail',
     'el_pagination',

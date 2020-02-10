@@ -7,8 +7,7 @@ verify_ssl = true
 
 [packages]
 django = "==1.11.28"
-django-celery = "==3.2.2"
-gitberg = ">=0.7.0"
+gitberg = "==0.7.1"
 sorl-thumbnail = "*"
 django-extensions = "*"
 django-zurb-foundation = "*"
