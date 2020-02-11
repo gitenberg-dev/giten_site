@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 django = "==1.11.28"
-gitberg = "==0.7.1"
+gitberg = "==0.7.2"
 sorl-thumbnail = "*"
 django-extensions = "*"
 django-zurb-foundation = "*"
@@ -21,6 +21,7 @@ dj-database-url = "*"
 cachecontrol = "*"
 lxml = "*"
 boto3 = "*"
+appdirs = "==1.4.3"
 
 [requires]
 python_version = "3.6"
