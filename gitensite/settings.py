@@ -24,6 +24,7 @@ ALLOWED_HOSTS = [
     'localhost',
     'gitensite.elasticbeanstalk.com',
     'giten-site.us-east-1.elasticbeanstalk.com',
+    '172.31.49.28',
 ]
 
 # Application definition
