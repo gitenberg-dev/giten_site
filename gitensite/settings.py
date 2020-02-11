@@ -21,12 +21,15 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
 
 ALLOWED_HOSTS = [
+    'gitenberg.org',
+    'www.gitenberg.org',
     'localhost',
+    '127.0.0.1',
     'gitensite.elasticbeanstalk.com',
     'giten-site.us-east-1.elasticbeanstalk.com',
     'gitenberg.us-east-1.elasticbeanstalk.com',
-    '172.31.49.28',
 ]
+USE_X_FORWARDED_HOST = True
 
 # Application definition
 COMMON_APPS = [
