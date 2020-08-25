@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include, url, patterns
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles import views
 from django.conf import settings
 from django.views.generic.base import TemplateView
 
@@ -18,7 +19,7 @@ from gitensite.apps.bookinfo.views import all_repos_txt
 from gitensite.apps.bookinfo.views import metadata
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
     url(r'^book/(?P<bookid>\d+)$', EbookListingView.as_view(), name='book'),
     url(r'^updates/?$', TemplateView.as_view(template_name='updates.html'), name='updates'),
@@ -37,6 +38,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^static/(?P<path>.*)$', 'serve'),
-    )
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', views.serve),
+    ]

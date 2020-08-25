@@ -71,16 +71,16 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='external_link',
             name='book',
-            field=models.ForeignKey(to='bookinfo.Book'),
+            field=models.ForeignKey(to='bookinfo.Book', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='cover',
             name='book',
-            field=models.ForeignKey(to='bookinfo.Book'),
+            field=models.ForeignKey(to='bookinfo.Book', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='book',
             name='author',
-            field=models.ForeignKey(to='bookinfo.Author', null=True),
+            field=models.ForeignKey(to='bookinfo.Author', on_delete=models.CASCADE, null=True),
         ),
     ]

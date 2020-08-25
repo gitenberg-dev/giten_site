@@ -1,0 +1,17 @@
+== GITenberg Status Report #5
+
+We're pleased to report that the GITenberg effort is helping https://www.gutenberg.org[Project Gutenberg] adopt some of the innovations piloted here. 
+
+So far...
+
+* The bugfixes we made to the PG EbookMaker software have migrated into the production https://github.com/guenbergtools/EbookMaker[EbookMaker software] on Project Gutenberg.
+* Almost 200 problematic books identified in the GITenberg work are being rehabilitated on Project Gutenberg.
+* The generated covers used for GITenberg were adapted for Project Gutenberg.
+* Metadata processing software is being applied to generation of offline versions of Project Gutenberg.
+
+The following are being seriously considered for implementation at Project Gutenberg (resources permitting) ...
+
+* Use of Github for Project Gutenberg maintenance.
+* YAML metadata for Project Gutenberg books.
+
+If you have ideas for other ways to reuse the work done for this project, be sure to let us know!

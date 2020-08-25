@@ -1,3 +1,4 @@
+from urllib.parse import urljoin
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
@@ -5,14 +6,13 @@ from gitenberg.metadata.pandata import Pandata
 
 from gitensite.apps.bookinfo.models import Author, Book, Cover
 
-import urlparse
 import requests
 
 def addBookFromYaml(yaml):
     if isinstance(yaml, Pandata):
         obj = yaml.metadata
     else:
-        pandata = Pandata(None)
+        pandata = Pandata()
         pandata.load(yaml)
         obj = pandata.metadata
 
@@ -27,7 +27,7 @@ def addBookFromYaml(yaml):
             defaultCover = True
             for cover in obj["covers"]:
                 #Upload cover to S3
-                url = urlparse.urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover["image_path"])
+                url = urljoin("https://raw.githubusercontent.com/GITenberg/" + obj["_repo"] + "/master/", cover["image_path"])
                 r = requests.get(url)
                 if r.status_code == 200:
                     contentfile = ContentFile(r.content)

@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - '2.7'
+  - '3.6'
 
 env:
   - AWS_SECRET_ACCESS_KEY=abc DJANGO_SECRET_KEY=abc BOTO_CONFIG=/tmp

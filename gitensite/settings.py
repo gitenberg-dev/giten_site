@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -20,9 +19,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
-TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
 
 # Application definition
 COMMON_APPS = [
@@ -36,7 +33,6 @@ COMMON_APPS = [
     'django_extensions',
     'foundation',
     'fontawesome',
-    'djcelery',
     'storages',
     'sorl.thumbnail',
     'el_pagination',
@@ -52,21 +48,34 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = COMMON_APPS + LOCAL_APPS
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'djangosecure.middleware.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-TEMPLATE_CONTEXT_PROCESSORS += (
-    'django.core.context_processors.request',
 )
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+            ],
+        },
+    },
+]
 ROOT_URLCONF = 'gitensite.urls'
 
 WSGI_APPLICATION = 'gitensite.wsgi.application'
@@ -104,12 +113,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# AWS S3
-# https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
 
-AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+AWS_S3_OBJECT_PARAMETERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'Cache-Control': 'max-age=94608000',
+    'CacheControl': 'max-age=94608000',
 }
 AWS_STORAGE_BUCKET_NAME = 'gitensite'
 AWS_ACCESS_KEY_ID = 'AKIAIDP7I26XHV4SCSLA'
@@ -122,14 +129,17 @@ AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 # We also use it in the next setting.
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
+# inherit the bucket's ACL
+AWS_DEFAULT_ACL = None
+
 # This is used by the `static` template tag from `static`, if you're using that. Or if anything else
 # refers directly to STATIC_URL. So it's safest to always set it.
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
 # you run `collectstatic`).
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,7 +155,6 @@ STATICFILES_DIRS = (
 # The in-development settings and the default configuration.
 if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
     DEBUG = True
-    TEMPLATE_DEBUG = DEBUG
 
     ALLOWED_HOSTS = []
 
@@ -154,7 +163,8 @@ if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
     ]
 else:
     # django-secure
-    ALLOWED_HOSTS = ['gitenberg.org', 'www.gitenberg.org']
+    ALLOWED_HOSTS = ['*']
+    USE_X_FORWARDED_HOST = True
 
     SESSION_COOKIE_SECURE = True
     SECURE_SSL_REDIRECT = True
@@ -164,6 +174,7 @@ else:
     # SECURE_CONTENT_TYPE_NOSNIFF = False
     # SECURE_BROWSER_XSS_FILTER = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 
 LOGGING = {
@@ -211,7 +222,7 @@ LOGGING = {
         }
     },
 }
-MEDIA_URL = '/static/media/'
+#MEDIA_URL = '/static/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload/media")
 

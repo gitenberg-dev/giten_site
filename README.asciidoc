@@ -13,42 +13,16 @@ This is a django/python project, so you are going to want to use some standard p
 
 === environment
 Copy `example.env` to `.env` and store your local db secret and other values there.
-Load that file into your environment with:
 
-    source .env
-
-=== virtualenv
 Virtual environments in python are a way of separating and reproducing the python package requirements.
 
 From the root of the project
 
-    sudo pip install virtualenv
-    virtualenv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
+    pipenv install -r requirements.txt
 
 For every new terminal, or when returning to work on the project, you will need to run
 
     source venv/bin/activate
-
-==== OSX issues with bcrypt
-On OSX, apple occasionally moves cffi's location, which bcrypt depends on. This causes pip to fail when installing. Deactive your virtualenv, set a bash variable, and install system-wide.
-
-    $ # Instal homebrew. See http://brew.sh
-    $ # Install cffi. See  https://cffi.readthedocs.org/en/latest/#macos-x
-    # you may need to find and set include_dirs in setup.py
-    $ brew install pkg-config libffi
-    $ pip install bgcrypt
-    $ source venv/bin/activate
-
-==== How to install dependencies on OS X with conda
-
-```
-conda create -n giten_site python=2 pip
-conda install psycopg2
-conda install cryptography
-pip install -r requirements.txt
-```
 
 
 === Database(s)
@@ -86,20 +60,13 @@ There are currently three apps in the project:
 * _bookinfo_ for metadata for the repos
 
 == Elastic Beanstalk
-this website is deployed on Elastic Beanstalk. The main difficulty has been managing python dependencies- EB doesn't manage nested dependencies, so you have to stage the install. To load up the initial database, push the metadata feed from pg along with the install, then 
+this website is deployed on Elastic Beanstalk. Install the awsebcli tool in it's own py 3.7+ environment- it doesn't play well with other packages, even boto from aws!
 
-    eb ssh
+cd to the project directory and you should be able to deploy updates using 
 
-into an instance, then execute
+    eb deploy [giten-site-new]
 
-    cd /opt/python/current
-    source ./env
-    sudo mkdir -m 777 tmp
-    unzip ./app/assets/rdf-files.tar.zip -d ./tmp
-    cd tmp
-    tar -xf rdf-files.tar
-    cd ..
-    python ./app/manage.py load_repos /opt/python/current/tmp/cache/epub
+Remember to commit changes before deploying.
 
 == Vagrant
 
