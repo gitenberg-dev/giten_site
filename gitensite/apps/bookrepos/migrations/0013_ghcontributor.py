@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('username', models.CharField(max_length=255, null=True, blank=True)),
                 ('contributions', models.IntegerField(default=0, null=True, blank=True)),
-                ('book_repo', models.ForeignKey(to='bookrepos.BookRepo')),
+                ('book_repo', models.ForeignKey(to='bookrepos.BookRepo', on_delete=models.CASCADE)),
             ],
         ),
     ]

@@ -29,7 +29,7 @@ class BookRepo(models.Model):
 
 class GHContributor(models.Model):
     username = models.CharField(max_length=255, null=True, blank=True)
-    book_repo = models.ForeignKey(BookRepo)
+    book_repo = models.ForeignKey(BookRepo, on_delete=models.CASCADE)
     contributions = models.IntegerField(default=0, null=True, blank=True)
 
     def __unicode__(self):
