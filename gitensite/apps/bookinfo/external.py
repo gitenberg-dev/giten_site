@@ -8,6 +8,8 @@ cached_session = CacheControl(request_session)
 #These functions take a Book object as an argument, and return either a URL if a result is found, or an empty string if there is no result
 
 def librivox_api(book):
+    if not book.author:
+        return ""
     if "," in book.author.name:
         author_last = book.author.name[0:book.author.name.index(",")]
     else:
