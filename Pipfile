@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "==1.11.28"
+django = "==1.11.29"
 gitberg = "==0.7.2"
 sorl-thumbnail = "*"
 django-extensions = "*"
