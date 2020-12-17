@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 {% load thumbnail %}
 <div class="row">
   <div class="large-3 column">

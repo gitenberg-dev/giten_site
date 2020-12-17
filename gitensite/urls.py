@@ -3,9 +3,9 @@
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.staticfiles import views
 from django.conf import settings
 from django.views.generic.base import TemplateView
+from django.views.static import serve as serve_static
 
 from gitensite.apps.content.views import HomePageView
 from gitensite.apps.content.views import NewsletterView
@@ -39,5 +39,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', views.serve),
+        url(r'^static/(?P<path>.*)$', serve_static),
     ]

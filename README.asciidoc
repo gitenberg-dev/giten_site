@@ -13,6 +13,7 @@ This is a django/python project, so you are going to want to use some standard p
 
 === environment
 Copy `example.env` to `.env` and store your local db secret and other values there.
+QUESTION: are you using dotenv to auto-load these, or should we prefix the lines with `export` and run `source .env`?
 
 Virtual environments in python are a way of separating and reproducing the python package requirements.
 
@@ -23,6 +24,10 @@ From the root of the project
 For every new terminal, or when returning to work on the project, you will need to run
 
     source venv/bin/activate
+    source .env
+
+==== Linux
+You need the debian packages `libxml2-dev libxslt1-dev libjpeg9-dev libpq-dev` to install the python requirements.
 
 
 === Database(s)

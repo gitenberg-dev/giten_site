@@ -32,7 +32,7 @@ COMMON_APPS = [
 
     'django_extensions',
     'foundation',
-    'fontawesome',
+    'fontawesome_5',
     'storages',
     'sorl.thumbnail',
     'el_pagination',
@@ -121,7 +121,7 @@ AWS_S3_OBJECT_PARAMETERS = {  # see http://developer.yahoo.com/performance/rules
 AWS_STORAGE_BUCKET_NAME = 'gitensite'
 AWS_ACCESS_KEY_ID = 'AKIAIDP7I26XHV4SCSLA'
 # use environment variable to set AWS_SECRET_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
 # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
