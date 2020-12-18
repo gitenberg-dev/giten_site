@@ -1,4 +1,4 @@
-{% extends 'foundation/base.html' %}
+{% extends 'foundation_base.html' %}
 {% load fontawesome_5 %}
 {% load static %}
 
@@ -11,8 +11,11 @@
 
 {# Custom CSS #}
 {% block css %}
-<link rel="shortcut icon" href="{%static 'favicon.ico' %}" />
+<link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
 <link href="{% static 'css/site.css'%}" rel="stylesheet"/>
+<!-- fontawesome_5_static -->
+{% fontawesome_5_static %}
+<!-- fontawesome_5_static -->
 {% endblock css %}
 
 
