@@ -1,11 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from django.views.static import serve as serve_static
+from django.urls import re_path
 
 from gitensite.apps.content.views import HomePageView
 from gitensite.apps.content.views import NewsletterView
@@ -36,8 +34,7 @@ urlpatterns = [
     url(r'^browse/?$', BrowseBooksView.as_view(), name='browse'),
     url(r'^external/(?P<bookid>\d+)$', ExternalLinksView.as_view(), name='external')
 ]
-
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^static/(?P<path>.*)$', serve_static),
+        re_path(r'^static/(?P<path>.*)$', serve_static),
     ]
