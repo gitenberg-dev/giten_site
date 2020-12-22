@@ -9,7 +9,7 @@ ipdb = "*"
 
 [packages]
 django = ">=3.1.4"
-gitberg = "==0.7.2"
+gitberg = ">=0.7.4"
 sorl-thumbnail = "*"
 django-extensions = "*"
 django-zurb-foundation = "*"
