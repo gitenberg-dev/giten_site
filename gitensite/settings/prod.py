@@ -1,25 +1,20 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 """
 Django settings for gitensite project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 import os
+import logging
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # use environment variable to set DJANGO_SECRET_KEY
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'asdf')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG',False))
-
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
+from sorl.thumbnail.log import ThumbnailLogHandler
 
 # Application definition
 COMMON_APPS = [
@@ -29,10 +24,9 @@ COMMON_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_extensions',
     'foundation',
-    'fontawesome',
+    'fontawesome_5',
     'storages',
     'sorl.thumbnail',
     'el_pagination',
@@ -98,8 +92,8 @@ else:
         'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
                 'NAME': 'gitensite',
-                'USER': 'postgres',
-                'PASSWORD': 'gitensite',
+                'USER': 'seth',
+                'PASSWORD': 'asdf',
                 'HOST': 'localhost',
                 'PORT': '5432',
         }
@@ -114,37 +108,41 @@ USE_L10N = True
 USE_TZ = True
 
 
-AWS_S3_OBJECT_PARAMETERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
-    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'CacheControl': 'max-age=94608000',
-}
-AWS_STORAGE_BUCKET_NAME = 'gitensite'
-AWS_ACCESS_KEY_ID = 'AKIAIDP7I26XHV4SCSLA'
-# use environment variable to set AWS_SECRET_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+if not DEBUG:
+    AWS_S3_OBJECT_PARAMETERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+    AWS_STORAGE_BUCKET_NAME = 'gitensite'
+    # TODO: make secret
+    AWS_ACCESS_KEY_ID = 'AKIAIDP7I26XHV4SCSLA'
+    # use environment variable to set AWS_SECRET_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-# Tell django-storages that when coming up with the URL for an item in S3 storage, keep
-# it simple - just use this domain plus the path. (If this isn't set, things get complicated).
-# This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
-# We also use it in the next setting.
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+    # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+    # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+    # We also use it in the next setting.
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-# inherit the bucket's ACL
-AWS_DEFAULT_ACL = None
+    # inherit the bucket's ACL
+    AWS_DEFAULT_ACL = None
 
-# This is used by the `static` template tag from `static`, if you're using that. Or if anything else
-# refers directly to STATIC_URL. So it's safest to always set it.
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    # This is used by the `static` template tag from `static`, if you're using that. Or if anything else
+    # refers directly to STATIC_URL. So it's safest to always set it.
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}" if not DEBUG else "/static/"
 
-# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
-# you run `collectstatic`).
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+    # you run `collectstatic`).
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+if DEBUG:
+    STATIC_URL = "/static/"
+print(STATIC_URL)
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets"),
@@ -154,8 +152,6 @@ STATICFILES_DIRS = (
 
 # The in-development settings and the default configuration.
 if 'ENVIRONMENT' in os.environ and os.environ['ENVIRONMENT'] == 'DEVELOPMENT':
-    DEBUG = True
-
     ALLOWED_HOSTS = []
 
     INSTALLED_APPS = COMMON_APPS + LOCAL_APPS + [
@@ -222,14 +218,15 @@ LOGGING = {
         }
     },
 }
-#MEDIA_URL = '/static/media/'
 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload/media")
 
-import logging
-from sorl.thumbnail.log import ThumbnailLogHandler
 
 handler = ThumbnailLogHandler()
 handler.setLevel(logging.ERROR)
 logging.getLogger('sorl.thumbnail').addHandler(handler)
 
+if DEBUG:
+     STATIC_URL = '/static/'
+     MEDIA_URL = '/media/'

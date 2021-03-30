@@ -18,11 +18,14 @@ Virtual environments in python are a way of separating and reproducing the pytho
 
 From the root of the project
 
-    pipenv install -r requirements.txt
+    pipenv install
 
 For every new terminal, or when returning to work on the project, you will need to run
 
-    source venv/bin/activate
+    pipenv shell
+
+==== Linux
+You need the debian packages `libxml2-dev libxslt1-dev libjpeg9-dev libpq-dev` to install the python requirements.
 
 
 === Database(s)
