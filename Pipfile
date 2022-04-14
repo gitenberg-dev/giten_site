@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-gitberg = "==0.7.2"
+gitberg = ">=0.8.0"
 sorl-thumbnail = "*"
 django-extensions = "*"
 django-zurb-foundation = "*"
@@ -24,4 +24,4 @@ psycopg2 = "*"
 django = "==2.2.15"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
