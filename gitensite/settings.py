@@ -111,7 +111,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 
 AWS_S3_OBJECT_PARAMETERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
@@ -174,7 +174,6 @@ else:
     # SECURE_CONTENT_TYPE_NOSNIFF = False
     # SECURE_BROWSER_XSS_FILTER = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 
 
 LOGGING = {
