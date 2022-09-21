@@ -31,7 +31,7 @@ importlib-resources==3.0.0 ; python_version < '3.7'
 isodate==0.6.0
 jinja2==2.11.2
 jmespath==0.10.0
-jwcrypto==0.8
+jwcrypto==1.4
 lxml==4.5.2
 markupsafe==1.1.1
 mock==2.0.0
