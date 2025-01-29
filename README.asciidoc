@@ -102,3 +102,27 @@ Use port 5001 since the Vagrantfile will automatically forward this port to the 
 
 . Go to http://localhost:5001
 . Done.
+
+== 2022
+
+updated to Amazon Linux 2 , python 3.8, and trying codecommit. Codecommit fights with github desktop so maybe should revert that.
+
+to update:
+
+giten_site % git commit -a -m 'message'
+
+# if this fails, go through `eb init`
+git push ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/giten_site
+
+eb deploy giten-site2-dev3  
+
+# to see logs...
+eb logs giten-site2-dev3
+
+# to make a new environment
+
+eb create giten-site-something
+
+# to set environment vars
+
+eb setenv DJANGO_SECRET_KEY="????" GITENBERG_SECRET="????" AWS_SECRET_ACCESS_KEY="????"

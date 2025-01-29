@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
 
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles import views
 from django.conf import settings
+from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 
 from gitensite.apps.content.views import HomePageView
@@ -34,10 +37,16 @@ urlpatterns = [
     url(r'^books/post/', BookPostView.as_view(), name='book-post'),
     url(r'^download/(?P<bookid>\d+)$', DownloadView.as_view(), name='download'),
     url(r'^browse/?$', BrowseBooksView.as_view(), name='browse'),
-    url(r'^external/(?P<bookid>\d+)$', ExternalLinksView.as_view(), name='external')
+    url(r'^external/(?P<bookid>\d+)$', ExternalLinksView.as_view(), name='external'),
+    url(r"^msg/$", msg, name="msg"),
 ]
 
 if settings.DEBUG:
     urlpatterns += [
         url(r'^static/(?P<path>.*)$', views.serve),
     ]
+
+@login_required
+def msg(request):
+    message = os.environ['RDS_HOSTNAME']
+    return HttpResponse("message sent:" + message)
