@@ -23,7 +23,7 @@ from gitensite.apps.bookinfo.views import metadata
 
 @login_required
 def msg(request):
-    message = os.environ['RDS_PASSWORD']
+    message = 'message sent'
     return HttpResponse("message sent:" + message)
     
 urlpatterns = [
