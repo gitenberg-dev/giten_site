@@ -21,6 +21,11 @@ from gitensite.apps.content.views import ExternalLinksView
 from gitensite.apps.bookinfo.views import all_repos_txt
 from gitensite.apps.bookinfo.views import metadata
 
+@login_required
+def msg(request):
+    message = os.environ['RDS_HOSTNAME']
+    return HttpResponse("message sent:" + message)
+    
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^newsletter/(?P<issue>\d)$', NewsletterView.as_view(), name='newsletter'),
@@ -46,7 +51,3 @@ if settings.DEBUG:
         url(r'^static/(?P<path>.*)$', views.serve),
     ]
 
-@login_required
-def msg(request):
-    message = os.environ['RDS_HOSTNAME']
-    return HttpResponse("message sent:" + message)
